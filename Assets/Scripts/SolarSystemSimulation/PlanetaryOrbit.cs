@@ -11,6 +11,9 @@ public class PlanetaryOrbit : MonoBehaviour {
         public double rate;
     }
 
+    public const float radToDeg = 180 / Mathf.PI;
+    public const float degToRad = Mathf.PI / 180;
+
     public KeplerianParameter semiMajorAxis;                    // AU       |       AU  / Cy        
     public KeplerianParameter eccentricity;                     // rad      |       rad / Cy        
     public KeplerianParameter inclination;                      // deg      |       deg / Cy        
@@ -25,7 +28,7 @@ public class PlanetaryOrbit : MonoBehaviour {
     }
 
     void FixedUpdate() {
-       transform.position = CalculateCoordinates(universe.julianCenturiesSinceEpoch);
+       transform.position = CalculateCoordinates(universe.julianCenturiesSinceEpoch) * universe.distanceScale;
     }
 
     // https://ssd.jpl.nasa.gov/planets/approx_pos.html
@@ -52,6 +55,47 @@ public class PlanetaryOrbit : MonoBehaviour {
         // Solve Kepler's equation (Newton's way) to get the eccentricity anomaly
         float eccentricAnomaly = KeplerEquation(meanAnomaly, eccentricity, 5);
 
+        // Mathf.Sin and Cos functions take in radians. Convert some keplerian elements from deg to rad to save computation power
+        argumentOfPerihelion *= degToRad;
+        eccentricAnomaly *= degToRad;
+        inclination *= degToRad;
+        ascendingNodeLongitude *= degToRad;
+
+        // Compute the planet's heliocentric coordinates in its orbital plane, r', with the x'-axis aligned from the focus to the perihelion
+        float x0 = semiMajorAxis * (Mathf.Cos(eccentricAnomaly) - eccentricity);
+        float y0 = semiMajorAxis * Mathf.Sqrt(1 - eccentricity * eccentricity) * Mathf.Sin(eccentricAnomaly);
+        // z0 ends up being 0 so it can be ignored 
+
+        // Compute the coordinates, , in the J2000 ecliptic plane, with the x-axis aligned toward the equinox
+
+        coords.x = (
+                    Mathf.Cos(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude)
+                    - Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(inclination)
+                   ) * x0
+                +
+                   (
+                    -Mathf.Sin(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude)
+                    - Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(inclination)
+                   ) * y0;
+
+        coords.y = (
+                    Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude)
+                    - Mathf.Sin(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(inclination)
+                   ) * x0
+                +
+                   (
+                    -Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude)
+                    + Mathf.Cos(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(inclination)
+                   ) * y0;
+
+        coords.z = (
+                    Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(inclination)
+                   ) * x0
+                +
+                   (
+                    Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(inclination)
+                   ) * y0;
+
         return coords;
     }
 
@@ -60,12 +104,15 @@ public class PlanetaryOrbit : MonoBehaviour {
      * meanAnomaly = eccentricAnomaly - eccentricity * sin(eccentricAnomaly)
      */
     public static float KeplerEquation(float meanAnomaly, float eccentricity, uint precision) {
+
+        float eccentricityInDeg = eccentricity * radToDeg;
         //E0
         float eccentricAnomaly = meanAnomaly + eccentricity * Mathf.Sin(meanAnomaly);
 
         for (uint i = 0; i < precision; i++) {
-            float deltaMeanAnomaly = meanAnomaly - (eccentricAnomaly - eccentricity * Mathf.Sin(eccentricAnomaly));
-            float deltaEccentricAnomaly = deltaMeanAnomaly / (1 - eccentricity * Mathf.Cos(eccentricAnomaly));
+            float eccentricAnomalyInRad = eccentricAnomaly * degToRad;
+            float deltaMeanAnomaly = meanAnomaly - (eccentricAnomaly - eccentricityInDeg * Mathf.Sin(eccentricAnomalyInRad));
+            float deltaEccentricAnomaly = deltaMeanAnomaly / (1 - eccentricity * Mathf.Cos(eccentricAnomalyInRad));
             eccentricAnomaly += deltaEccentricAnomaly;
         }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Universe : MonoBehaviour {
 
+    public float distanceScale;
+
     public float dayTimeStep;
     public DateTime georgianDate;
     public double julianDate;
