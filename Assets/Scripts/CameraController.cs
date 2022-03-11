@@ -1,34 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
 {
 #if UNITY_IOS || UNITY_ANDROID
 
-    public Camera Camera;
     //public bool Rotate;
     protected Plane Plane;
 
-    private void Awake()
+    private void Start()
     {
-        if (Camera == null)
-            Camera = Camera.main;
-
         Application.targetFrameRate = 60;       // Very important!
     }
 
+/*    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }*/
+
     private void Update()
     {
-        var Delta1 = Vector3.zero;
-
         // Scroll
         if (Input.touchCount >= 1)
         {
-            Plane.SetNormalAndPosition(transform.up, transform.position);   // Update Plane
-            Delta1 = PlanePositionDelta(Input.GetTouch(0));
+            Plane.SetNormalAndPosition(Vector3.up, Vector3.zero);   // Update Plane
+            var Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                Camera.transform.Translate(Delta1, Space.World);
+                if(Input.touchCount >= 2)
+                {
+                    // Scroll slower when zooming limit has been reached
+                    gameObject.transform.Translate(Delta1 / 3, Space.World);
+                }
+                else
+                {
+                    gameObject.transform.Translate(Delta1, Space.World);
+                }
         }
 
         // Pinch
@@ -46,8 +58,22 @@ public class CameraController : MonoBehaviour
             if (zoom == 0 || zoom > 10)
                 return;
 
+            // Limit camera zoom
+            if(gameObject.transform.position.y >= 10)
+            {
+                if(zoom > 1)    // Allow only zooming in
+                    gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
+                return;
+            }
+            if (gameObject.transform.position.y <= 2)
+            {
+                if (zoom < 1)    // Allow only zooming out
+                    gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
+                return;
+            }
+
             // Move the camera (1/zoom)% along the ray from pos1 to the camera
-            Camera.transform.position = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+            gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
 
             //if (Rotate && pos2b != pos2)
             //    Camera.transform.RotateAround(pos1, Plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, Plane.normal));
@@ -61,8 +87,8 @@ public class CameraController : MonoBehaviour
         if (touch.phase != TouchPhase.Moved)
             return Vector3.zero;
 
-        var rayBefore = Camera.ScreenPointToRay(touch.position - touch.deltaPosition);
-        var rayNow = Camera.ScreenPointToRay(touch.position);
+        var rayBefore = Camera.main.ScreenPointToRay(touch.position - touch.deltaPosition);
+        var rayNow = Camera.main.ScreenPointToRay(touch.position);
         if (Plane.Raycast(rayBefore, out var enterBefore) && Plane.Raycast(rayNow, out var enterNow))
             return rayBefore.GetPoint(enterBefore) - rayNow.GetPoint(enterNow);
 
@@ -72,7 +98,7 @@ public class CameraController : MonoBehaviour
 
     protected Vector3 PlanePosition(Vector2 screenPos)
     {
-        var rayNow = Camera.ScreenPointToRay(screenPos);
+        var rayNow = Camera.main.ScreenPointToRay(screenPos);
         if (Plane.Raycast(rayNow, out var enterNow))
             return rayNow.GetPoint(enterNow);
 
