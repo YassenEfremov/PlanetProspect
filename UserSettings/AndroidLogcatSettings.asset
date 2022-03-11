@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "65a4d15",
         "name": "com.DefaultCompany.HTIProject",
-        "processId": 13916,
+        "processId": 28565,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -24,6 +24,18 @@
             "deviceId": "65a4d15",
             "name": "com.DefaultCompany.HTIProject",
             "processId": 13916,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 18055,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 28565,
             "exited": false
         }
     ],
