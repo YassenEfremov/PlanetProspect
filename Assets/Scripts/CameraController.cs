@@ -26,7 +26,6 @@ public class CameraController : MonoBehaviour
                 touchedUI = true;
         }
 
-
         // Scroll
         if (Input.touchCount >= 1 && !touchedUI)
         {
