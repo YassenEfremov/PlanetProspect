@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "65a4d15",
         "name": "com.DefaultCompany.HTIProject",
-        "processId": 9997,
+        "processId": 10784,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,12 @@
             "deviceId": "65a4d15",
             "name": "com.DefaultCompany.HTIProject",
             "processId": 9997,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 10784,
             "exited": false
         }
     ],

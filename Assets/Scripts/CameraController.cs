@@ -28,7 +28,15 @@ public class CameraController : MonoBehaviour
             Plane.SetNormalAndPosition(transform.up, transform.position);   // Update Plane
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                Camera.transform.Translate(Delta1, Space.World);
+                if (Input.touchCount >= 2)
+                {
+                    // Scroll slower when zooming limit has been reached
+                    Camera.transform.Translate(Delta1 / 3, Space.World);
+                }
+                else
+                {
+                    Camera.transform.Translate(Delta1, Space.World);
+                }
         }
 
         // Pinch
@@ -46,8 +54,22 @@ public class CameraController : MonoBehaviour
             if (zoom == 0 || zoom > 10)
                 return;
 
-            // Move the camera (1/zoom)% along the ray from pos1 to the camera
-            Camera.transform.position = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+            // Limit camera zoom
+            if (Camera.transform.position.y >= 10)
+            {
+                if (zoom > 1)    // Allow only zooming in
+                    Camera.transform.position = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+                return;
+            }
+            if (Camera.transform.position.y <= 2)
+            {
+                if (zoom < 1)    // Allow only zooming out
+                    Camera.transform.position = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+                return;
+            }
+
+            // Move the camera (1/zoom)% along the ray from between the two points to the camera
+            gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
 
             //if (Rotate && pos2b != pos2)
             //    Camera.transform.RotateAround(pos1, Plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, Plane.normal));
