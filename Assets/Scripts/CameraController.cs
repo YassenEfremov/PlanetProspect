@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 
     //public bool Rotate;
     Plane Plane;
+    bool touchedUI = false;
 
 
     private void Start()
@@ -18,8 +19,15 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        // If we click on a UI element => don't move the camera
+        if(Input.touchCount >= 1)
+        {
+            if (IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began)
+                touchedUI = true;
+        }
+
         // Scroll
-        if (Input.touchCount >= 1)
+        if (Input.touchCount >= 1 && !touchedUI)
         {
             Plane.SetNormalAndPosition(Vector3.up, Vector3.zero);   // Update Plane
             var Delta1 = PlanePositionDelta(Input.GetTouch(0));
@@ -38,7 +46,7 @@ public class CameraController : MonoBehaviour
         }
 
         // Pinch
-        if (Input.touchCount >= 2)
+        if (Input.touchCount >= 2 && !touchedUI)
         {
             var pos1 = PlanePosition(Input.GetTouch(0).position);
             var pos2 = PlanePosition(Input.GetTouch(1).position);
@@ -57,24 +65,36 @@ public class CameraController : MonoBehaviour
             {
                 if (zoom > 1)    // Allow only zooming in
                     gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
-                return;
             }
-            if (gameObject.transform.position.y <= 2)
+            else if (gameObject.transform.position.y <= 2)
             {
                 if (zoom < 1)    // Allow only zooming out
                     gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
-                return;
             }
-
-            // Move the camera (1/zoom)% along the ray from pos1 to the camera
-            gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
+            else
+            {
+                // Move the camera (1/zoom)% along the ray from pos1 to the camera
+                gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
+            }
 
             //if (Rotate && pos2b != pos2)
             //    Camera.transform.RotateAround(pos1, Plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, Plane.normal));
         }
+
+        if(Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            touchedUI = false;
     }
 
-    protected Vector3 PlanePositionDelta(Touch touch)
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
+    private Vector3 PlanePositionDelta(Touch touch)
     {
         // Didn't moved
         if (touch.phase != TouchPhase.Moved)
@@ -89,7 +109,7 @@ public class CameraController : MonoBehaviour
         return Vector3.zero;
     }
 
-    protected Vector3 PlanePosition(Vector2 screenPos)
+    private Vector3 PlanePosition(Vector2 screenPos)
     {
         var rayNow = Camera.main.ScreenPointToRay(screenPos);
         if (Plane.Raycast(rayNow, out var enterNow))
