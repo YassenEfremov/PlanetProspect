@@ -61,12 +61,12 @@ public class CameraController : MonoBehaviour
                 return;
 
             // Limit camera zoom
-            if (gameObject.transform.position.x <= -10)
+            if (gameObject.transform.position.z <= -10)
             {
                 if (zoom > 1)    // Allow only zooming in
                     gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
             }
-            else if (gameObject.transform.position.x >= -2)
+            else if (gameObject.transform.position.z >= -2)
             {
                 if (zoom < 1)    // Allow only zooming out
                     gameObject.transform.position = Vector3.LerpUnclamped(Vector3.Lerp(pos1, pos2, 0.5f), gameObject.transform.position, 1 / zoom);
