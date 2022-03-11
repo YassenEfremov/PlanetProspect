@@ -225,5 +225,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineWidth: 0.1
-  dayIncrement: 10
-  nodeAmount: 150
+  dayIncrement: 1
+  nodeAmount: 10

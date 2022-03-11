@@ -54,6 +54,11 @@ public class PlanetaryOrbit : MonoBehaviour {
 
         // Solve Kepler's equation (Newton's way) to get the eccentricity anomaly
         float eccentricAnomaly = KeplerEquation(meanAnomaly, eccentricity, 5);
+        float trueAnomaly = 2 * Mathf.Atan2(
+                Mathf.Sqrt(1 + eccentricity) * Mathf.Sin(eccentricAnomaly / 2),
+                Mathf.Sqrt(1 - eccentricity) * Mathf.Cos(eccentricAnomaly / 2)
+            );
+
 
         // Mathf.Sin and Cos functions take in radians. Convert some keplerian elements from deg to rad to save computation power
         argumentOfPerihelion *= degToRad;
@@ -61,40 +66,23 @@ public class PlanetaryOrbit : MonoBehaviour {
         inclination *= degToRad;
         ascendingNodeLongitude *= degToRad;
 
-        // Compute the planet's heliocentric coordinates in its orbital plane, r', with the x'-axis aligned from the focus to the perihelion
-        float x0 = semiMajorAxis * (Mathf.Cos(eccentricAnomaly) - eccentricity);
-        float y0 = semiMajorAxis * Mathf.Sqrt(1 - eccentricity * eccentricity) * Mathf.Sin(eccentricAnomaly);
-        // z0 ends up being 0 so it can be ignored 
+        // https://space.stackexchange.com/questions/19322/converting-orbital-elements-to-cartesian-state-vectors
+        // calculate the radius vector and compute the position components X,Y,Z
+        float radiusVector = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Mathf.Cos(trueAnomaly));
 
-        // Compute the coordinates, , in the J2000 ecliptic plane, with the x-axis aligned toward the equinox
+        coords.x = radiusVector * (
+                Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(trueAnomaly + argumentOfPerihelion)
+                - Mathf.Sin(ascendingNodeLongitude) * Mathf.Sin(trueAnomaly + argumentOfPerihelion)
+                * Mathf.Cos(inclination)
+            );
 
-        coords.x = (
-                    Mathf.Cos(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude)
-                    - Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(inclination)
-                   ) * x0
-                +
-                   (
-                    -Mathf.Sin(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude)
-                    - Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(inclination)
-                   ) * y0;
+        coords.y = radiusVector * (
+                Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(trueAnomaly + argumentOfPerihelion)
+                + Mathf.Cos(ascendingNodeLongitude) * Mathf.Sin(trueAnomaly + argumentOfPerihelion)
+                * Mathf.Cos(inclination)
+            );
 
-        coords.y = (
-                    Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude)
-                    - Mathf.Sin(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(inclination)
-                   ) * x0
-                +
-                   (
-                    -Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(ascendingNodeLongitude)
-                    + Mathf.Cos(argumentOfPerihelion) * Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(inclination)
-                   ) * y0;
-
-        coords.z = (
-                    Mathf.Sin(argumentOfPerihelion) * Mathf.Sin(inclination)
-                   ) * x0
-                +
-                   (
-                    Mathf.Cos(argumentOfPerihelion) * Mathf.Sin(inclination)
-                   ) * y0;
+        coords.z = radiusVector * Mathf.Sin(trueAnomaly + argumentOfPerihelion) * Mathf.Sin(inclination);
 
         return coords;
     }
