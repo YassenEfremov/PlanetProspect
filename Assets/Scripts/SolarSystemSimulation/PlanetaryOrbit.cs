@@ -54,17 +54,15 @@ public class PlanetaryOrbit : MonoBehaviour {
 
         // Solve Kepler's equation (Newton's way) to get the eccentricity anomaly
         float eccentricAnomaly = KeplerEquation(meanAnomaly, eccentricity, 5);
-        float trueAnomaly = 2 * Mathf.Atan2(
-                Mathf.Sqrt(1 + eccentricity) * Mathf.Sin(eccentricAnomaly / 2),
-                Mathf.Sqrt(1 - eccentricity) * Mathf.Cos(eccentricAnomaly / 2)
-            );
-
 
         // Mathf.Sin and Cos functions take in radians. Convert some keplerian elements from deg to rad to save computation power
         argumentOfPerihelion *= degToRad;
         eccentricAnomaly *= degToRad;
         inclination *= degToRad;
         ascendingNodeLongitude *= degToRad;
+
+        // calculate true anomaly
+        float trueAnomaly = TrueAnomaly(eccentricity, eccentricAnomaly);
 
         // https://space.stackexchange.com/questions/19322/converting-orbital-elements-to-cartesian-state-vectors
         // calculate the radius vector and compute the position components X,Y,Z
@@ -105,6 +103,18 @@ public class PlanetaryOrbit : MonoBehaviour {
         }
 
         return eccentricAnomaly;
+
+    }
+
+    // Compute the true anomaly -> eccentricAnomaly should be in radians
+    // jgiesen.de/Kepler
+    // tan(TA) = (sqrt(1-e*e) * sin(E)) / (cos(E) - e)
+    public static float TrueAnomaly(float eccentricity, float eccentricAnomaly) {
+        float numerator = Mathf.Sqrt(1f - eccentricity * eccentricity) * Mathf.Sin(eccentricAnomaly);
+        float denominator = Mathf.Cos(eccentricAnomaly) - eccentricity;
+
+        return Mathf.Atan2(numerator, denominator);
+
 
     }
 };
