@@ -18,7 +18,7 @@ public class PanelOpener : MonoBehaviour
             openPanel = panel;
             foreach (Button button in FindObjectsOfType<Button>())
             {
-                if (button != gameObject.GetComponent<Button>())
+                if (button != gameObject.GetComponent<Button>() && !button.transform.IsChildOf(panel.transform))
                     button.interactable = false;
             }
         }
@@ -30,7 +30,7 @@ public class PanelOpener : MonoBehaviour
                 openPanel = null;
                 foreach (Button button in FindObjectsOfType<Button>())
                 {
-                    if (button != gameObject.GetComponent<Button>())
+                    if (button != gameObject.GetComponent<Button>() && !button.transform.IsChildOf(panel.transform))
                         button.interactable = true;
                 }
             }

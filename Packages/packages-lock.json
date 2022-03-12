@@ -64,6 +64,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "file:C:/Users/yassen/Downloads/com.unity.nuget.newtonsoft-json2.0.0/com.unity.nuget.newtonsoft-json@2.0.0",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.services.core": {
       "version": "1.0.1",
       "depth": 1,
