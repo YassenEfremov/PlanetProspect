@@ -10,55 +10,46 @@ using UnityEditor;
 using System.Threading;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
-//using UnityEngine.UnityWebRequestModule;
 
-
-public class JsonInfo
-{
-    public string date;
-    public string title;
-}
 public class ContentGatheringScript : MonoBehaviour
 {
-    void Awake()
+    public void Awake()
     {
-        string path = Application.dataPath + "/Resources/APOD/JSON";
+        string path = Application.dataPath + "/Resources/APOD/";
         bool PictureFlag = true;
         for (int i = 0; i < 7; i++)
         {
             string filename = DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd") + ".json";
-            bool fileflag = File.Exists(Path.Combine(path, filename));
+            bool fileflag = File.Exists(Path.Combine(path + "JSON/", filename));
             if (!fileflag)
             {
 
-                try
-                {
-
-                    StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd")));
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"));
-                    PictureFlag = false;
-                }
+                StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"), success => {
+                    if (!success)
+                    {
+                        PictureFlag = false;
+                    }
+                }));
+                
 
             }
         }
-        if (File.Exists((path + "/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json")) && PictureFlag is true)
+        if (File.Exists((path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json")))
         {
-            File.Delete(path + "/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json");
+            if(PictureFlag is true)
+            {
+                File.Delete(path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json");
+                string[] PicToDelete = Directory.GetFiles(path + "Pictures/", DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".*");
+                File.Delete(PicToDelete[0]);
+            }
         }
     }
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    public void GatherContent()
+    public void Start()
     {
         GameObject goContainer = new GameObject();
         goContainer.name = "goContainer";
+        goContainer.tag = "clone";
         goContainer.AddComponent<VerticalLayoutGroup>();
         goContainer.GetComponent<VerticalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
         goContainer.GetComponent<VerticalLayoutGroup>().spacing = 100;
@@ -72,11 +63,13 @@ public class ContentGatheringScript : MonoBehaviour
 
         GameObject goImage = new GameObject();
         goImage.name = "goImage";
+        goImage.tag = "clone";
         goImage.AddComponent<RawImage>();
         goImage.transform.SetParent(this.transform, false);
 
         GameObject goTitle = new GameObject();
         goTitle.name = "goTitle";
+        goTitle.tag = "clone";
         goTitle.AddComponent<Text>();
         goTitle.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
         goTitle.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
@@ -91,6 +84,7 @@ public class ContentGatheringScript : MonoBehaviour
 
         GameObject goDesc = new GameObject();
         goDesc.name = "goDesc";
+        goDesc.tag = "clone";
         goDesc.AddComponent<Text>();
         goDesc.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
         goDesc.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 700);
@@ -118,32 +112,7 @@ public class ContentGatheringScript : MonoBehaviour
         {
             try
             {
-                string JsonString = FileList[i];
-                var JsonDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonString);
-                GameObject TmpParent = Instantiate(goContainer, this.transform);
-                GameObject TmpTitle = Instantiate(goTitle, TmpParent.transform);
-                GameObject TmpImg = Instantiate(goImage, TmpParent.transform);
-                GameObject TmpDesc = Instantiate(goDesc, TmpParent.transform);
-
-                Text t = TmpTitle.GetComponent<Text>();
-                t.text = JsonDict["title"];
-
-                RawImage ri = TmpImg.GetComponent<RawImage>();
-                Texture2D tmp_texture = (Texture2D)textures[i];
-                ri.texture = tmp_texture;
-                ri.SetNativeSize();
-                var width = ri.rectTransform.rect.width;
-                var height = ri.rectTransform.rect.height;
-                while (width > 1024)
-                {
-                    width *= (float)0.8;
-                    height *= (float)0.8;
-                }
-                ri.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
-                ri.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-
-                Text d = TmpDesc.GetComponent<Text>();
-                d.text = JsonDict["explanation"];
+                CreateObjects(goContainer, goTitle, goImage, goDesc, textures[i], FileList[i]);
             }
             catch (Exception e) { }
         }
@@ -153,13 +122,57 @@ public class ContentGatheringScript : MonoBehaviour
         Destroy(goDesc);
     }
 
-    IEnumerator APODFetch(string date)
+    public void DeleteClones()
+    {
+        var clones = GameObject.FindGameObjectsWithTag("clone");
+        foreach (var clone in clones)
+        {
+            Destroy(clone);
+        }
+    }
+
+    public void CreateObjects(GameObject goContainer, GameObject goTitle, GameObject goImage, GameObject goDesc,UnityEngine.Object texture, string JsonString)
+    {
+        var JsonDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonString);
+        GameObject TmpParent = Instantiate(goContainer, this.transform);
+        GameObject TmpTitle = Instantiate(goTitle, TmpParent.transform);
+        GameObject TmpImg = Instantiate(goImage, TmpParent.transform);
+        GameObject TmpDesc = Instantiate(goDesc, TmpParent.transform);
+
+        Text t = TmpTitle.GetComponent<Text>();
+        t.text = JsonDict["title"];
+
+        RawImage ri = TmpImg.GetComponent<RawImage>();
+        Texture2D tmp_texture = (Texture2D)texture;
+        ri.texture = tmp_texture;
+        ri.SetNativeSize();
+        var width = ri.rectTransform.rect.width;
+        var height = ri.rectTransform.rect.height;
+        while (width > 1024)
+        {
+            width *= (float)0.8;
+            height *= (float)0.8;
+        }
+        ri.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+        ri.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+
+        Text d = TmpDesc.GetComponent<Text>();
+        d.text = JsonDict["explanation"];
+    }
+
+
+    IEnumerator APODFetch(string date, System.Action<bool> success)
     {
         var url = "https://api.nasa.gov/planetary/apod?api_key=RkKaZUhTLv3tJ2ar6t8NQxrnG9w5tZtmQjREUWsj&date=" + date;
         UnityWebRequest webRequest = UnityWebRequest.Get(url);
         yield return webRequest.SendWebRequest();
         string result = webRequest.downloadHandler.text;
         Debug.Log(result);
+        if(result.Contains("Date must be between Jun 16, 1995 and Mar 11, 2022."))
+        {
+            success(false);
+            yield break;
+        }
         var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
         string ImageExtension = values["hdurl"].Substring((values["hdurl"].LastIndexOf('.')));
         string ImageFilePath = Application.dataPath + "/Resources/APOD/Pictures/" + values["date"] + ImageExtension;
@@ -168,7 +181,6 @@ public class ContentGatheringScript : MonoBehaviour
         using (WebClient webClient = new WebClient())
         {
             //yield return new WaitForSeconds(3);
-            Debug.Log(values["hdurl"]);
             webClient.DownloadFile(values["hdurl"], ImageFilePath);
         }
     }
