@@ -23,7 +23,7 @@ public class Universe : MonoBehaviour {
         georgianDate = georgianDate.AddDays(dayTimeStep * Time.fixedDeltaTime);
         julianDate = ToJulianDate(georgianDate);
         julianCenturiesSinceEpoch = ToJulianCenturiesSinceEpoch(julianDate);
-        print("Georgian date: " + georgianDate);
+        //print("Georgian date: " + georgianDate);
     }
 
     /*

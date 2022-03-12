@@ -31,25 +31,29 @@ public class testXml : MonoBehaviour
         goContainer.tag = "clone";
         goContainer.AddComponent<VerticalLayoutGroup>();
         goContainer.GetComponent<VerticalLayoutGroup>().childAlignment = TextAnchor.MiddleCenter;
-        goContainer.GetComponent<VerticalLayoutGroup>().spacing = 10;
+        goContainer.GetComponent<VerticalLayoutGroup>().spacing = 0;
         goContainer.GetComponent<VerticalLayoutGroup>().childControlWidth = false;
         goContainer.GetComponent<VerticalLayoutGroup>().childControlHeight = false;
         goContainer.GetComponent<VerticalLayoutGroup>().childForceExpandHeight = true;
         goContainer.GetComponent<VerticalLayoutGroup>().childForceExpandWidth = true;
-        goContainer.GetComponent<VerticalLayoutGroup>().padding = new RectOffset(20, 20, 20, 20);
+        goContainer.GetComponent<VerticalLayoutGroup>().padding = new RectOffset(20, 20, 0, 0);
         goContainer.AddComponent<ContentSizeFitter>();
         goContainer.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
         GameObject goLink = new GameObject();
         goLink.name = "goLink";
         goLink.tag = "clone";
+        goLink.AddComponent<Button>();
+
+        
         goLink.AddComponent<Text>();
         goLink.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1000);
         goLink.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
         goLink.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
         goLink.GetComponent<Text>().alignByGeometry = true;
+         goLink.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
         goLink.GetComponent<Text>().resizeTextForBestFit = true;
-        goLink.GetComponent<Text>().resizeTextMaxSize = 60; 
+        goLink.GetComponent<Text>().resizeTextMaxSize = 25;
         goLink.transform.SetParent(Content.transform, false);
 
         GameObject goTitle = new GameObject();
@@ -133,6 +137,12 @@ public class testXml : MonoBehaviour
         Destroy(goDesc);
 
     }
+
+    public void OnButtonPress(string link)
+    {
+        Application.OpenURL(link);
+    }
+
     public void CreateObjects(GameObject Content, GameObject goContainer, GameObject goTitle, GameObject goLink, GameObject goDesc, string title, string link, string description)
     {
         GameObject TmpParent = Instantiate(goContainer, Content.transform);
@@ -144,7 +154,11 @@ public class testXml : MonoBehaviour
         t.text = title;
 
         Text l = TmpLink.GetComponent<Text>();
+        l.fontStyle = FontStyle.Italic;
         l.text = link;
+        l.color = Color.blue;
+        TmpLink.GetComponent<Button>().onClick.AddListener(() => OnButtonPress(link));
+
         Text d = TmpDesc.GetComponent<Text>();
         d.text = description;
     }

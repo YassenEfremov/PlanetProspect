@@ -20,10 +20,10 @@ public class ContentGatheringScript : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             string filename = DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd") + ".json";
-            bool fileflag = File.Exists(Path.Combine(path + "JSON/", filename));
-            if (!fileflag)
+            bool jsonfileflag = File.Exists(Path.Combine(path + "JSON/", filename));
+            if (!jsonfileflag)
             {
-
+                Debug.Log("DownLoading");
                 StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"), success => {
                     if (!success)
                     {
@@ -180,8 +180,9 @@ public class ContentGatheringScript : MonoBehaviour
         File.WriteAllText(JsonFilePath, result);
         using (WebClient webClient = new WebClient())
         {
-            //yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3);
             webClient.DownloadFile(values["hdurl"], ImageFilePath);
+            Debug.Log("Download Success");
         }
     }
 
