@@ -15,6 +15,11 @@ public class Universe : MonoBehaviour {
     readonly static int julianCenturyDays = 36525; // In Julian days
     readonly static double julianEpoch = 2451545.0;  // In Julian days
 
+    // Gravity is used when simulating rockets
+    public readonly static float gravitationalConstant = 0.0001f;
+    public readonly static float physicsTimeStep = 0.01f;
+
+
     void Awake() {
         georgianDate = DateTime.Now;
     }

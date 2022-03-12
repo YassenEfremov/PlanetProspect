@@ -10,11 +10,12 @@ public class RocketOrbitDraw : MonoBehaviour {
         public Vector3 position;
         public Vector3 velocity;
         public float mass;
-        // Rockets shouldn't affect each other gravity
+
+        // Rockets shouldn't affect each other gravity?
         // public float surfaceGravity;
 
         public VirtualRocket(GravityObject body) {
-            if (body.isRocket) {
+            if (body.isGravityAffected) {
                 position = body.transform.position;
                 velocity = body.velocity == Vector3.zero ? body.initialVelocity : body.velocity;
                 mass = body.mass;
@@ -39,7 +40,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         planets = new List<GravityObject>();
         foreach (GravityObject body in FindObjectsOfType<GravityObject>()) {
 
-            if(!body.isRocket) {
+            if(!body.isGravityAffected) {
                 planets.Add(body);
             }
         }
@@ -80,7 +81,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         foreach (GravityObject planet in planets) {
             float sqrDst = (planet.Position - rocket.position).sqrMagnitude;
             Vector3 forceDir = (planet.Position - rocket.position).normalized;
-            Vector3 acceleration = forceDir * YavorUniverse.gravitationalConstant * planet.mass / sqrDst;
+            Vector3 acceleration = forceDir * Universe.gravitationalConstant * planet.mass / sqrDst;
             rocket.velocity += acceleration * timeStep;
         }
     }
