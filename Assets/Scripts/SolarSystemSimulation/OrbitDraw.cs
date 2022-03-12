@@ -12,6 +12,7 @@ public class OrbitDraw : MonoBehaviour {
     private LineRenderer lineRenderer;
 
     public float lineWidth;
+    public Material lineMaterial;
     public double dayIncrement;
     public uint nodeAmount;
 
@@ -20,7 +21,12 @@ public class OrbitDraw : MonoBehaviour {
         universe = FindObjectOfType<Universe>();
 
         lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
+        lineRenderer.material = lineMaterial;
+        lineRenderer.startColor = lineRenderer.material.color;
+        lineRenderer.endColor= lineRenderer.material.color;
         lineRenderer.enabled = true;
+        
+        // TODO: Draw orbit here (better performance but harder to debug)
     }
 
     void Update() {

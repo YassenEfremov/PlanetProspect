@@ -11,6 +11,19 @@ public class PlanetaryOrbit : MonoBehaviour {
         public double rate;
     }
 
+    /* 
+     * Additional Terms used for computing Jupiter-Neptune Orbits
+     * I have no idea where these arguments mean or come from, although they have to be used
+     * [table 2b] https://ssd.jpl.nasa.gov/planets/approx_pos.html
+     */
+    [System.Serializable]
+    public struct AdditionalTerms {
+        public double b;
+        public double c;
+        public double s;
+        public double f;
+    }
+
     public const float radToDeg = 180 / Mathf.PI;
     public const float degToRad = Mathf.PI / 180;
 
@@ -20,6 +33,7 @@ public class PlanetaryOrbit : MonoBehaviour {
     public KeplerianParameter meanLongitude;                    // deg      |       deg / Cy        
     public KeplerianParameter perihelionLongitude;              // deg      |       deg / Cy        
     public KeplerianParameter ascendingNodeLongitude;           // deg      |       deg / Cy
+    public AdditionalTerms additionalTerms;
 
     private Universe universe;
 
@@ -45,7 +59,11 @@ public class PlanetaryOrbit : MonoBehaviour {
 
         // Compute the argument of perihelion and the mean anomaly
         float argumentOfPerihelion = perihelionLongitude - ascendingNodeLongitude;
-        float meanAnomaly = meanLongitude - perihelionLongitude;
+        float meanAnomaly = (float)(meanLongitude - perihelionLongitude
+            + additionalTerms.b * julianCenturiesSinceEpoch * julianCenturiesSinceEpoch
+            + additionalTerms.c * Mathf.Cos((float)(additionalTerms.f * julianCenturiesSinceEpoch))
+            + additionalTerms.s * Mathf.Sin((float)(additionalTerms.f * julianCenturiesSinceEpoch))
+            );
 
         // Modulus the mean anomaly so that -180 <= M <= +180
         while (meanAnomaly > 180) {
