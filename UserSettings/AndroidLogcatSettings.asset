@@ -265,6 +265,12 @@
             "name": "com.DefaultCompany.HTI_Project",
             "processId": 9237,
             "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 22428,
+            "exited": false
         }
     ],
     "m_Tags": {
