@@ -168,7 +168,7 @@ public class ContentGatheringScript : MonoBehaviour
         yield return webRequest.SendWebRequest();
         string result = webRequest.downloadHandler.text;
         Debug.Log(result);
-        if(result.Contains("Date must be between Jun 16, 1995 and Mar 11, 2022."))
+        if(result.Contains("{\"code\":400,"))
         {
             success(false);
             yield break;
