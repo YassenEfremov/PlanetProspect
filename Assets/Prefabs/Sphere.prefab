@@ -114,6 +114,11 @@ MonoBehaviour:
   ascendingNodeLongitude:
     element: 0
     rate: 0
+  additionalTerms:
+    b: 0
+    c: 0
+    s: 0
+    f: 0
 --- !u!120 &8509454708810621090
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -225,5 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineWidth: 0.1
+  lineMaterial: {fileID: 0}
   dayIncrement: 10
   nodeAmount: 100
