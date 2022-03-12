@@ -14,13 +14,13 @@ public class NBodySimulation : MonoBehaviour {
 
     void FixedUpdate() {
         for (int i = 0; i < bodies.Length; i++) {
-            if (bodies[i].isGravityAffected) {
+            if (bodies[i].isGravityAffected && bodies[i].isActive) {
                 bodies[i].velocity = CalculateVelocity(bodies, bodies[i]);
             }
         }
 
         for (int i = 0; i < bodies.Length; i++) {
-            if (bodies[i].isGravityAffected) {
+            if (bodies[i].isGravityAffected && bodies[i].isActive) {
                 bodies[i].Position = CalculatePosition(bodies[i].Position, bodies[i].velocity);
             }
         }

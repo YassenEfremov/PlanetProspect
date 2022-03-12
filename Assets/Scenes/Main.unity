@@ -2528,6 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540ca934e16bb6844a0543537eb1c3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isGravityAffected: 0
   radius: 8
   surfaceGravity: 7
@@ -3521,10 +3522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540ca934e16bb6844a0543537eb1c3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isGravityAffected: 1
   radius: 0.03
   surfaceGravity: 0.04
-  initialVelocity: {x: 0, y: 0, z: 2}
+  initialVelocity: {x: 0, y: 4, z: 0}
 --- !u!54 &1451825466435368866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6791,7 +6793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451825466435368862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.33, y: 0, z: 4.55}
+  m_LocalPosition: {x: 11.08, y: 0, z: -0.12}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1584250686312785631}

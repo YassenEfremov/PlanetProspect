@@ -3,6 +3,7 @@ using UnityEngine;
 
 [RequireComponent (typeof (Rigidbody))]
 public class GravityObject : MonoBehaviour {
+    public bool isActive;
     public bool isGravityAffected;
     public float radius;
     public float surfaceGravity;
@@ -36,10 +37,12 @@ public class GravityObject : MonoBehaviour {
         }
 
         set {
-            rb.position = value;
-            rb.MovePosition(rb.position);
-            Quaternion rotation = Quaternion.LookRotation(velocity);
-            rb.MoveRotation(rotation);
+            if (isActive) {
+                rb.position = value;
+                rb.MovePosition(rb.position);
+                Quaternion rotation = Quaternion.LookRotation(velocity);
+                rb.MoveRotation(rotation);
+            }
         }
     }
 }
