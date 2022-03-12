@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 
+[ExecuteInEditMode]
 public class OrbitDebugDisplay : MonoBehaviour {
 
     public int numSteps = 1000;
@@ -13,16 +14,10 @@ public class OrbitDebugDisplay : MonoBehaviour {
     public bool useThickLines;
 
     void Start () {
-        if (Application.isPlaying) {
-            HideOrbits ();
-        }
     }
 
     void Update () {
-
-        if (!Application.isPlaying) {
-            DrawOrbits ();
-        }
+        DrawOrbits ();
     }
 
     void DrawOrbits () {

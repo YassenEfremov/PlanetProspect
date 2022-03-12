@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 [RequireComponent (typeof (Rigidbody))]
 public class GravityObject : MonoBehaviour {
-    public bool isPlanet;
+    public bool isRocket;
     public float radius;
     public float surfaceGravity;
     public Vector3 initialVelocity;
@@ -12,7 +11,8 @@ public class GravityObject : MonoBehaviour {
 
     public Vector3 velocity { get; private set; }
     public float mass { get; private set; }
-    Rigidbody rb;
+    [System.NonSerialized]
+    public Rigidbody rb;
 
     void Awake () {
         rb = GetComponent<Rigidbody> ();
@@ -25,7 +25,6 @@ public class GravityObject : MonoBehaviour {
             if (otherBody != this) {
                 float sqrDst = (otherBody.rb.position - rb.position).sqrMagnitude;
                 Vector3 forceDir = (otherBody.rb.position - rb.position).normalized;
-
                 Vector3 acceleration = forceDir * Universe.gravitationalConstant * otherBody.mass / sqrDst;
                 velocity += acceleration * timeStep;
             }
