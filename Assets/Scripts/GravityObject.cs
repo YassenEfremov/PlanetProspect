@@ -25,7 +25,7 @@ public class GravityObject : MonoBehaviour {
             if (otherBody != this) {
                 float sqrDst = (otherBody.rb.position - rb.position).sqrMagnitude;
                 Vector3 forceDir = (otherBody.rb.position - rb.position).normalized;
-                Vector3 acceleration = forceDir * Universe.gravitationalConstant * otherBody.mass / sqrDst;
+                Vector3 acceleration = forceDir * YavorUniverse.gravitationalConstant * otherBody.mass / sqrDst;
                 velocity += acceleration * timeStep;
             }
         }
@@ -43,7 +43,7 @@ public class GravityObject : MonoBehaviour {
     }
 
     void OnValidate () {
-        mass = surfaceGravity * radius * radius / Universe.gravitationalConstant;
+        mass = surfaceGravity * radius * radius / YavorUniverse.gravitationalConstant;
 //        meshHolder = transform.GetChild (0);
 //        meshHolder.localScale = Vector3.one * radius;
     }

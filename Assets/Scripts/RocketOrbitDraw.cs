@@ -80,7 +80,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         foreach (GravityObject planet in planets) {
             float sqrDst = (planet.Position - rocket.position).sqrMagnitude;
             Vector3 forceDir = (planet.Position - rocket.position).normalized;
-            Vector3 acceleration = forceDir * Universe.gravitationalConstant * planet.mass / sqrDst;
+            Vector3 acceleration = forceDir * YavorUniverse.gravitationalConstant * planet.mass / sqrDst;
             rocket.velocity += acceleration * timeStep;
         }
     }

@@ -96,7 +96,7 @@ public class OrbitDebugDisplay : MonoBehaviour {
             }
             Vector3 forceDir = (virtualBodies[j].position - virtualBodies[i].position).normalized;
             float sqrDst = (virtualBodies[j].position - virtualBodies[i].position).sqrMagnitude;
-            acceleration += forceDir * Universe.gravitationalConstant * virtualBodies[j].mass / sqrDst;
+            acceleration += forceDir * YavorUniverse.gravitationalConstant * virtualBodies[j].mass / sqrDst;
         }
         return acceleration;
     }
@@ -112,7 +112,7 @@ public class OrbitDebugDisplay : MonoBehaviour {
 
     void OnValidate () {
         if (usePhysicsTimeStep) {
-            timeStep = Universe.physicsTimeStep;
+            timeStep = YavorUniverse.physicsTimeStep;
         }
     }
 
