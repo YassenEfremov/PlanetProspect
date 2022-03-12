@@ -4,7 +4,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent (typeof (Rigidbody))]
 public class GravityObject : MonoBehaviour {
-
+    public bool isPlanet;
     public float radius;
     public float surfaceGravity;
     public Vector3 initialVelocity;
@@ -34,17 +34,19 @@ public class GravityObject : MonoBehaviour {
 
     public void UpdateVelocity (Vector3 acceleration, float timeStep) {
         velocity += acceleration * timeStep;
+        
     }
 
     public void UpdatePosition (float timeStep) {
-        rb.MovePosition (rb.position + velocity * timeStep);
-
+        rb.MovePosition(rb.position + velocity * timeStep);
+        Quaternion rotation = Quaternion.LookRotation(velocity);
+        rb.MoveRotation(rotation);
     }
 
     void OnValidate () {
         mass = surfaceGravity * radius * radius / Universe.gravitationalConstant;
-        meshHolder = transform.GetChild (0);
-        meshHolder.localScale = Vector3.one * radius;
+//        meshHolder = transform.GetChild (0);
+//        meshHolder.localScale = Vector3.one * radius;
     }
 
     public Rigidbody Rigidbody {
