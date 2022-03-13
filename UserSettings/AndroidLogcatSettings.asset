@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "65a4d15",
     "m_SelectedPackage": {
         "deviceId": "65a4d15",
-        "name": "com.DefaultCompany.HTI_Project",
-        "processId": 22428,
+        "name": "com.DefaultCompany.HTIProject",
+        "processId": 20221,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -138,6 +138,42 @@
             "deviceId": "65a4d15",
             "name": "com.DefaultCompany.HTI_Project",
             "processId": 22428,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 28097,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 4728,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 9762,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 14006,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTI_Project",
+            "processId": 16451,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 20221,
             "exited": false
         }
     ],

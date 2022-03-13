@@ -108,13 +108,13 @@ public class ContentGatheringScript : MonoBehaviour
         }
 
         UnityEngine.Object[] textures = Resources.LoadAll("APOD/Pictures", typeof(Texture2D));
-        for (int i = 6; i >= 0; i--)
+        for (int i = textures.Length - 1; i >= 0; i--)
         {
             try
             {
                 CreateObjects(goContainer, goTitle, goImage, goDesc, textures[i], FileList[i]);
             }
-            catch (Exception e) { }
+            finally { }
         }
         Destroy(goContainer);
         Destroy(goImage);
@@ -168,12 +168,12 @@ public class ContentGatheringScript : MonoBehaviour
         yield return webRequest.SendWebRequest();
         string result = webRequest.downloadHandler.text;
         Debug.Log(result);
-        if(result.Contains("Date must be between Jun 16, 1995 and Mar 11, 2022."))
+        var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
+        if(values.ContainsKey("code"))
         {
             success(false);
             yield break;
         }
-        var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
         string ImageExtension = values["hdurl"].Substring((values["hdurl"].LastIndexOf('.')));
         string ImageFilePath = Application.dataPath + "/Resources/APOD/Pictures/" + values["date"] + ImageExtension;
         string JsonFilePath = Application.dataPath + "/Resources/APOD/JSON/" + values["date"] + ".json";

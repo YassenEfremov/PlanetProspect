@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Xml;
 
-public class testXml : MonoBehaviour
+public class XmlReaderScript : MonoBehaviour
 {
     void Start()
     {
