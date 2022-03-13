@@ -49,7 +49,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         rocket = new VirtualRocket(realRocket);
 
         lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
-        lineRenderer.enabled = true;
+        //lineRenderer.enabled = true;
         lineRenderer.material = lineMaterial;
         lineRenderer.material.color = Color.white;
         lineRenderer.startColor = lineMaterial.color;
