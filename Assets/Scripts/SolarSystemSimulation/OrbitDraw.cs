@@ -44,7 +44,9 @@ public class OrbitDraw : MonoBehaviour {
             double julianDate = Universe.ToJulianDate(georgianDate);
             double julianCenturiesSinceEpoch = Universe.ToJulianCenturiesSinceEpoch(julianDate);
             // compute coords
-            drawPoints[i] = planetaryOrbit.CalculateCoordinates(julianCenturiesSinceEpoch) * universe.distanceScale;
+            Vector3 velocity = new Vector3(); 
+            planetaryOrbit.CalculateCoordinates(ref drawPoints[i], ref velocity, julianCenturiesSinceEpoch);
+            drawPoints[i] = (drawPoints[i] * universe.distanceScale) + velocity * Universe.physicsTimeStep;
         }
 
         // draw lines

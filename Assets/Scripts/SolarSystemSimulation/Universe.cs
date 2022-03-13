@@ -15,8 +15,14 @@ public class Universe : MonoBehaviour {
     readonly static int julianCenturyDays = 36525; // In Julian days
     readonly static double julianEpoch = 2451545.0;  // In Julian days
 
+    public readonly static float physicsTimeStep = 0.01f;
+
     void Awake() {
         georgianDate = DateTime.Now;
+        var dateString = "5/1/2008 8:30:52 AM";
+        DateTime date1 = DateTime.Parse(dateString,
+                                  System.Globalization.CultureInfo.InvariantCulture);
+        print(ToJulianDate(date1));
     }
 
     void FixedUpdate() {
