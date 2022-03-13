@@ -19,9 +19,12 @@ public class Universe : MonoBehaviour {
     public readonly static float gravitationalConstant = 0.0001f;
     public readonly static float physicsTimeStep = 0.01f;
 
-
     void Awake() {
         georgianDate = DateTime.Now;
+        var dateString = "5/1/2008 8:30:52 AM";
+        DateTime date1 = DateTime.Parse(dateString,
+                                  System.Globalization.CultureInfo.InvariantCulture);
+        print(ToJulianDate(date1));
     }
 
     void FixedUpdate() {

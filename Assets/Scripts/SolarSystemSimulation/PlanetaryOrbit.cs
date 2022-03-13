@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine; 
 
 
+[RequireComponent (typeof(Rigidbody))]
 public class PlanetaryOrbit : MonoBehaviour {
 
     [System.Serializable]
@@ -27,6 +28,8 @@ public class PlanetaryOrbit : MonoBehaviour {
     public const float radToDeg = 180 / Mathf.PI;
     public const float degToRad = Mathf.PI / 180;
 
+    public double gravitationalParameter;
+
     public KeplerianParameter semiMajorAxis;                    // AU       |       AU  / Cy        
     public KeplerianParameter eccentricity;                     // rad      |       rad / Cy        
     public KeplerianParameter inclination;                      // deg      |       deg / Cy        
@@ -36,18 +39,25 @@ public class PlanetaryOrbit : MonoBehaviour {
     public AdditionalTerms additionalTerms;
 
     private Universe universe;
+    private Vector3 position = new Vector3();
+    private Vector3 velocity = new Vector3();
+    private Rigidbody rb;
 
     void Awake() {
+        rb = GetComponent<Rigidbody>();
         universe = FindObjectOfType<Universe> ();
     }
 
     void FixedUpdate() {
-       transform.position = CalculateCoordinates(universe.julianCenturiesSinceEpoch) * universe.distanceScale;
+        CalculateCoordinates(ref position, ref velocity, universe.julianCenturiesSinceEpoch);
+        rb.MovePosition((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);
+        Quaternion rotation = Quaternion.LookRotation(velocity);
+        rb.MoveRotation(rotation);
     }
 
     // https://ssd.jpl.nasa.gov/planets/approx_pos.html
-    public Vector3 CalculateCoordinates(double julianCenturiesSinceEpoch) {
-        Vector3 coords = new Vector3();
+    public void CalculateCoordinates(ref Vector3 position, ref Vector3 velocity, double julianCenturiesSinceEpoch) {
+        position = new Vector3();
         
         // Compute values for the Kepler elements for the given (Julian) time
         float semiMajorAxis = (float)(this.semiMajorAxis.element + this.semiMajorAxis.rate * julianCenturiesSinceEpoch);
@@ -86,21 +96,36 @@ public class PlanetaryOrbit : MonoBehaviour {
         // calculate the radius vector and compute the position components X,Y,Z
         float radiusVector = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Mathf.Cos(trueAnomaly));
 
-        coords.x = radiusVector * (
+        position.x = radiusVector * (
                 Mathf.Cos(ascendingNodeLongitude) * Mathf.Cos(trueAnomaly + argumentOfPerihelion)
                 - Mathf.Sin(ascendingNodeLongitude) * Mathf.Sin(trueAnomaly + argumentOfPerihelion)
                 * Mathf.Cos(inclination)
             );
 
-        coords.y = radiusVector * (
+        position.y = radiusVector * (
                 Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(trueAnomaly + argumentOfPerihelion)
                 + Mathf.Cos(ascendingNodeLongitude) * Mathf.Sin(trueAnomaly + argumentOfPerihelion)
                 * Mathf.Cos(inclination)
             );
 
-        coords.z = radiusVector * Mathf.Sin(trueAnomaly + argumentOfPerihelion) * Mathf.Sin(inclination);
+        position.z = radiusVector * Mathf.Sin(trueAnomaly + argumentOfPerihelion) * Mathf.Sin(inclination);
 
-        return coords;
+        // Compute angular momentum and calculate velocity vectors
+        float p = semiMajorAxis * (1 - eccentricity * eccentricity);  // This will be used a lot - Calculate here to save computation power
+        float angularMomentum = Mathf.Sqrt((float)(gravitationalParameter) * p);
+
+        velocity = new Vector3();
+
+        velocity.x = (position.x * angularMomentum * eccentricity / (radiusVector * p)) * Mathf.Sin(trueAnomaly)
+                - (angularMomentum / radiusVector) * Mathf.Cos(ascendingNodeLongitude) * Mathf.Sin(argumentOfPerihelion + trueAnomaly)
+                + Mathf.Sin(ascendingNodeLongitude) * Mathf.Cos(argumentOfPerihelion + trueAnomaly) * Mathf.Cos(inclination);
+
+        velocity.y = (position.y * angularMomentum * eccentricity / (radiusVector * p)) * Mathf.Sin(trueAnomaly)
+                - (angularMomentum / radiusVector) * Mathf.Sin(ascendingNodeLongitude) * Mathf.Sin(argumentOfPerihelion + trueAnomaly)
+                - Mathf.Cos(argumentOfPerihelion) * Mathf.Cos(argumentOfPerihelion * trueAnomaly) * Mathf.Cos(inclination);
+
+        velocity.z = (position.z * angularMomentum * eccentricity / (radiusVector * p )) * Mathf.Sin(trueAnomaly)
+            + (angularMomentum * radiusVector) * Mathf.Cos(argumentOfPerihelion + trueAnomaly) * Mathf.Sin(inclination);
     }
 
     /*
@@ -121,7 +146,6 @@ public class PlanetaryOrbit : MonoBehaviour {
         }
 
         return eccentricAnomaly;
-
     }
 
     // Compute the true anomaly -> eccentricAnomaly should be in radians
