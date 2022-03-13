@@ -17,7 +17,7 @@ public class ContentGatheringScript : MonoBehaviour
     {
         string path = Application.dataPath + "/Resources/APOD/";
         bool PictureFlag = true;
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 8; i++)
         {
             string filename = DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd") + ".json";
             bool jsonfileflag = File.Exists(Path.Combine(path + "JSON/", filename));
