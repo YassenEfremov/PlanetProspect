@@ -16,7 +16,6 @@ public class ContentGatheringScript : MonoBehaviour
     public void Awake()
     {
         string path = Application.dataPath + "/Resources/APOD/";
-        bool PictureFlag = true;
         for (int i = 0; i < 7; i++)
         {
             string filename = DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd") + ".json";
@@ -25,24 +24,21 @@ public class ContentGatheringScript : MonoBehaviour
             {
                 Debug.Log("DownLoading");
                 StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"), success => {
-                    if (!success)
+                    if (success)
                     {
-                        PictureFlag = false;
+                        if (File.Exists((path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json")))
+                        {
+                            File.Delete(path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json");
+                            string[] PicToDelete = Directory.GetFiles(path + "Pictures/", DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".*");
+                            File.Delete(PicToDelete[0]);
+                        }
                     }
                 }));
-                
+
 
             }
         }
-        if (File.Exists((path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json")))
-        {
-            if(PictureFlag is true)
-            {
-                File.Delete(path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json");
-                string[] PicToDelete = Directory.GetFiles(path + "Pictures/", DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".*");
-                File.Delete(PicToDelete[0]);
-            }
-        }
+
     }
     // Start is called before the first frame update
     public void Start()
@@ -131,7 +127,7 @@ public class ContentGatheringScript : MonoBehaviour
         }
     }
 
-    public void CreateObjects(GameObject goContainer, GameObject goTitle, GameObject goImage, GameObject goDesc,UnityEngine.Object texture, string JsonString)
+    public void CreateObjects(GameObject goContainer, GameObject goTitle, GameObject goImage, GameObject goDesc, UnityEngine.Object texture, string JsonString)
     {
         var JsonDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonString);
         GameObject TmpParent = Instantiate(goContainer, this.transform);
@@ -169,7 +165,7 @@ public class ContentGatheringScript : MonoBehaviour
         string result = webRequest.downloadHandler.text;
         Debug.Log(result);
         var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
-        if(values.ContainsKey("code"))
+        if (values.ContainsKey("code"))
         {
             success(false);
             yield break;

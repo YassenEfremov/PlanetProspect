@@ -25,12 +25,12 @@ public class OrbitDraw : MonoBehaviour {
         lineRenderer.startColor = lineRenderer.material.color;
         lineRenderer.endColor= lineRenderer.material.color;
         lineRenderer.enabled = true;
-        
-        // TODO: Draw orbit here (better performance but harder to debug)
+
+        DrawOrbit();
     }
 
     void Update() {
-        DrawOrbit();
+        //DrawOrbit();
     }
 
     void DrawOrbit() {
