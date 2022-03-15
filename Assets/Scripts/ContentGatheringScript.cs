@@ -16,7 +16,6 @@ public class ContentGatheringScript : MonoBehaviour
     public void Awake()
     {
         string path = Application.dataPath + "/Resources/APOD/";
-        bool PictureFlag = true;
         for (int i = 0; i < 7; i++)
         {
             string filename = DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd") + ".json";
@@ -25,24 +24,36 @@ public class ContentGatheringScript : MonoBehaviour
             {
                 Debug.Log("DownLoading");
                 StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"), success => {
-                    if (!success)
+                    if (success)
                     {
-                        PictureFlag = false;
+                        Debug.Log("success");
                     }
                 }));
-                
-
             }
         }
-        if (File.Exists((path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json")))
-        {
-            if(PictureFlag is true)
+        UnityEngine.Object[] jsonarr = Resources.LoadAll("APOD/JSON", typeof(TextAsset));
+        List<UnityEngine.Object> jsonlist = new List<UnityEngine.Object>(jsonarr);
+        for (int i = 0; i < jsonlist.Count; i++)
+        { 
+            if (jsonlist.Count > 7)
             {
-                File.Delete(path + "JSON/" + DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".json");
-                string[] PicToDelete = Directory.GetFiles(path + "Pictures/", DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd") + ".*");
-                File.Delete(PicToDelete[0]);
+                Debug.Log((path + "JSON/" + DateTime.Today.AddDays(-jsonlist.Count).ToString("yyyy-MM-dd") + ".json"));
+                if (File.Exists((path + "JSON/" + DateTime.Today.AddDays(-jsonlist.Count).ToString("yyyy-MM-dd") + ".json")))
+                {
+                    File.Delete(path + "JSON/" + DateTime.Today.AddDays(-jsonlist.Count).ToString("yyyy-MM-dd") + ".json");
+                    File.Delete(path + "JSON/" + DateTime.Today.AddDays(-jsonlist.Count).ToString("yyyy-MM-dd") + ".json.meta");
+                    try
+                    {
+                        string[] PicToDelete = Directory.GetFiles(path + "Pictures/", DateTime.Today.AddDays(-jsonlist.Count).ToString("yyyy-MM-dd") + ".*");
+                        File.Delete(PicToDelete[0]);
+                        File.Delete(PicToDelete[0] + ".meta");
+                    }
+                    finally { }
+                }
+                jsonlist.RemoveAt(0);
             }
         }
+
     }
     // Start is called before the first frame update
     public void Start()
@@ -108,13 +119,13 @@ public class ContentGatheringScript : MonoBehaviour
         }
 
         UnityEngine.Object[] textures = Resources.LoadAll("APOD/Pictures", typeof(Texture2D));
-        for (int i = 6; i >= 0; i--)
+        for (int i = textures.Length - 1; i >= 0; i--)
         {
             try
             {
                 CreateObjects(goContainer, goTitle, goImage, goDesc, textures[i], FileList[i]);
             }
-            catch (Exception e) { }
+            finally { }
         }
         Destroy(goContainer);
         Destroy(goImage);
@@ -131,7 +142,7 @@ public class ContentGatheringScript : MonoBehaviour
         }
     }
 
-    public void CreateObjects(GameObject goContainer, GameObject goTitle, GameObject goImage, GameObject goDesc,UnityEngine.Object texture, string JsonString)
+    public void CreateObjects(GameObject goContainer, GameObject goTitle, GameObject goImage, GameObject goDesc, UnityEngine.Object texture, string JsonString)
     {
         var JsonDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(JsonString);
         GameObject TmpParent = Instantiate(goContainer, this.transform);
@@ -168,12 +179,12 @@ public class ContentGatheringScript : MonoBehaviour
         yield return webRequest.SendWebRequest();
         string result = webRequest.downloadHandler.text;
         Debug.Log(result);
-        if(result.Contains("{\"code\":400,"))
+        var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
+        if (values.ContainsKey("code"))
         {
             success(false);
             yield break;
         }
-        var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
         string ImageExtension = values["hdurl"].Substring((values["hdurl"].LastIndexOf('.')));
         string ImageFilePath = Application.dataPath + "/Resources/APOD/Pictures/" + values["date"] + ImageExtension;
         string JsonFilePath = Application.dataPath + "/Resources/APOD/JSON/" + values["date"] + ".json";
