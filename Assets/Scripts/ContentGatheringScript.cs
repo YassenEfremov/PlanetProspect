@@ -22,7 +22,7 @@ public class ContentGatheringScript : MonoBehaviour
             bool jsonfileflag = File.Exists(Path.Combine(path + "JSON/", filename));
             if (!jsonfileflag)
             {
-                Debug.Log("DownLoading");
+                //Debug.Log("DownLoading");
                 StartCoroutine(APODFetch(DateTime.Today.AddDays(-i).ToString("yyyy-MM-dd"), success => {
                     if (success)
                     {
@@ -163,7 +163,7 @@ public class ContentGatheringScript : MonoBehaviour
         UnityWebRequest webRequest = UnityWebRequest.Get(url);
         yield return webRequest.SendWebRequest();
         string result = webRequest.downloadHandler.text;
-        Debug.Log(result);
+        //Debug.Log(result);
         var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
         if (values.ContainsKey("code"))
         {
@@ -178,7 +178,7 @@ public class ContentGatheringScript : MonoBehaviour
         {
             yield return new WaitForSeconds(3);
             webClient.DownloadFile(values["hdurl"], ImageFilePath);
-            Debug.Log("Download Success");
+            //Debug.Log("Download Success");
         }
     }
 
