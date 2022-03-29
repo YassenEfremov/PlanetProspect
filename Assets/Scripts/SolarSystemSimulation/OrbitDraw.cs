@@ -11,10 +11,12 @@ public class OrbitDraw : MonoBehaviour {
     private Universe universe;
     private LineRenderer lineRenderer;
 
-    public float lineWidth;
+    //public float lineWidth;
     public Material lineMaterial;
     public double dayIncrement;
     public uint nodeAmount;
+
+    float MainCameraPrevPosZ;
 
     void Start() {
         planetaryOrbit = gameObject.GetComponentInChildren<PlanetaryOrbit>();
@@ -26,14 +28,22 @@ public class OrbitDraw : MonoBehaviour {
         lineRenderer.endColor= lineRenderer.material.color;
         lineRenderer.enabled = true;
 
+        lineRenderer.widthMultiplier = -Camera.main.transform.position.z / 200;
+        MainCameraPrevPosZ = Camera.main.transform.position.z;
+
         DrawOrbit();
     }
 
     void Update() {
-        //DrawOrbit();
+        // Redraw lines on camera movement
+        if (Camera.main.transform.position.z != MainCameraPrevPosZ)
+        {
+            lineRenderer.widthMultiplier = -Camera.main.transform.position.z / 200;
+            MainCameraPrevPosZ = Camera.main.transform.position.z;
+        }
     }
 
-    void DrawOrbit() {
+    public void DrawOrbit() {
         Vector3[] drawPoints = new Vector3[nodeAmount];
         DateTime georgianDate = universe.georgianDate;
 
@@ -52,8 +62,5 @@ public class OrbitDraw : MonoBehaviour {
         // draw lines
         lineRenderer.positionCount = drawPoints.Length;
         lineRenderer.SetPositions(drawPoints);
-        lineRenderer.widthMultiplier = lineWidth;
     }
-
-
 }
