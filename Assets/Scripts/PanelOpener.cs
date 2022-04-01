@@ -1,36 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class PanelOpener : MonoBehaviour
 {
     static GameObject openPanel = null;
 
-    public GameObject panel;
+
+    void Start()
+    {
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            //Debug.Log(button.GetComponent<Image>().color);
+            //button.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
+            button.gameObject.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
+        }
+    }
+
+/*    void OnDisable()
+    {
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            Debug.Log("AAA");
+            button.gameObject.GetComponent<Animator>().Play("Normal", 0, 0f);
+        }
+    }*/
 
 
     public void TogglePanel()
     {
+        // There is no active panel => set the given one as active
         if (openPanel == null)
         {
-            panel.SetActive(true);
-            openPanel = panel;
+            openPanel = gameObject;
+            gameObject.SetActive(true);
+            // Disable all buttons except for the ones that are part of the given panel
             foreach (Button button in FindObjectsOfType<Button>())
             {
-                if (button != gameObject.GetComponent<Button>() && !button.transform.IsChildOf(panel.transform))
+                if (!button.transform.IsChildOf(gameObject.transform))
                     button.interactable = false;
             }
         }
+        // There already is an active panel
         else
         {
-            if (panel == openPanel)
+            if (gameObject == openPanel)
             {
-                panel.SetActive(false);
                 openPanel = null;
+                gameObject.SetActive(false);
+                // Enable all buttons that are part of the given panel
                 foreach (Button button in FindObjectsOfType<Button>())
                 {
-                    if (button != gameObject.GetComponent<Button>() && !button.transform.IsChildOf(panel.transform))
+                    if (!button.transform.IsChildOf(gameObject.transform))
                         button.interactable = true;
                 }
             }

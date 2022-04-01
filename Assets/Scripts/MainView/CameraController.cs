@@ -7,28 +7,39 @@ public class CameraController : MonoBehaviour
 {
 #if UNITY_IOS || UNITY_ANDROID
 
+    int MIN_ZOOM = -2;
+    int MAX_ZOOM = -10;
+
     Plane plane;
     bool touchedUI = false;
 
     [SerializeField] bool rotate;
-    [SerializeField] GameObject[] planets;
-    [SerializeField] GameObject planetToFollow;
+    [SerializeField] bool mapView;
 
 
-    private void Awake()
+    void Awake()
     {
         Application.targetFrameRate = 60;       // Very important!
     }
 
-
-    private void Start()
+    void Start()
     {
+        if(mapView)
+        {
+            MIN_ZOOM = -10;
+            MAX_ZOOM = -50;
+        }
+
+/*        gameObject.transform.position = new Vector3(0, -5, -5);     // Default position
+        if(PlayerPrefs.HasKey("x"))
+            // Load the last camera position
+            gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));*/
+
         //gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 5, -5);
         //gameObject.transform.position = planetToFollow.transform.position;
     }
 
-
-    private void Update()
+    public void Update()
     {
         // If we click on a UI element => don't move the camera
         if (Input.touchCount >= 1)
@@ -41,17 +52,17 @@ public class CameraController : MonoBehaviour
         if (Input.touchCount >= 1 && !touchedUI)
         {
             plane.SetNormalAndPosition(Vector3.back, Vector3.zero);   // Update Plane
-            var Delta1 = PlanePositionDelta(Input.GetTouch(0));
+            var delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 if (Input.touchCount >= 2)
                 {
                     // Scroll slower when zooming limit has been reached
-                    gameObject.transform.Translate(Delta1 / 3, Space.World);
+                    gameObject.transform.Translate(delta1 / 3, Space.World);
                 }
                 else
                 {
-                    gameObject.transform.Translate(Delta1, Space.World);
+                    gameObject.transform.Translate(delta1, Space.World);
                 }
             }
         }
@@ -79,12 +90,12 @@ public class CameraController : MonoBehaviour
                 return;
 
             // Limit camera zoom
-            if (gameObject.transform.position.z <= -10)
+            if (gameObject.transform.position.z <= MAX_ZOOM)
             {
                 if (zoom > 1)    // Allow only zooming in
                     gameObject.transform.position = Vector3.LerpUnclamped(posToZoom, gameObject.transform.position, 1 / zoom);
             }
-            else if (gameObject.transform.position.z >= -2)
+            else if (gameObject.transform.position.z >= MIN_ZOOM)
             {
                 if (zoom < 1)    // Allow only zooming out
                     gameObject.transform.position = Vector3.LerpUnclamped(posToZoom, gameObject.transform.position, 1 / zoom);
@@ -104,7 +115,19 @@ public class CameraController : MonoBehaviour
             touchedUI = false;
     }
 
-    private bool IsPointerOverUIObject()
+/*    void OnApplicationPause(bool pauseStatus)
+    {
+        if(pauseStatus)
+        {
+            // Save the camera position
+            PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
+            PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
+            PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
+            PlayerPrefs.Save();
+        }
+    }*/
+
+    bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -113,7 +136,7 @@ public class CameraController : MonoBehaviour
         return results.Count > 0;
     }
 
-    private Vector3 PlanePositionDelta(Touch touch)
+    Vector3 PlanePositionDelta(Touch touch)
     {
         // Didn't move
         if (touch.phase != TouchPhase.Moved)
@@ -128,7 +151,7 @@ public class CameraController : MonoBehaviour
         return Vector3.zero;
     }
 
-    private Vector3 PlanePosition(Vector2 screenPos)
+    Vector3 PlanePosition(Vector2 screenPos)
     {
         var rayNow = Camera.main.ScreenPointToRay(screenPos);
         if (plane.Raycast(rayNow, out var enterNow))

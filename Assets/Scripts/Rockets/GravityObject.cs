@@ -1,55 +1,62 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-[RequireComponent (typeof (Rigidbody))]
-public class GravityObject : MonoBehaviour {
+
+[RequireComponent(typeof(Rigidbody))]
+public class GravityObject : MonoBehaviour
+{
     public bool isActive;
     public bool isGravityAffected;
     public float radius;
     public float surfaceGravity;
-    public Slider sliderX;
-    public Slider sliderY;
+    [SerializeField] FixedJoystick joystick;
     public Vector3 initialVelocity;
 
-    public Vector3 velocity {get; set;}
+    public Vector3 velocity { get; set; }
     public float mass { get; private set; }
-    
+
     // [System.NonSerialized]
     private Rigidbody rb;
 
-    void Awake () {
+
+    void Awake()
+    {
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
         //velocity = initialVelocity;
     }
 
-    private void Update()
+    void Update()
     {
-        if(!isActive)
+        if (!isActive && joystick != null)
         {
-            if(sliderX != null || sliderY != null)
-                velocity = new Vector3(sliderX.value, sliderY.value, 0);
+            velocity = new Vector3(joystick.Horizontal * 10, joystick.Vertical * 10, 0);
         }
     }
 
-    void OnValidate () {
+    void OnValidate()
+    {
         mass = surfaceGravity * radius * radius / Universe.gravitationalConstant;
     }
 
-    public Rigidbody Rigidbody {
-        get {
+    public Rigidbody Rigidbody
+    {
+        get
+        {
             return rb;
         }
     }
 
-    public Vector3 Position {
-        get {
+    public Vector3 Position
+    {
+        get
+        {
             return rb.position;
         }
 
-        set {
-            if (isActive) {
+        set
+        {
+            if (isActive)
+            {
                 rb.position = value;
                 rb.MovePosition(rb.position);
                 Quaternion rotation = Quaternion.LookRotation(velocity);

@@ -18,6 +18,7 @@ public class OrbitDraw : MonoBehaviour {
 
     float MainCameraPrevPosZ;
 
+
     void Start() {
         planetaryOrbit = gameObject.GetComponentInChildren<PlanetaryOrbit>();
         universe = FindObjectOfType<Universe>();
