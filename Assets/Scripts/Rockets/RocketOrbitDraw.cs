@@ -28,6 +28,7 @@ public class RocketOrbitDraw : MonoBehaviour {
     private GravityObject realRocket;
     // private VirtualRocket rocket;
     private VirtualRocket rocket;
+    private bool collided = false;
     // private Vector3 rocketVelocity;
 
     public uint nodeAmount = 1000;
@@ -59,7 +60,13 @@ public class RocketOrbitDraw : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         rocket = new VirtualRocket(realRocket);
-        DrawOrbit();
+        if(!collided)
+            DrawOrbit();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        collided = true;
     }
 
     void DrawOrbit() {

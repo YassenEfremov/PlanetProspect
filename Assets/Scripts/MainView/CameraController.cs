@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] bool rotate;
     [SerializeField] bool mapView;
+    [SerializeField] GameObject planetToFollow;
 
 
     void Awake()
@@ -24,29 +25,27 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        if(mapView)
+        if (mapView)
         {
             MIN_ZOOM = -10;
             MAX_ZOOM = -50;
         }
-
-/*        gameObject.transform.position = new Vector3(0, -5, -5);     // Default position
-        if(PlayerPrefs.HasKey("x"))
-            // Load the last camera position
-            gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));*/
-
-        //gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 5, -5);
-        //gameObject.transform.position = planetToFollow.transform.position;
+        /*        gameObject.transform.position = new Vector3(0, -5, -5);     // Default position
+                if(PlayerPrefs.HasKey("x"))
+                    // Load the last camera position
+                    gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));*/
     }
 
     public void Update()
     {
-        // If we click on a UI element => don't move the camera
-        if (Input.touchCount >= 1)
-        {
-            if (IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began)
-                touchedUI = true;
-        }
+/*        if(mapView)
+            gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y, -5);
+        else
+            gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 5, -5);*/
+
+        // If we click on an interactable UI element => don't move the camera
+        if (Input.touchCount >= 1 && IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began)
+            touchedUI = true;
 
         // Scroll
         if (Input.touchCount >= 1 && !touchedUI)
@@ -115,25 +114,36 @@ public class CameraController : MonoBehaviour
             touchedUI = false;
     }
 
-/*    void OnApplicationPause(bool pauseStatus)
-    {
-        if(pauseStatus)
+    /*    void OnApplicationPause(bool pauseStatus)
         {
-            // Save the camera position
-            PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
-            PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
-            PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
-            PlayerPrefs.Save();
-        }
-    }*/
+            if(pauseStatus)
+            {
+                // Save the camera position
+                PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
+                PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
+                PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
+                PlayerPrefs.Save();
+            }
+        }*/
 
     bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        eventDataCurrentPosition.position = new Vector2(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y);
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
+        if (results.Count > 0)
+        {
+            Transform interactable = results[0].gameObject.transform;
+            while (interactable != null)
+            {
+                if (interactable.tag.Equals("Interactable"))
+                    return true;
+
+                interactable = interactable.parent;
+            }
+        }
+        return false;
     }
 
     Vector3 PlanePositionDelta(Touch touch)

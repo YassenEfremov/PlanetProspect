@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,10 +10,11 @@ public class GravityObject : MonoBehaviour
     public float radius;
     public float surfaceGravity;
     [SerializeField] FixedJoystick joystick;
+    [SerializeField] Slider slider;
     public Vector3 initialVelocity;
 
     public Vector3 velocity { get; set; }
-    public float mass { get; private set; }
+    public float mass { get; set; }
 
     // [System.NonSerialized]
     private Rigidbody rb;
@@ -29,7 +31,7 @@ public class GravityObject : MonoBehaviour
     {
         if (!isActive && joystick != null)
         {
-            velocity = new Vector3(joystick.Horizontal * 10, joystick.Vertical * 10, 0);
+            velocity = new Vector3(joystick.Horizontal * slider.value, joystick.Vertical * slider.value, 0);
         }
     }
 

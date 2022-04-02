@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class CanvasSwitch : MonoBehaviour
 {
-    [SerializeField] Canvas closeCanvas;
+    //[SerializeField] Canvas globalCanvas;
+    [SerializeField] Canvas mainCanvas;
     [SerializeField] Canvas mapCanvas;
 
 
     public void SwitchCanvas()
     {
-        closeCanvas.gameObject.SetActive(!closeCanvas.gameObject.activeSelf);
+        mainCanvas.gameObject.SetActive(!mainCanvas.gameObject.activeSelf);
         mapCanvas.gameObject.SetActive(!mapCanvas.gameObject.activeSelf);
     }
 }

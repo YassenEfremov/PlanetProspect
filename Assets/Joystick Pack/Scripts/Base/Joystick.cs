@@ -78,13 +78,14 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
-        if (magnitude > deadZone)
-        {
-            if (magnitude > 1)
-                input = normalised;
-        }
-        else
-            input = Vector2.zero;
+        /*        if (magnitude > deadZone)
+                {
+                    if (magnitude > 1)
+                        input = normalised;
+                }
+                else
+                    input = Vector2.zero;*/
+        input = normalised;
     }
 
     private void FormatInput()
