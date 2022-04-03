@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Universe : MonoBehaviour {
 
-    public float distanceScale;
+    public float distanceScale = 30;
 
     public float dayTimeStep;
     public DateTime georgianDate;
@@ -15,16 +15,19 @@ public class Universe : MonoBehaviour {
     readonly static int julianCenturyDays = 36525; // In Julian days
     readonly static double julianEpoch = 2451545.0;  // In Julian days
 
-    // Gravity is used when simulating rockets
-    public readonly static float gravitationalConstant = 0.0001f;
+    // Gravity is used when simulating rockets (TODO: satelites and moons?)
+    // public readonly static long earthMass = 60000000000000000000;
+    // public readonly static double gravitationalConstant = 0.0000000000673;
+
+    // (Gravitational Constant * Earth's Mass) / (distance from sun to earth * distanceScale)
+    public static float gravitationalConstant;
+
     public readonly static float physicsTimeStep = 0.01f;
 
     void Awake() {
         georgianDate = DateTime.Now;
-        var dateString = "5/1/2008 8:30:52 AM";
-        DateTime date1 = DateTime.Parse(dateString,
-                                  System.Globalization.CultureInfo.InvariantCulture);
-        print(ToJulianDate(date1));
+        gravitationalConstant = 26.692f / distanceScale;
+        print(gravitationalConstant);
     }
 
     void FixedUpdate() {

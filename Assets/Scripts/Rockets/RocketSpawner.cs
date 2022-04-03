@@ -30,7 +30,7 @@ public class RocketSpawner : MonoBehaviour {
         GravityObject rocketGravity = newRocket.GetComponent<GravityObject>();
         rocketGravity.isGravityAffected = true;
         rocketGravity.radius = 0.05f;
-        rocketGravity.surfaceGravity = 0.04f;
+        // rocketGravity.surfaceGravity = 0.04f;
         rocketGravity.initialVelocity = Vector3.zero;
 
         newRocket.transform.localScale = Vector3.one * spawnSize;
