@@ -36,7 +36,7 @@ public class OrbitDraw : MonoBehaviour {
     }
 
     void Update() {
-        // Redraw lines on camera movement
+        // Update lines width on camera movement
         if (Camera.main.transform.position.z != MainCameraPrevPosZ)
         {
             lineRenderer.widthMultiplier = -Camera.main.transform.position.z / 200;

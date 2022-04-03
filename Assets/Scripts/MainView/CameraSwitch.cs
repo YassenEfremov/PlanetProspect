@@ -22,8 +22,8 @@ public class CameraSwitch : MonoBehaviour
 
         // This is needed because the camera's scripts aren't loaded on the first touch
         if (closeView.gameObject.activeSelf)
-            closeView.GetComponent<CameraController>().Update();
+            closeView.GetComponent<MainCameraController>().Update();
         else
-            mapView.GetComponent<CameraController>().Update();
+            mapView.GetComponent<MapCameraController>().Update();
     }
 }
