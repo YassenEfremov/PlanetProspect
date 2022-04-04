@@ -5,28 +5,44 @@ using UnityEngine;
 
 public class Universe : MonoBehaviour {
 
-    public float distanceScale = 30;
+    /*
+     * Planet coordinates are calculated in AU
+     * To give a realistic perception of scale in the universe, these values are multiplied
+     * this is the coefficient they are multiplied with
+     */
+    public float distanceScale;
 
+    /*
+     * How many days pass per second in the simulation
+     * TODO: slow-down / fast-forward time
+     */
     public float dayTimeStep;
+
     public DateTime georgianDate;
     public double julianDate;
     public double julianCenturiesSinceEpoch;
-
     readonly static int julianCenturyDays = 36525; // In Julian days
     readonly static double julianEpoch = 2451545.0;  // In Julian days
 
-    // Gravity is used when simulating rockets (TODO: satelites and moons?)
-    // public readonly static long earthMass = 60000000000000000000;
-    // public readonly static double gravitationalConstant = 0.0000000000673;
-
-    // (Gravitational Constant * Earth's Mass) / (distance from sun to earth * distanceScale)
-    public static float gravitationalConstant;
+    /* 
+     * (Gravitational Constant * Earth's Mass) / (distance from sun to earth * distance scale)
+     * This variable is precomputed for use in all gravitational computations and contains all the constant values required
+     * Aside from the gravitational constant, all other values unify the different parameters:
+     * distance from sun to earth in km && distance scale - unifies AU
+     * Earth's mass -> All planets mass, which are otherwise too large to store in a 64 bit integer
+     * Constant values approximations:
+     * Earth's mass -> 5.9722 * 10^24 kg
+     * Distance from earth to moon -> 150 * 10^10 m
+     * Gravitational constant -> 6.67 * 10^-11 Nm^2/kg^2
+     * TODO: More appropriate and less misleading var name
+     */
+    public static float gravitationalConstant = 265.563826f;
 
     public readonly static float physicsTimeStep = 0.01f;
 
     void Awake() {
         georgianDate = DateTime.Now;
-        gravitationalConstant = 26.692f / distanceScale;
+        gravitationalConstant /= distanceScale;
         print(gravitationalConstant);
     }
 

@@ -6,8 +6,13 @@ using UnityEngine.UI;
 public class GravityObject : MonoBehaviour {
     public bool isActive;
     public bool isGravityAffected;
+
+    // Is serialized only for debug purposes
+    // TODO: Change to non serializable
+    // [System.NonSerialized]
     public float radius;
-// public float surfaceGravity; -> can be calculated from radius, mass and gravitational constant
+
+    // public float surfaceGravity; -> can be calculated from radius, mass and gravitational constant
     public float mass; // mass in earth masses
 
     [SerializeField] FixedJoystick joystick;
@@ -18,21 +23,29 @@ public class GravityObject : MonoBehaviour {
 
     // [System.NonSerialized]
     private Rigidbody rb;
-    private Universe universe;
-
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
+
+        // get radius
         try {
             Mesh mesh = GetComponent<MeshFilter>().mesh;
             Bounds bounds = mesh.bounds;
-            radius = bounds.extents.x;
+            radius = bounds.extents.x * transform.localScale.x;  // .x because x == y == z, since we expect a sphere
         } catch (MissingComponentException) {  // Rockets don't have a mesh filter
-            radius = 0;
+            // get largest dimension as a radius
+            radius = transform.localScale.x;
+
+            if (radius < transform.localScale.y) {
+                radius = transform.localScale.y;
+            }
+
+            if (radius < transform.localScale.z) {
+                radius = transform.localScale.z;
+            }
         }
-        //velocity = initialVelocity;
-        universe = FindObjectOfType<Universe>();
+
     }
 
     void Update() {

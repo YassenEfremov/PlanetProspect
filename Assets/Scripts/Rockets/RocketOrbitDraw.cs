@@ -10,6 +10,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         public Vector3 position;
         public Vector3 velocity;
         public float mass;
+        public float radius;
 
         // Rockets shouldn't affect each other gravity?
         // public float surfaceGravity;
@@ -19,6 +20,7 @@ public class RocketOrbitDraw : MonoBehaviour {
                 position = body.transform.position;
                 velocity = body.velocity == Vector3.zero ? body.initialVelocity : body.velocity;
                 mass = body.mass;
+                radius = body.radius;
             }
         }
     }
@@ -108,7 +110,7 @@ public class RocketOrbitDraw : MonoBehaviour {
             // distance between rocket and planet
             float dist = Vector3.Distance(rocket.position, planet.transform.position);
             // take in account planet radius
-            dist -= planet.radius;
+            dist -= planet.radius + rocket.radius;
             // check for collision
             if (dist <= 0.01) {
                 return true;
