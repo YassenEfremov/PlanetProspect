@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class CameraSwitch : MonoBehaviour
 {
-    [SerializeField] Camera closeView;
-    [SerializeField] Camera mapView;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] Camera mapCamera;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        /*        closeView.gameObject.SetActive(true);
+        /*        mainCamera.gameObject.SetActive(true);
                 topView.gameObject.SetActive(false);*/
     }
 
 
     public void SwitchCamera()
     {
-        closeView.gameObject.SetActive(!closeView.gameObject.activeSelf);
-        mapView.gameObject.SetActive(!mapView.gameObject.activeSelf);
+        mainCamera.gameObject.SetActive(!mainCamera.gameObject.activeSelf);
+        mapCamera.gameObject.SetActive(!mapCamera.gameObject.activeSelf);
 
         // This is needed because the camera's scripts aren't loaded on the first touch
-        if (closeView.gameObject.activeSelf)
-            closeView.GetComponent<MainCameraController>().Update();
+        if (mainCamera.gameObject.activeSelf)
+            mainCamera.GetComponent<MainCameraController>().Update();
         else
-            mapView.GetComponent<MapCameraController>().Update();
+            mapCamera.GetComponent<MapCameraController>().Update();
     }
 }

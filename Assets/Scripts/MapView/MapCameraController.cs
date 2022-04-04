@@ -6,31 +6,32 @@ using UnityEngine.EventSystems;
 
 public class MapCameraController : MonoBehaviour
 {
-    int MIN_ZOOM = 1;
-    int MAX_ZOOM = 10000;
+    float MIN_ZOOM;
+    float MAX_ZOOM = 10000f;
 
     Plane plane;
     bool touchedUI = false;
+    Vector3 cameraLastPos;
 
     [SerializeField] bool rotate;
-    [SerializeField] GameObject planetToFollow;
+    public GameObject planetToFollow;
 
 
     void Awake()
     {
         Application.targetFrameRate = 60;       // Very important!
+
+        MIN_ZOOM = planetToFollow.transform.lossyScale.x * 10;
     }
 
     void Start()
     {
-        //gameObject.transform.position = new Vector3(0, -5, -5);     // Default position
-        //if (PlayerPrefs.HasKey("x"))
-        //    // Load the last camera position
-        //    gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));
+        // TEMPORARY! UNTIL WE HAVE A BACKEND TO GET THE LAST POS FROM
+        cameraLastPos = new Vector3(planetToFollow.transform.position.x,
+                                    planetToFollow.transform.position.y,
+                                    planetToFollow.transform.position.z - planetToFollow.transform.lossyScale.x * 5);
 
-        //gameObject.transform.parent.position = planetToFollow.transform.position;
-        //gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 1, planetToFollow.transform.position.z - 1);
-        StartCoroutine(waitThenFocusPlanet());
+        gameObject.transform.position = cameraLastPos;
     }
 
     public void Update()
@@ -42,14 +43,14 @@ public class MapCameraController : MonoBehaviour
         // Scroll
         if (Input.touchCount >= 1 && !touchedUI)
         {
-            plane.SetNormalAndPosition(Vector3.back, Vector3.zero);   // Update Plane
+            plane.SetNormalAndPosition(Vector3.back, planetToFollow.transform.position);   // Update reference plane
             var delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 if (Input.touchCount >= 2)
                 {
                     // Scroll slower when zooming limit has been reached
-                    gameObject.transform.Translate(delta1 / 3, Space.World);
+                    gameObject.transform.Translate(delta1 / 5, Space.World);
                 }
                 else
                 {
@@ -86,7 +87,7 @@ public class MapCameraController : MonoBehaviour
                 if (zoom > 1)    // Allow only zooming in
                     gameObject.transform.position = Vector3.LerpUnclamped(posToZoom, gameObject.transform.position, 1 / zoom);
             }
-            else if (-gameObject.transform.position.z <= MIN_ZOOM)
+            else if (Vector3.Distance(planetToFollow.transform.position, gameObject.transform.position) <= MIN_ZOOM)
             {
                 if (zoom < 1)    // Allow only zooming out
                     gameObject.transform.position = Vector3.LerpUnclamped(posToZoom, gameObject.transform.position, 1 / zoom);
@@ -99,30 +100,13 @@ public class MapCameraController : MonoBehaviour
 
             // SHOULD BE REWOKED IF WE WANT TO USE IT!!
             if (rotate && pos2b != pos2)
-                Camera.main.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
+                gameObject.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
 
         if (Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
             touchedUI = false;
     }
 
-    //void OnApplicationPause(bool pauseStatus)
-    //{
-    //    if (pauseStatus)
-    //    {
-    //        // Save the camera position
-    //        PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
-    //        PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
-    //        PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
-    //        PlayerPrefs.Save();
-    //    }
-    //}
-
-    IEnumerator waitThenFocusPlanet()
-    {
-        yield return new WaitForSeconds(0.01f);
-        gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y, planetToFollow.transform.position.z - 1);
-    }
 
     bool IsPointerOverUIObject()
     {

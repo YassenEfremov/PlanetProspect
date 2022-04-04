@@ -1,32 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 
 public class PlanetLabel : MonoBehaviour
 {
     public GameObject targetPlanet;
+    MainCameraController mainCameraController;
+    MapCameraController mapCameraController;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        var screenPoint = Camera.main.WorldToScreenPoint(targetPlanet.transform.position);
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(targetPlanet.transform.position);
         screenPoint.y += 100;
         gameObject.transform.position = screenPoint;
-
-        //gameObject.SetActive(Vector3.Distance(targetPlanet.transform.position, Camera.main.transform.position) > (targetPlanet.transform.lossyScale.x * 5));
     }
 
     public void focusPlanet()
     {
-        //if (Camera.main.GetComponent<MainCameraController>().planetToFollow != targetPlanet)
-        Camera.main.GetComponent<MainCameraController>().planetToFollow = targetPlanet;
-        float distance = Vector3.Distance(targetPlanet.transform.position, Camera.main.transform.position);
-        Camera.main.transform.position = Vector3.Lerp(targetPlanet.transform.position, Camera.main.transform.position, targetPlanet.transform.lossyScale.x * 5 / distance);
+        if(Camera.main.name == "MainCamera")
+        {
+            if(mainCameraController == null)
+                mainCameraController = Camera.main.GetComponent<MainCameraController>();
+            mainCameraController.planetToFollow = targetPlanet;
+            mainCameraController.Update();
+            mainCameraController.focusPlanet();
+        }
+        else if(Camera.main.name == "MapCamera")
+        {
+            if (mapCameraController == null)
+                mapCameraController = Camera.main.GetComponent<MapCameraController>();
+            mapCameraController.planetToFollow = targetPlanet;
+            Camera.main.transform.position = new Vector3(targetPlanet.transform.position.x,
+                                                         targetPlanet.transform.position.y,
+                                                         targetPlanet.transform.position.z - targetPlanet.transform.lossyScale.x * 5);
+        }
     }
 }

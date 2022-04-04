@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.002679305, g: 0.002395087, b: 0.0021713004, a: 1}
+  m_IndirectSpecularColor: {r: 0.0026762104, g: 0.0023934653, b: 0.0021692745, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -683,8 +683,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1875, y: 1.1875, z: 1.1875}
   m_Children:
-  - {fileID: 1742574595}
+  - {fileID: 1208988374}
   - {fileID: 1319427001}
+  - {fileID: 1742574595}
   - {fileID: 2103837568}
   m_Father: {fileID: 1522211111}
   m_RootOrder: 0
@@ -1762,7 +1763,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &326644190
 GameObject:
@@ -2719,7 +2720,7 @@ GameObject:
   - component: {fileID: 722409733}
   - component: {fileID: 722409734}
   m_Layer: 0
-  m_Name: Views
+  m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2753,8 +2754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee3a9ff87d2d9c48bbf6fd995cb42be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeView: {fileID: 963194227}
-  mapView: {fileID: 1819086214}
+  mainCamera: {fileID: 963194227}
+  mapCamera: {fileID: 1819086214}
 --- !u!1 &768876619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,7 +4034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6}
+  m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4150,7 +4151,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   m_Layer: 0
-  m_Name: MainView
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4188,7 +4189,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 50000
+  far clip plane: 100000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -5376,7 +5377,7 @@ GameObject:
   - component: {fileID: 1208988375}
   m_Layer: 5
   m_Name: PlanetLabels
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5388,15 +5389,15 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208988373}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1236529327}
   - {fileID: 938577164}
   - {fileID: 2035106397}
-  m_Father: {fileID: 1234237376}
-  m_RootOrder: 1
+  m_Father: {fileID: 126451013}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5444,7 +5445,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 238067594}
-  - {fileID: 1208988374}
   m_Father: {fileID: 1879734341}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5575,7 +5575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6}
+  m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7722,12 +7722,12 @@ PrefabInstance:
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: nodeAmount
-      value: 115
+      value: 920
       objectReference: {fileID: 0}
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: dayIncrement
-      value: 2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -7905,7 +7905,7 @@ RectTransform:
   - {fileID: 117055752}
   - {fileID: 227373549}
   m_Father: {fileID: 126451013}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -8235,12 +8235,12 @@ PrefabInstance:
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: nodeAmount
-      value: 90
+      value: 881
       objectReference: {fileID: 0}
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: dayIncrement
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -8353,7 +8353,7 @@ GameObject:
   - component: {fileID: 1819086214}
   - component: {fileID: 1819086213}
   m_Layer: 0
-  m_Name: MapView
+  m_Name: MapCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8367,7 +8367,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819086211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -45.9}
+  m_LocalPosition: {x: 0, y: 0, z: -200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 722409733}
@@ -8386,7 +8386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotate: 0
-  planetToFollow: {fileID: 1647223583}
+  planetToFollow: {fileID: 460628353}
 --- !u!20 &1819086214
 Camera:
   m_ObjectHideFlags: 0
@@ -8410,7 +8410,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 50000
   field of view: 60
   orthographic: 0
@@ -8508,7 +8508,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1879734341
 RectTransform:
@@ -9054,7 +9054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6}
+  m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9385,6 +9385,8 @@ GameObject:
   - component: {fileID: 2103837571}
   - component: {fileID: 2103837570}
   - component: {fileID: 2103837569}
+  - component: {fileID: 2103837572}
+  - component: {fileID: 2103837573}
   m_Layer: 5
   m_Name: NewsPanel
   m_TagString: Interactable
@@ -9407,7 +9409,7 @@ RectTransform:
   - {fileID: 676112685}
   - {fileID: 1506423813}
   m_Father: {fileID: 126451013}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9464,6 +9466,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103837567}
   m_CullTransparentMesh: 1
+--- !u!223 &2103837572
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103837567}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
+--- !u!114 &2103837573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103837567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &2122453787
 GameObject:
   m_ObjectHideFlags: 0
@@ -11080,7 +11120,7 @@ PrefabInstance:
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: nodeAmount
-      value: 740
+      value: 734
       objectReference: {fileID: 0}
     - target: {fileID: 4981937637523409184, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -11118,7 +11158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451825466435368862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -107.9, y: 0, z: 0}
+  m_LocalPosition: {x: -1135, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.10000001, z: 0.10000001}
   m_Children:
   - {fileID: 1584250686312785631}
