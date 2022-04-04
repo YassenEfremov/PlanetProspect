@@ -10,6 +10,7 @@ public class RocketOrbitDraw : MonoBehaviour {
         public Vector3 position;
         public Vector3 velocity;
         public float mass;
+        public float radius;
 
         // Rockets shouldn't affect each other gravity?
         // public float surfaceGravity;
@@ -19,6 +20,7 @@ public class RocketOrbitDraw : MonoBehaviour {
                 position = body.transform.position;
                 velocity = body.velocity == Vector3.zero ? body.initialVelocity : body.velocity;
                 mass = body.mass;
+                radius = body.radius;
             }
         }
     }
@@ -28,7 +30,6 @@ public class RocketOrbitDraw : MonoBehaviour {
     private GravityObject realRocket;
     // private VirtualRocket rocket;
     private VirtualRocket rocket;
-    private bool collided = false;
     // private Vector3 rocketVelocity;
 
     public uint nodeAmount = 1000;
@@ -38,9 +39,10 @@ public class RocketOrbitDraw : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        // list of objects that will affect the rocket's gravity
         planets = new List<GravityObject>();
         foreach (GravityObject body in FindObjectsOfType<GravityObject>()) {
-
+            // only planets aren't affected by gravity, because their orbit is calculated without it
             if(!body.isGravityAffected) {
                 planets.Add(body);
             }
@@ -49,24 +51,21 @@ public class RocketOrbitDraw : MonoBehaviour {
         realRocket = gameObject.GetComponentInChildren<GravityObject>();
         rocket = new VirtualRocket(realRocket);
 
+        /* line renderer settings */
         lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
-        //lineRenderer.enabled = true;
+        // lineRenderer.enabled = true;
         lineRenderer.material = lineMaterial;
         lineRenderer.material.color = Color.white;
         lineRenderer.startColor = lineMaterial.color;
         lineRenderer.endColor = lineMaterial.color;
+
     }
 
     // Update is called once per frame
     void Update() {
+        // create a new virtual rocket
         rocket = new VirtualRocket(realRocket);
-        if(!collided)
-            DrawOrbit();
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        collided = true;
+        DrawOrbit();
     }
 
     void DrawOrbit() {
@@ -77,6 +76,10 @@ public class RocketOrbitDraw : MonoBehaviour {
             drawPoints[i] = rocket.position;
             UpdateVelocity();
             UpdatePosition();
+            // check for colliision and exit if so
+            if (hasCollided(rocket, planets)) {
+                break;
+            }
         }
 
         lineRenderer.positionCount = drawPoints.Length;
@@ -95,5 +98,25 @@ public class RocketOrbitDraw : MonoBehaviour {
 
     void UpdatePosition() {
         rocket.position += rocket.velocity * timeStep;
+    }
+
+    /*
+     * Check if a virtual rocket is in an object
+     * TODO: Include other rockets to collisionObjects
+     */
+    bool hasCollided(VirtualRocket rocket, List<GravityObject> collisionObjects) {
+        // iterate over all objects
+        foreach (GravityObject planet in collisionObjects) {
+            // distance between rocket and planet
+            float dist = Vector3.Distance(rocket.position, planet.transform.position);
+            // take in account planet radius
+            dist -= planet.radius + rocket.radius;
+            // check for collision
+            if (dist <= 0.01) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
