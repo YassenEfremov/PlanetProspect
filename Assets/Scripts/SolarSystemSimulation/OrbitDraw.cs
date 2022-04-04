@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -16,7 +16,9 @@ public class OrbitDraw : MonoBehaviour {
     public double dayIncrement;
     public uint nodeAmount;
 
-    float MainCameraPrevPosZ;
+    float currentCameraPrevPosZ;
+    MainCameraController mainCameraController;
+    MapCameraController mapCameraController;
 
 
     void Start() {
@@ -29,18 +31,26 @@ public class OrbitDraw : MonoBehaviour {
         lineRenderer.endColor= lineRenderer.material.color;
         lineRenderer.enabled = true;
 
-        lineRenderer.widthMultiplier = -Camera.main.transform.position.z / 200;
-        MainCameraPrevPosZ = Camera.main.transform.position.z;
-
         DrawOrbit();
     }
 
     void Update() {
         // Update lines width on camera movement
-        if (Camera.main.transform.position.z != MainCameraPrevPosZ)
+        if (Camera.main.transform.position.z != currentCameraPrevPosZ)
         {
-            lineRenderer.widthMultiplier = -Camera.main.transform.position.z / 200;
-            MainCameraPrevPosZ = Camera.main.transform.position.z;
+            if (Camera.main.name == "MainCamera")
+            {
+                if (mainCameraController == null)
+                    mainCameraController = Camera.main.GetComponent<MainCameraController>();
+                lineRenderer.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 200;
+            }
+            else if (Camera.main.name == "MapCamera")
+            {
+                if (mapCameraController == null)
+                    mapCameraController = Camera.main.GetComponent<MapCameraController>();
+                lineRenderer.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 200;
+            }
+            currentCameraPrevPosZ = Camera.main.transform.position.z;
         }
     }
 

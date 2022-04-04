@@ -53,7 +53,7 @@ public class PlanetaryOrbit : MonoBehaviour {
         CalculateCoordinates(ref position, ref velocity, universe.julianCenturiesSinceEpoch);
         rb.MovePosition((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);
         Quaternion rotation = Quaternion.LookRotation(velocity);
-        rb.MoveRotation(rotation);
+        //rb.MoveRotation(rotation);
         //if (gameObject.name == "Earth")
         //{
         //    Debug.Log((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);

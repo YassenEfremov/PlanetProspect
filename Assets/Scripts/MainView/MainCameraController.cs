@@ -6,18 +6,16 @@ using UnityEngine.EventSystems;
 
 public class MainCameraController : MonoBehaviour
 {
+    float MIN_ZOOM;
+    float MAX_ZOOM = 10000f;
+
     Plane plane;
     bool touchedUI = false;
-    //float cameraDistance = -1;
-    //Vector3 zoomedCameraPos;
     Vector3 planetPreviousPos = Vector3.zero;
-    Vector3 planetOffset = Vector3.zero;
+    Vector3 cameraLastPos;
 
     [SerializeField] bool rotate;
     public GameObject planetToFollow;
-
-    float MIN_ZOOM;
-    float MAX_ZOOM = 10000f;
 
 
     void Awake()
@@ -29,27 +27,25 @@ public class MainCameraController : MonoBehaviour
 
     void Start()
     {
-        //gameObject.transform.position = new Vector3(0, -5, -5);     // Default position
-        //if (PlayerPrefs.HasKey("x"))
-        //    // Load the last camera position
-        //    gameObject.transform.position = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));
+        //// TEMPORARY! UNTIL WE HAVE A BACKEND TO GET THE LAST POS FROM
+        //cameraLastPos = new Vector3(planetToFollow.transform.position.x,
+        //                            planetToFollow.transform.position.y - planetToFollow.transform.lossyScale.x * 5,
+        //                            planetToFollow.transform.position.z - planetToFollow.transform.lossyScale.x * 5);
 
-        //gameObject.transform.parent.position = planetToFollow.transform.position;
-        //gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 1, planetToFollow.transform.position.z - 1);
-        StartCoroutine(waitThenFocusPlanet());
+        cameraLastPos = new Vector3(planetToFollow.transform.position.x,
+                            planetToFollow.transform.position.y - planetToFollow.transform.lossyScale.x * 5,
+                            planetToFollow.transform.position.z - planetToFollow.transform.lossyScale.x * 5);
+        gameObject.transform.position = cameraLastPos;
+        focusPlanet();
     }
 
     public void Update()
     {
-        //float distance = Vector3.Distance(planetToFollow.transform.position, gameObject.transform.position);
-        //if (cameraDistance == -1)
-        //    cameraDistance = distance;
-        //gameObject.transform.position = Vector3.LerpUnclamped(planetToFollow.transform.position, gameObject.transform.position, cameraDistance / distance);
+        // Move the camera along with the planetToFollow
         if(planetPreviousPos == Vector3.zero)
-        {
             planetPreviousPos = planetToFollow.transform.position;
-        }
-        planetOffset = planetToFollow.transform.position - planetPreviousPos;
+
+        Vector3 planetOffset = planetToFollow.transform.position - planetPreviousPos;
         gameObject.transform.position += planetOffset;
         planetPreviousPos = planetToFollow.transform.position;
 
@@ -60,7 +56,7 @@ public class MainCameraController : MonoBehaviour
         // Pinch
         if (Input.touchCount >= 2 && !touchedUI)
         {
-            plane.SetNormalAndPosition(Vector3.back, Vector3.zero);   // Create reference plane
+            plane.SetNormalAndPosition(Vector3.back, planetToFollow.transform.position);   // Update reference plane
             var touch1 = PlanePosition(Input.GetTouch(0).position);
             var touch2 = PlanePosition(Input.GetTouch(1).position);
             var touch1Delta = PlanePosition(Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition);
@@ -92,29 +88,28 @@ public class MainCameraController : MonoBehaviour
 
             // SHOULD BE REWOKED IF WE WANT TO USE IT!!
             if (rotate && touch2Delta != touch2)
-                Camera.main.transform.RotateAround(planetToFollow.transform.position, plane.normal, Vector3.SignedAngle(touch2 - touch1, touch2Delta - touch1Delta, plane.normal));
+                gameObject.transform.RotateAround(planetToFollow.transform.position, plane.normal,
+                                                   Vector3.SignedAngle(touch2 - touch1, touch2Delta - touch1Delta, plane.normal));
         }
 
         if (Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
             touchedUI = false;
     }
 
-    //void OnApplicationPause(bool pauseStatus)
-    //{
-    //    if (pauseStatus)
-    //    {
-    //        // Save the camera position
-    //        PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
-    //        PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
-    //        PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
-    //        PlayerPrefs.Save();
-    //    }
-    //}
 
-    IEnumerator waitThenFocusPlanet()
+    public void focusPlanet()
     {
-        yield return new WaitForSeconds(0.01f);
-        gameObject.transform.position = new Vector3(planetToFollow.transform.position.x, planetToFollow.transform.position.y - 1, planetToFollow.transform.position.z - 1);
+        //Ray cameraRay = new Ray(gameObject.transform.position, gameObject.transform.forward);
+        //plane.SetNormalAndPosition(Vector3.back, planetToFollow.transform.position);   // Update reference plane
+        //plane.Raycast(cameraRay, out var rayEnter);
+        //Vector3 offset = planetToFollow.transform.position - cameraRay.GetPoint(rayEnter);
+        ////Debug.Log(rayEnter);
+        //gameObject.transform.position += offset;
+
+        float distance = Vector3.Distance(planetToFollow.transform.position, gameObject.transform.position);
+        gameObject.transform.position = Vector3.Lerp(planetToFollow.transform.position,
+                                                     gameObject.transform.position,
+                                                     planetToFollow.transform.lossyScale.x * 5 / distance);
     }
 
     bool IsPointerOverUIObject()
