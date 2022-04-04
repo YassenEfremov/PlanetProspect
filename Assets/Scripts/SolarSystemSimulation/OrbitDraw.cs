@@ -67,7 +67,7 @@ public class OrbitDraw : MonoBehaviour {
             // compute coords
             Vector3 velocity = new Vector3(); 
             planetaryOrbit.CalculateCoordinates(ref drawPoints[i], ref velocity, julianCenturiesSinceEpoch);
-            drawPoints[i] = (drawPoints[i] * universe.distanceScale) + velocity * Universe.physicsTimeStep;
+            drawPoints[i] = planetaryOrbit.CalculatePosition(drawPoints[i], velocity);
         }
 
         // draw lines

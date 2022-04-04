@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceScale: 1172.7
-  dayTimeStep: 0.001
+  dayTimeStep: 0
+  hourTimeStep: 1
+  minuteTimeStep: 0
   julianDate: 0
   julianCenturiesSinceEpoch: 0
 --- !u!4 &147955
@@ -894,6 +896,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 5.794
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.09266985
       objectReference: {fileID: 0}
@@ -921,6 +928,16 @@ PrefabInstance:
         type: 3}
       propertyPath: radius
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodMinutes
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -1263,7 +1280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230857377}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540ca934e16bb6844a0543537eb1c3a6, type: 3}
   m_Name: 
@@ -1918,6 +1935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 6.8351
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.01009938
       objectReference: {fileID: 0}
@@ -1940,6 +1962,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mass
       value: 17.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -4938,6 +4965,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 0.042828
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.45223625
       objectReference: {fileID: 0}
@@ -4955,6 +4987,21 @@ PrefabInstance:
         type: 3}
       propertyPath: ascendingNodeLongitude.element
       value: 49.71320984
+      objectReference: {fileID: 0}
+    - target: {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodMinutes
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -5056,7 +5103,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mars
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &1151751813 stripped
 Transform:
@@ -5734,6 +5782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 126.687
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.18199196
       objectReference: {fileID: 0}
@@ -5756,6 +5809,16 @@ PrefabInstance:
         type: 3}
       propertyPath: mass
       value: 317.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodMinutes
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -7543,6 +7606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 0.32486
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.05679648
       objectReference: {fileID: 0}
@@ -7565,6 +7633,16 @@ PrefabInstance:
         type: 3}
       propertyPath: mass
       value: 0.815
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodDays
+      value: 243
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -8041,6 +8119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 0.022032
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.15940013
       objectReference: {fileID: 0}
@@ -8058,6 +8141,21 @@ PrefabInstance:
         type: 3}
       propertyPath: ascendingNodeLongitude.element
       value: 48.33961819
+      objectReference: {fileID: 0}
+    - target: {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodDays
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -8159,7 +8257,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mercury
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &1793549835 stripped
 Transform:
@@ -9128,6 +9227,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 37.931
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.54179478
       objectReference: {fileID: 0}
@@ -9150,6 +9254,16 @@ PrefabInstance:
         type: 3}
       propertyPath: mass
       value: 95.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodMinutes
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -10895,6 +11009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: gravitationalParameter
+      value: 0.3986
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: perihelionLongitude.rate
       value: 0.3179526
       objectReference: {fileID: 0}
@@ -10912,6 +11031,16 @@ PrefabInstance:
         type: 3}
       propertyPath: ascendingNodeLongitude.element
       value: -5.11260389
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodHours
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: rotationPeriodMinutes
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -11018,7 +11147,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earth
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &6350120392550754334
 Transform:

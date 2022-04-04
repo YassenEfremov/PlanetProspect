@@ -13,10 +13,12 @@ public class Universe : MonoBehaviour {
     public float distanceScale;
 
     /*
-     * How many days pass per second in the simulation
+     * How much time passes per second in the simulation
      * TODO: slow-down / fast-forward time
      */
     public float dayTimeStep;
+    public float hourTimeStep;
+    public float minuteTimeStep;
 
     public DateTime georgianDate;
     public double julianDate;
@@ -37,17 +39,20 @@ public class Universe : MonoBehaviour {
      * TODO: More appropriate and less misleading var name
      */
     public static float gravitationalConstant = 265.563826f;
-
     public readonly static float physicsTimeStep = 0.01f;
 
     void Awake() {
         georgianDate = DateTime.Now;
         gravitationalConstant /= distanceScale;
         print(gravitationalConstant);
+
+        hourTimeStep += dayTimeStep * 24;
+        minuteTimeStep += hourTimeStep * 60;
     }
 
     void FixedUpdate() {
-        georgianDate = georgianDate.AddDays(dayTimeStep * Time.fixedDeltaTime);
+        georgianDate = georgianDate.AddMinutes(minuteTimeStep * Time.fixedDeltaTime);
+
         julianDate = ToJulianDate(georgianDate);
         julianCenturiesSinceEpoch = ToJulianCenturiesSinceEpoch(julianDate);
         //print("Georgian date: " + georgianDate);
@@ -64,8 +69,5 @@ public class Universe : MonoBehaviour {
     public static double ToJulianCenturiesSinceEpoch(double julianDate) {
         return (julianDate - julianEpoch) / julianCenturyDays;
     }
-
-    
-
 
 }
