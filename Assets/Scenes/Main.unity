@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230857377}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540ca934e16bb6844a0543537eb1c3a6, type: 3}
   m_Name: 
@@ -4987,6 +4987,11 @@ PrefabInstance:
       propertyPath: ascendingNodeLongitude.element
       value: 49.71320984
       objectReference: {fileID: 0}
+    - target: {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: rotationPeriodHours
@@ -5097,7 +5102,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mars
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &1151751813 stripped
 Transform:
@@ -8136,6 +8142,11 @@ PrefabInstance:
       propertyPath: ascendingNodeLongitude.element
       value: 48.33961819
       objectReference: {fileID: 0}
+    - target: {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
       propertyPath: rotationPeriodDays
@@ -8246,7 +8257,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mercury
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &1793549835 stripped
 Transform:
@@ -11095,7 +11107,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earth
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4747277918401508730, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2df8e073f12e021e396c87a809dc570f, type: 3}
 --- !u!4 &6350120392550754334
 Transform:

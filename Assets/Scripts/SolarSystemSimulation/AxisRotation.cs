@@ -13,18 +13,26 @@ public class AxisRotation : MonoBehaviour {
     // TODO: Don't serialize
     // [System.NonSerialized]
     public float fullRotationsPerTimeStep;
+    // [System.NonSerialized]
+    public float angleIncrement;
 
+    private float yAngle = 0;
     private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start() {
+        rb = GetComponent<Rigidbody>();
+
         rotationPeriodHours += rotationPeriodDays * 24;
+        // get minutes required for a full rotation
         rotationPeriodMinutes += rotationPeriodHours * 60;
 
         universe = FindObjectOfType<Universe>();
-        fullRotationsPerTimeStep = universe.minuteTimeStep / rotationPeriodMinutes;
+        // how many full rotations happen every time step
+        fullRotationsPerTimeStep = rotationPeriodMinutes / universe.minuteTimeStep;
 
-        rb = GetComponent<Rigidbody>();
+        // angle increase per time step where a full rotation happens every 360 degrees
+        angleIncrement = 360 / fullRotationsPerTimeStep;
     }
 
     // Update is called once per frame
@@ -33,6 +41,8 @@ public class AxisRotation : MonoBehaviour {
     }
 
     void Rotate() {
-        rb.MoveRotation(Quaternion.Euler(Vector3.up * fullRotationsPerTimeStep * Universe.physicsTimeStep));
+        // increment angle TODO: if yAngle > 360, set to 0 + leftover
+        yAngle += angleIncrement * Universe.physicsTimeStep;
+        rb.MoveRotation(Quaternion.Euler(new Vector3(0, yAngle, 0)));
     }
 }
