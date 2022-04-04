@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 
 [RequireComponent (typeof(Rigidbody))]
@@ -43,9 +43,10 @@ public class PlanetaryOrbit : MonoBehaviour {
     private Vector3 velocity = new Vector3();
     private Rigidbody rb;
 
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        universe = FindObjectOfType<Universe> ();
+        universe = FindObjectOfType<Universe>();
     }
 
     void FixedUpdate() {
@@ -53,7 +54,13 @@ public class PlanetaryOrbit : MonoBehaviour {
         rb.MovePosition((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);
         Quaternion rotation = Quaternion.LookRotation(velocity);
         rb.MoveRotation(rotation);
+        //if (gameObject.name == "Earth")
+        //{
+        //    Debug.Log((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);
+        //    Debug.Log("transform: " + transform.position);
+        //}
     }
+
 
     // https://ssd.jpl.nasa.gov/planets/approx_pos.html
     public void CalculateCoordinates(ref Vector3 position, ref Vector3 velocity, double julianCenturiesSinceEpoch) {
@@ -156,8 +163,6 @@ public class PlanetaryOrbit : MonoBehaviour {
         float denominator = Mathf.Cos(eccentricAnomaly) - eccentricity;
 
         return Mathf.Atan2(numerator, denominator);
-
-
     }
 };
 

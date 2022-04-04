@@ -17,14 +17,14 @@ public class PanelOpener : MonoBehaviour
         }
     }
 
-/*    void OnDisable()
-    {
-        foreach (Button button in GetComponentsInChildren<Button>(true))
-        {
-            Debug.Log("AAA");
-            button.gameObject.GetComponent<Animator>().Play("Normal", 0, 0f);
-        }
-    }*/
+    //void OnDisable()
+    //{
+    //    foreach (Button button in GetComponentsInChildren<Button>(true))
+    //    {
+    //        Debug.Log("AAA");
+    //        button.gameObject.GetComponent<Animator>().Play("Normal", 0, 0f);
+    //    }
+    //}
 
 
     public void TogglePanel()
