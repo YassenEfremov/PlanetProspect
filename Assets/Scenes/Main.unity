@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceScale: 1172.7
-  dayTimeStep: 0.01
+  dayTimeStep: 0
+  hourTimeStep: 1
+  minuteTimeStep: 0
   julianDate: 0
   julianCenturiesSinceEpoch: 0
 --- !u!4 &147955
@@ -10852,6 +10854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: semiMajorAxis.element
       value: 1.00000018
+      objectReference: {fileID: 0}
+    - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: gravitationalParameter
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: -5150877943401526111, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
