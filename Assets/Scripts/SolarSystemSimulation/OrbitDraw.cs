@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 
 
 [RequireComponent(typeof(LineRenderer))]
-public class OrbitDraw : MonoBehaviour {
+public class OrbitDraw : MonoBehaviour
+{
 
     private PlanetaryOrbit planetaryOrbit;
     private Universe universe;
@@ -21,20 +20,22 @@ public class OrbitDraw : MonoBehaviour {
     MapCameraController mapCameraController;
 
 
-    void Start() {
+    void Start()
+    {
         planetaryOrbit = gameObject.GetComponentInChildren<PlanetaryOrbit>();
         universe = FindObjectOfType<Universe>();
 
         lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
         lineRenderer.material = lineMaterial;
         lineRenderer.startColor = lineRenderer.material.color;
-        lineRenderer.endColor= lineRenderer.material.color;
+        lineRenderer.endColor = lineRenderer.material.color;
         lineRenderer.enabled = true;
 
         DrawOrbit();
     }
 
-    void Update() {
+    void Update()
+    {
         // Update lines width on camera movement
         if (Camera.main.transform.position.z != currentCameraPrevPosZ)
         {
@@ -42,30 +43,33 @@ public class OrbitDraw : MonoBehaviour {
             {
                 if (mainCameraController == null)
                     mainCameraController = Camera.main.GetComponent<MainCameraController>();
-                lineRenderer.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 200;
+                lineRenderer.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
             }
             else if (Camera.main.name == "MapCamera")
             {
                 if (mapCameraController == null)
                     mapCameraController = Camera.main.GetComponent<MapCameraController>();
-                lineRenderer.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 200;
+                lineRenderer.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
             }
             currentCameraPrevPosZ = Camera.main.transform.position.z;
         }
     }
 
-    public void DrawOrbit() {
+
+    public void DrawOrbit()
+    {
         Vector3[] drawPoints = new Vector3[nodeAmount];
         DateTime georgianDate = universe.georgianDate;
 
         // calculate points
-        for (uint i = 0; i < nodeAmount; i++) {
+        for (uint i = 0; i < nodeAmount; i++)
+        {
             // increment date and convert to Julian centuries since J2000
             georgianDate = georgianDate.AddDays(dayIncrement);
             double julianDate = Universe.ToJulianDate(georgianDate);
             double julianCenturiesSinceEpoch = Universe.ToJulianCenturiesSinceEpoch(julianDate);
             // compute coords
-            Vector3 velocity = new Vector3(); 
+            Vector3 velocity = new Vector3();
             planetaryOrbit.CalculateCoordinates(ref drawPoints[i], ref velocity, julianCenturiesSinceEpoch);
             drawPoints[i] = planetaryOrbit.CalculatePosition(drawPoints[i], velocity);
         }
