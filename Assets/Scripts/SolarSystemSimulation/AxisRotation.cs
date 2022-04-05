@@ -7,16 +7,23 @@ public class AxisRotation : MonoBehaviour {
     private Universe universe;
 
     public float rotationPeriodDays;
-    public float rotationPeriodHours = 24;
+    public float rotationPeriodHours;
     public float rotationPeriodMinutes;
 
+    public float axisAngleOffset;
+    public bool counterClockwiseRotation = true;
+
     // TODO: Don't serialize
-    // [System.NonSerialized]
+    [System.NonSerialized]
     public float fullRotationsPerTimeStep;
-    // [System.NonSerialized]
-    public float angleIncrement;
+    [System.NonSerialized]
+    public float angleIncrementX;
+    [System.NonSerialized]
+    public float angleIncrementY;
 
     private float yAngle = 0;
+    private float xAngle = 0;
+
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -32,7 +39,8 @@ public class AxisRotation : MonoBehaviour {
         fullRotationsPerTimeStep = rotationPeriodMinutes / universe.minuteTimeStep;
 
         // angle increase per time step where a full rotation happens every 360 degrees
-        angleIncrement = 360 / fullRotationsPerTimeStep;
+        angleIncrementY = (360 / fullRotationsPerTimeStep) * Mathf.Sin(axisAngleOffset);
+        angleIncrementX = (360 / fullRotationsPerTimeStep) * Mathf.Cos(axisAngleOffset);
     }
 
     // Update is called once per frame
@@ -42,7 +50,13 @@ public class AxisRotation : MonoBehaviour {
 
     void Rotate() {
         // increment angle TODO: if yAngle > 360, set to 0 + leftover
-        yAngle += angleIncrement * Universe.physicsTimeStep;
-        rb.MoveRotation(Quaternion.Euler(new Vector3(0, yAngle, 0)));
+        if (counterClockwiseRotation) {
+            yAngle -= angleIncrementY * Universe.physicsTimeStep;
+            xAngle -= angleIncrementX * Universe.physicsTimeStep;
+        } else {
+            yAngle += angleIncrementY * Universe.physicsTimeStep;
+            xAngle += angleIncrementX * Universe.physicsTimeStep;
+        }
+        rb.MoveRotation(Quaternion.Euler(new Vector3(xAngle, yAngle, 0)));
     }
 }

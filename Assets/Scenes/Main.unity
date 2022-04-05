@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026762104, g: 0.0023934653, b: 0.0021692745, a: 1}
+  m_IndirectSpecularColor: {r: 0.002679305, g: 0.002395087, b: 0.0021713004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -931,6 +931,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 17
       objectReference: {fileID: 0}
@@ -938,6 +943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodMinutes
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -1965,8 +1975,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -4995,6 +5015,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 24
       objectReference: {fileID: 0}
@@ -5002,6 +5027,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodMinutes
       value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -5812,6 +5842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 9
       objectReference: {fileID: 0}
@@ -5819,6 +5854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodMinutes
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -7636,6 +7676,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 177
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodDays
       value: 243
       objectReference: {fileID: 0}
@@ -8149,6 +8194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodDays
       value: 58
       objectReference: {fileID: 0}
@@ -8156,6 +8206,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodHours
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -9257,6 +9312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 10
       objectReference: {fileID: 0}
@@ -9264,6 +9324,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodMinutes
       value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
@@ -11034,6 +11099,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
+      propertyPath: axisAngleOffset
+      value: 23.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
       propertyPath: rotationPeriodHours
       value: 23
       objectReference: {fileID: 0}
@@ -11041,6 +11111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationPeriodMinutes
       value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 453322512681922203, guid: 2df8e073f12e021e396c87a809dc570f,
+        type: 3}
+      propertyPath: counterClockwiseRotation
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4239353979592864421, guid: 2df8e073f12e021e396c87a809dc570f,
         type: 3}
