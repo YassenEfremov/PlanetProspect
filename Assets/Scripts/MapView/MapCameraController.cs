@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,10 +7,11 @@ public class MapCameraController : MonoBehaviour
 {
     float MIN_ZOOM;
     float MAX_ZOOM = 10000f;
+    float MAX_DIST_AWAY = 200f;
 
     Plane plane;
     bool touchedUI = false;
-    Vector3 cameraLastPos;
+    Vector3 cameraSavedPos;
 
     [SerializeField] bool rotate;
     public GameObject planetToFollow;
@@ -27,11 +27,11 @@ public class MapCameraController : MonoBehaviour
     void Start()
     {
         // TEMPORARY! UNTIL WE HAVE A BACKEND TO GET THE LAST POS FROM
-        cameraLastPos = new Vector3(planetToFollow.transform.position.x,
+        cameraSavedPos = new Vector3(planetToFollow.transform.position.x,
                                     planetToFollow.transform.position.y,
                                     planetToFollow.transform.position.z - planetToFollow.transform.lossyScale.x * 5);
 
-        gameObject.transform.position = cameraLastPos;
+        gameObject.transform.position = cameraSavedPos;
     }
 
     public void Update()
@@ -102,6 +102,14 @@ public class MapCameraController : MonoBehaviour
             if (rotate && pos2b != pos2)
                 gameObject.transform.RotateAround(pos1, plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, plane.normal));
         }
+
+        // Limit the camera movement within a circle around the current planet
+        //if (Vector2.Distance(planetToFollow.transform.position, gameObject.transform.position) > MAX_DIST_AWAY)
+        //{
+        //    Vector2 limitedDistance = Vector2.Lerp(planetToFollow.transform.position, gameObject.transform.position,
+        //                                           MAX_DIST_AWAY / Vector2.Distance(planetToFollow.transform.position, gameObject.transform.position));
+        //    gameObject.transform.position = new Vector3(limitedDistance.x, limitedDistance.y, gameObject.transform.position.z);
+        //}
 
         if (Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
             touchedUI = false;
