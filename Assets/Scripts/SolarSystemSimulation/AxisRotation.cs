@@ -38,6 +38,11 @@ public class AxisRotation : MonoBehaviour {
         angleIncrement = (360 / fullRotationsPerTimeStep);
         // calculate axis of rotation
         axis = new Vector3(0, Mathf.Cos(Mathf.Deg2Rad * axisAngle), Mathf.Sin(Mathf.Deg2Rad * axisAngle));
+
+        if (counterClockwiseRotation) {
+            angleIncrement *= -1;
+        }
+
         deltaRotation = Quaternion.AngleAxis(angleIncrement * Universe.physicsTimeStep, axis);
     }
 
