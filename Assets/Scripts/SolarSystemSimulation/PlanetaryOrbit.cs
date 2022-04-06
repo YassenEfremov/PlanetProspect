@@ -42,25 +42,16 @@ public class PlanetaryOrbit : MonoBehaviour {
     private Vector3 position = new Vector3();
     private Vector3 velocity = new Vector3();
     private Rigidbody rb;
-    private Quaternion rotation;
-
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
         universe = FindObjectOfType<Universe>();
-        rotation = rb.rotation;
     }
 
     void FixedUpdate() {
         CalculateCoordinates(ref position, ref velocity, universe.julianCenturiesSinceEpoch);
         rb.MovePosition(CalculatePosition(position, velocity));
-        rotation = CalculateRotation(velocity, rotation);
-        // rb.MoveRotation(rotation);
-        //if (gameObject.name == "Earth")
-        //{
-        //    Debug.Log((position * universe.distanceScale) + velocity * Universe.physicsTimeStep);
-        //    Debug.Log("transform: " + transform.position);
-        //}
+        // transform.position = CalculatePosition(position, velocity);
     }
 
 
@@ -165,10 +156,6 @@ public class PlanetaryOrbit : MonoBehaviour {
         float denominator = Mathf.Cos(eccentricAnomaly) - eccentricity;
 
         return Mathf.Atan2(numerator, denominator);
-    }
-
-    public static Quaternion CalculateRotation(Vector3 angularVelocity, Quaternion currentRotation) {
-        return currentRotation * Quaternion.Euler(angularVelocity * Universe.physicsTimeStep);
     }
 
     public Vector3 CalculatePosition(Vector3 position, Vector3 velocity) {

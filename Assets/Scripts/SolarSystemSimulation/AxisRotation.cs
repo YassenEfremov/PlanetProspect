@@ -10,53 +10,43 @@ public class AxisRotation : MonoBehaviour {
     public float rotationPeriodHours;
     public float rotationPeriodMinutes;
 
-    public float axisAngleOffset;
+    public float axisAngle;
+    private float angleIncrement;
+
     public bool counterClockwiseRotation = true;
 
     // TODO: Don't serialize
     [System.NonSerialized]
     public float fullRotationsPerTimeStep;
     [System.NonSerialized]
-    public float angleIncrementX;
-    [System.NonSerialized]
-    public float angleIncrementY;
-
-    private float yAngle = 0;
-    private float xAngle = 0;
-
+    public Vector3 axis;
     private Rigidbody rb;
+    private Quaternion deltaRotation;
 
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
-
-        rotationPeriodHours += rotationPeriodDays * 24;
         // get minutes required for a full rotation
+        rotationPeriodHours += rotationPeriodDays * 24;
         rotationPeriodMinutes += rotationPeriodHours * 60;
 
-        universe = FindObjectOfType<Universe>();
         // how many full rotations happen every time step
+        universe = FindObjectOfType<Universe>();
         fullRotationsPerTimeStep = rotationPeriodMinutes / universe.minuteTimeStep;
 
         // angle increase per time step where a full rotation happens every 360 degrees
-        angleIncrementY = (360 / fullRotationsPerTimeStep) * Mathf.Sin(axisAngleOffset);
-        angleIncrementX = (360 / fullRotationsPerTimeStep) * Mathf.Cos(axisAngleOffset);
+        angleIncrement = (360 / fullRotationsPerTimeStep);
+        // calculate axis of rotation
+        axis = new Vector3(0, Mathf.Cos(Mathf.Deg2Rad * axisAngle), Mathf.Sin(Mathf.Deg2Rad * axisAngle));
+        deltaRotation = Quaternion.AngleAxis(angleIncrement * Universe.physicsTimeStep, axis);
     }
 
-    // Update is called once per frame
     void FixedUpdate() {
         Rotate();
     }
 
-    void Rotate() {
-        // increment angle TODO: if yAngle > 360, set to 0 + leftover
-        if (counterClockwiseRotation) {
-            yAngle -= angleIncrementY * Universe.physicsTimeStep;
-            xAngle -= angleIncrementX * Universe.physicsTimeStep;
-        } else {
-            yAngle += angleIncrementY * Universe.physicsTimeStep;
-            xAngle += angleIncrementX * Universe.physicsTimeStep;
-        }
-        rb.MoveRotation(Quaternion.Euler(new Vector3(xAngle, yAngle, 0)));
+    public void Rotate() {
+        // transform.Rotate(axis, angleIncrement * Universe.physicsTimeStep, Space.World);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 }
