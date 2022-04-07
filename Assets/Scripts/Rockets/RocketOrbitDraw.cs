@@ -67,10 +67,8 @@ public class RocketOrbitDraw : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         // create a new virtual rocket
-        if (!realRocket.isActive) {
-            rocket = new VirtualRocket(realRocket);
-            DrawOrbit();
-        }
+        rocket = new VirtualRocket(realRocket);
+        DrawOrbit();
     }
 
     void Update() {

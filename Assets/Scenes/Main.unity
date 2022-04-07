@@ -11442,8 +11442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a0f53fab6dd40929b958661c634660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeAmount: 1900
-  timeStep: 0.2
+  nodeAmount: 2200
+  timeStep: 0.15
   lineMaterial: {fileID: 2100000, guid: afb2d2ebf6ca4d1d6bf7c300ef160dee, type: 2}
 --- !u!120 &1451825466435368864
 LineRenderer:
