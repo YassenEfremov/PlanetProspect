@@ -21,7 +21,9 @@ public class Universe : MonoBehaviour {
     public float minuteTimeStep;
 
     public DateTime georgianDate;
+    [System.NonSerialized]
     public double julianDate;
+    [System.NonSerialized]
     public double julianCenturiesSinceEpoch;
     readonly static int julianCenturyDays = 36525; // In Julian days
     readonly static double julianEpoch = 2451545.0;  // In Julian days
@@ -39,7 +41,12 @@ public class Universe : MonoBehaviour {
      * TODO: More appropriate and less misleading var name
      */
     public static float gravitationalConstant = 265.563826f;
-    public readonly static float physicsTimeStep = 0.01f;
+    public readonly static float physicsTimeStep = 0.15f;
+
+    /*
+     * Freezes all movements in the universe if true
+     */
+    public static bool isFrozen = false;
 
     void Awake() {
         georgianDate = DateTime.Now;
@@ -51,11 +58,12 @@ public class Universe : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        georgianDate = georgianDate.AddMinutes(minuteTimeStep * Time.fixedDeltaTime);
-
-        julianDate = ToJulianDate(georgianDate);
-        julianCenturiesSinceEpoch = ToJulianCenturiesSinceEpoch(julianDate);
-        //print("Georgian date: " + georgianDate);
+        if (!isFrozen) {
+            georgianDate = georgianDate.AddMinutes(minuteTimeStep * Time.fixedDeltaTime);
+            julianDate = ToJulianDate(georgianDate);
+            julianCenturiesSinceEpoch = ToJulianCenturiesSinceEpoch(julianDate);
+            //print("Georgian date: " + georgianDate);
+        }
     }
 
     /*
