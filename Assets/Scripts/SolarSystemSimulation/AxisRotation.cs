@@ -47,7 +47,9 @@ public class AxisRotation : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        Rotate();
+        if (!Universe.isFrozen) {
+            Rotate();
+        }
     }
 
     public void Rotate() {

@@ -34,9 +34,12 @@ public class RocketOrbitDraw : MonoBehaviour {
 
     public uint nodeAmount = 1000;
     public float timeStep = 0.1f;
-    public float lineWidth = 0.5f;
+    // public float lineWidth = 0.5f;
     public Material lineMaterial;
 
+    float currentCameraPrevPosZ;
+    MainCameraController mainCameraController;
+    MapCameraController mapCameraController;
     // Start is called before the first frame update
     void Start() {
         // list of objects that will affect the rocket's gravity
@@ -62,10 +65,30 @@ public class RocketOrbitDraw : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         // create a new virtual rocket
-        rocket = new VirtualRocket(realRocket);
-        DrawOrbit();
+        if (!realRocket.isActive) {
+            rocket = new VirtualRocket(realRocket);
+            DrawOrbit();
+        }
+    }
+
+    void Update() {
+        if (Camera.main.transform.position.z != currentCameraPrevPosZ) {
+            if (Camera.main.name == "MainCamera") {
+                if (mainCameraController == null) {
+                    mainCameraController = Camera.main.GetComponent<MainCameraController>();
+                }
+                lineRenderer.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
+            }
+            else if (Camera.main.name == "MapCamera") {
+                if (mapCameraController == null) {
+                    mapCameraController = Camera.main.GetComponent<MapCameraController>();
+                }
+                lineRenderer.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
+            }
+            currentCameraPrevPosZ = Camera.main.transform.position.z;
+        }
     }
 
     void DrawOrbit() {
@@ -84,7 +107,7 @@ public class RocketOrbitDraw : MonoBehaviour {
 
         lineRenderer.positionCount = drawPoints.Length;
         lineRenderer.SetPositions(drawPoints);
-        lineRenderer.widthMultiplier = lineWidth;
+        // lineRenderer.widthMultiplier = lineWidth;
     }
 
     void UpdateVelocity() {
@@ -107,6 +130,9 @@ public class RocketOrbitDraw : MonoBehaviour {
     bool hasCollided(VirtualRocket rocket, List<GravityObject> collisionObjects) {
         // iterate over all objects
         foreach (GravityObject planet in collisionObjects) {
+            if (planet.name == "Earth") {
+                continue;
+            }
             // distance between rocket and planet
             float dist = Vector3.Distance(rocket.position, planet.transform.position);
             // take in account planet radius

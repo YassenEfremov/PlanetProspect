@@ -49,9 +49,11 @@ public class PlanetaryOrbit : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        CalculateCoordinates(ref position, ref velocity, universe.julianCenturiesSinceEpoch);
-        rb.MovePosition(CalculatePosition(position, velocity));
-        // transform.position = CalculatePosition(position, velocity);
+        if (!Universe.isFrozen) {
+            CalculateCoordinates(ref position, ref velocity, universe.julianCenturiesSinceEpoch);
+            rb.MovePosition(CalculatePosition(position, velocity));
+            // transform.position = CalculatePosition(position, velocity);
+        }
     }
 
 
