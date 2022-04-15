@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 [RequireComponent(typeof(LineRenderer))]
 public class RocketOrbitDraw : MonoBehaviour {
@@ -40,6 +40,8 @@ public class RocketOrbitDraw : MonoBehaviour {
     float currentCameraPrevPosZ;
     MainCameraController mainCameraController;
     MapCameraController mapCameraController;
+
+
     // Start is called before the first frame update
     void Start() {
         // list of objects that will affect the rocket's gravity

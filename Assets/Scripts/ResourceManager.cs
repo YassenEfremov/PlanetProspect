@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
-    public int energy { get; private set; } = 2000;
+    public int energy { get; private set; } = 1000;
     public int steel { get; private set; } = 1000;
 
-    public int maxEnergy { get; private set; }
+    public int maxEnergy { get; private set; } = 10000;
     public int MaxEnergy
     {
         get => maxEnergy;
@@ -17,7 +17,7 @@ public class ResourceManager : MonoBehaviour
                 maxEnergy = value;
         }
     }
-    public int maxSteel { get; private set; }
+    public int maxSteel { get; private set; } = 10000;
     public int MaxSteel
     {
         get => maxSteel;
@@ -34,8 +34,6 @@ public class ResourceManager : MonoBehaviour
 
     void Start()
     {
-        maxEnergy = 3000;
-        maxSteel = 3000;
         energyBar.maxValue = maxEnergy;
         steelBar.maxValue = maxSteel;
         energyBar.value = energy;

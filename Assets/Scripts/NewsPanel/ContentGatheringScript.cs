@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
-using System.Threading;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
+
 
 public class ContentGatheringScript : MonoBehaviour
 {
@@ -40,6 +40,7 @@ public class ContentGatheringScript : MonoBehaviour
         }
 
     }
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -118,6 +119,7 @@ public class ContentGatheringScript : MonoBehaviour
         Destroy(goDesc);
     }
 
+
     public void DeleteClones()
     {
         var clones = GameObject.FindGameObjectsWithTag("clone");
@@ -180,12 +182,5 @@ public class ContentGatheringScript : MonoBehaviour
             webClient.DownloadFile(values["hdurl"], ImageFilePath);
             //Debug.Log("Download Success");
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

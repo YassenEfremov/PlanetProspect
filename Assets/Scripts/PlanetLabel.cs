@@ -18,6 +18,7 @@ public class PlanetLabel : MonoBehaviour
         label.gameObject.SetActive(Vector3.Distance(gameObject.transform.position, Camera.main.transform.position) > (gameObject.transform.lossyScale.x * 30));
     }
 
+
     public void focusPlanet()
     {
         if (Camera.main.name == "MainCamera")
@@ -36,6 +37,7 @@ public class PlanetLabel : MonoBehaviour
             Camera.main.transform.position = new Vector3(gameObject.transform.position.x,
                                                          gameObject.transform.position.y,
                                                          gameObject.transform.position.z - gameObject.transform.lossyScale.x * 5);
+            mapCameraController.focused = true;
         }
     }
 }

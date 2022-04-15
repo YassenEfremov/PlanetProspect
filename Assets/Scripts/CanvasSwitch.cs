@@ -13,13 +13,13 @@ public class CanvasSwitch : MonoBehaviour {
         mapCanvas.gameObject.SetActive(!mapCanvas.gameObject.activeSelf);
 
 
-        if (mapCanvas.gameObject.activeSelf) {
-            Universe.isFrozen = true;
-            spawner = FindObjectOfType<RocketSpawner>();
-            spawner.SpawnRocket();
-        } else {
-            Universe.isFrozen = false;
-            spawner.rocketPrefab.transform.parent = spawner.spawnLocation.transform;
-        }
+        //if (mapCanvas.gameObject.activeSelf) {
+        //    Universe.isFrozen = true;
+        //    spawner = FindObjectOfType<RocketSpawner>();
+        //    spawner.SpawnRocket();
+        //} else {
+        //    Universe.isFrozen = false;
+        //    spawner.rocketPrefab.transform.parent = spawner.spawnLocation.transform;
+        //}
     }
 }

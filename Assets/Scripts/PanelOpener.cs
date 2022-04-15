@@ -6,6 +6,8 @@ public class PanelOpener : MonoBehaviour
 {
     static GameObject openPanel = null;
 
+    [SerializeField] GameObject backgroundDimmer;
+
 
     void Start()
     {
@@ -27,13 +29,14 @@ public class PanelOpener : MonoBehaviour
     //}
 
 
-    public void TogglePanel()
+    public void togglePanel()
     {
         // There is no active panel => set the given one as active
         if (openPanel == null)
         {
             openPanel = gameObject;
             gameObject.SetActive(true);
+            backgroundDimmer.SetActive(true);
             // Disable all buttons except for the ones that are part of the given panel
             foreach (Button button in FindObjectsOfType<Button>())
             {
@@ -41,13 +44,14 @@ public class PanelOpener : MonoBehaviour
                     button.interactable = false;
             }
         }
-        // There already is an active panel
+        // There already is an active panel => deactivate it
         else
         {
             if (gameObject == openPanel)
             {
                 openPanel = null;
                 gameObject.SetActive(false);
+                backgroundDimmer.SetActive(false);
                 // Enable all buttons that are part of the given panel
                 foreach (Button button in FindObjectsOfType<Button>())
                 {

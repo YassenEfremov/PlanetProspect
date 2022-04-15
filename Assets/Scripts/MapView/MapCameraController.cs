@@ -7,10 +7,12 @@ public class MapCameraController : MonoBehaviour
 {
     float MIN_ZOOM;
     float MAX_ZOOM = 10000f;
-    float MAX_DIST_AWAY = 200f;
+    //float MAX_DIST_AWAY = 200f;
 
     Plane plane;
     bool touchedUI = false;
+    [HideInInspector] public bool focused = true;
+    Vector3 planetPreviousPos = Vector3.zero;
     Vector3 cameraSavedPos;
 
     [SerializeField] bool rotate;
@@ -36,6 +38,17 @@ public class MapCameraController : MonoBehaviour
 
     public void Update()
     {
+        // If the camera hasn't been moved by the player => move the camera along with the planetToFollow
+        if (focused)
+        {
+            if (planetPreviousPos == Vector3.zero)
+                planetPreviousPos = planetToFollow.transform.position;
+
+            Vector3 planetOffset = planetToFollow.transform.position - planetPreviousPos;
+            gameObject.transform.position += planetOffset;
+            planetPreviousPos = planetToFollow.transform.position;
+        }
+
         // If we click on an interactable UI element => don't move the camera
         if (Input.touchCount >= 1 && IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began)
             touchedUI = true;
@@ -48,14 +61,12 @@ public class MapCameraController : MonoBehaviour
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 if (Input.touchCount >= 2)
-                {
-                    // Scroll slower when zooming limit has been reached
-                    gameObject.transform.Translate(delta1 / 5, Space.World);
-                }
+                    gameObject.transform.Translate(delta1 / 5, Space.World);    // Scroll slower when zooming limit has been reached
                 else
-                {
                     gameObject.transform.Translate(delta1, Space.World);
-                }
+
+                focused = false;
+                planetPreviousPos = Vector3.zero;
             }
         }
 

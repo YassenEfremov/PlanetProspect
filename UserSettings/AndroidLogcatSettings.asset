@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "65a4d15",
     "m_SelectedPackage": {
         "deviceId": "65a4d15",
-        "name": "com.DefaultCompany.HTIProject",
-        "processId": 21744,
+        "name": "com.DefaultCompany.PlanetProspect",
+        "processId": 22532,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -618,6 +618,126 @@
             "deviceId": "65a4d15",
             "name": "com.DefaultCompany.HTIProject",
             "processId": 21744,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 14548,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 24499,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 25795,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 31851,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 3606,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.HTIProject",
+            "processId": 7905,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 4800,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 11464,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 13523,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 22552,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 23634,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 5923,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 8566,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 9116,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 27445,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 16130,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 20347,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 28415,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 10624,
+            "exited": false
+        },
+        {
+            "deviceId": "65a4d15",
+            "name": "com.DefaultCompany.PlanetProspect",
+            "processId": 22532,
             "exited": false
         }
     ],
