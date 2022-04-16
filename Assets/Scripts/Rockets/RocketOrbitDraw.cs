@@ -17,7 +17,7 @@ public class RocketOrbitDraw : MonoBehaviour {
 
         public VirtualRocket(GravityObject body) {
             if (body.isGravityAffected) {
-                position = body.transform.position;
+                position = body.Position;
                 velocity = body.velocity == Vector3.zero ? body.initialVelocity : body.velocity;
                 mass = body.mass;
                 radius = body.radius;
@@ -134,9 +134,9 @@ public class RocketOrbitDraw : MonoBehaviour {
                 continue;
             }
             // distance between rocket and planet
-            float dist = Vector3.Distance(rocket.position, planet.transform.position);
+            float dist = Vector3.Distance(rocket.position, planet.Position);
             // take in account planet radius
-            dist -= planet.radius + rocket.radius;
+            dist -= (planet.radius * 15) + rocket.radius;  // Multiply by 15 because planets are extremely small and with current physicTimeStep control it's virtually impossible to hit a planet
             // check for collision
             if (dist <= 0.01) {
                 return true;

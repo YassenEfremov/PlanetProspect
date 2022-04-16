@@ -31,7 +31,7 @@ public class RocketSpawner : MonoBehaviour {
         
     }
 
-    public void SpawnRocket() {
+    public void SpawnRocket(bool respawnSig) {
         // TODO: Instanticate a new rocket which is an exact copy of the prefab
 
         /*
@@ -43,10 +43,13 @@ public class RocketSpawner : MonoBehaviour {
         spawnGravity.enabled = false;
         spawnRigidbody.Sleep();
 
-        if (!hasSpawned) {
+        // if Rocket hasn't spawned
+        if (!hasSpawned || respawnSig) {
+            rocketPrefab.GetComponentInChildren<GravityObject>().isActive = false;
             hasSpawned = true;
-            rocketPrefab.transform.position = new Vector3(spawnLocation.transform.position.x + spawnGravity.radius, spawnLocation.transform.position.y, spawnLocation.transform.position.z);
-        }
+            rocketPrefab.transform.position = new Vector3(spawnLocation.transform.position.x, spawnLocation.transform.position.y + spawnGravity.radius, spawnLocation.transform.position.z);
+        } 
+        
         rocketPrefab.transform.parent = null;
 
         /*
@@ -65,7 +68,7 @@ public class RocketSpawner : MonoBehaviour {
 
         newRocket.AddComponent<GravityObject>();
         newRocket.transform.SetParent(gameObject.transform);
-        GravityObject rocketGravity = newRocket.GetCompyonent<GravityObject>();
+        GravityObject rocketGravity = newRocket.GetComponent<GravityObject>();
         rocketGravity.isGravityAffected = true;
         rocketGravity.radius = 0.05f;
         // rocketGravity.surfaceGravity = 0.04f;
