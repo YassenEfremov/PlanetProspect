@@ -42,7 +42,7 @@ public class Universe : MonoBehaviour {
      * TODO: More appropriate and less misleading var name
      */
     public static float gravitationalConstant = 265.563826f;
-    public readonly static float physicsTimeStep = 0.15f;
+    public readonly static float physicsTimeStep = 0.125f;
 
     /*
      * Freezes all movements in the universe if true

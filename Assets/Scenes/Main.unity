@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026762104, g: 0.0023934653, b: 0.0021692745, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027201013, g: 0.0024161069, b: 0.0021980396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceScale: 1172.7
   dayTimeStep: 0
-  hourTimeStep: 0.1
-  minuteTimeStep: 0
+  hourTimeStep: 0
+  minuteTimeStep: 20
 --- !u!4 &147955
 Transform:
   m_ObjectHideFlags: 0
@@ -8234,7 +8234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1095657263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14657,6 +14657,8 @@ MonoBehaviour:
   focused: 1
   rotate: 0
   planetToFollow: {fileID: 460628353}
+  scrollZoomAxis: {x: 0, y: 0, z: 1}
+  scrollSpeed: 0.6
 --- !u!20 &1819086214
 Camera:
   m_ObjectHideFlags: 0
@@ -16489,7 +16491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeAmount: 2200
-  timeStep: 0.15
+  timeStep: 0.125
   lineMaterial: {fileID: 2100000, guid: afb2d2ebf6ca4d1d6bf7c300ef160dee, type: 2}
 --- !u!120 &1451825466435368864
 LineRenderer:

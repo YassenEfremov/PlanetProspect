@@ -1,15 +1,11 @@
 using UnityEngine;
 
-
-public class PlanetLabel : MonoBehaviour
-{
+public class PlanetLabel : MonoBehaviour {
     public GameObject label;
     MainCameraController mainCameraController;
     MapCameraController mapCameraController;
 
-
-    void Update()
-    {
+    void Update() {
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         screenPoint.y += 100;
         label.transform.position = screenPoint;
@@ -19,20 +15,20 @@ public class PlanetLabel : MonoBehaviour
     }
 
 
-    public void focusPlanet()
-    {
-        if (Camera.main.name == "MainCamera")
-        {
-            if (mainCameraController == null)
+    public void focusPlanet() {
+        if (Camera.main.name == "MainCamera") {
+            if (mainCameraController == null) {
                 mainCameraController = Camera.main.GetComponent<MainCameraController>();
+            }
+
             mainCameraController.planetToFollow = gameObject;
             mainCameraController.Update();
             mainCameraController.focusPlanet();
-        }
-        else if (Camera.main.name == "MapCamera")
-        {
-            if (mapCameraController == null)
+        } else if (Camera.main.name == "MapCamera") {
+            if (mapCameraController == null) {
                 mapCameraController = Camera.main.GetComponent<MapCameraController>();
+            }
+
             mapCameraController.planetToFollow = gameObject;
             Camera.main.transform.position = new Vector3(gameObject.transform.position.x,
                                                          gameObject.transform.position.y,
