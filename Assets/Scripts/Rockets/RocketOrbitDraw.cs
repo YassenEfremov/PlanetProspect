@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +26,8 @@ public class RocketOrbitDraw : MonoBehaviour {
         }
     }
 
-    private LineRenderer lineRenderer;
+    private Universe universe;
+    private LineRenderer lineRendererStart lineRendererEnd;
     private List<GravityObject> planets;
     private GravityObject realRocket;
     // private VirtualRocket rocket;
@@ -33,6 +35,15 @@ public class RocketOrbitDraw : MonoBehaviour {
     // private Vector3 rocketVelocity;
 
     public uint nodeAmount = 1000;
+
+    private int orbitArrStart = 0;
+    private int orbitArrEnd = nodeAmount - 1;
+    private DateTime = lastOrbitPredDate; 
+
+    private PlanetaryOrbit;
+
+    private Vector3[] drawPoints = new Vector3[nodeAmount];
+
     public float timeStep = 0.1f;
     // public float lineWidth = 0.5f;
     public Material lineMaterial;
@@ -53,23 +64,25 @@ public class RocketOrbitDraw : MonoBehaviour {
             }
         }
 
+        universe = FindObjectOfType<Universe>();
+        lastOrbitPredDate = universe.georgianDate;
+        planetaryOrbit = gameObject.GetComponentInChildren<PlanetaryOrbit>();
         realRocket = gameObject.GetComponentInChildren<GravityObject>();
         rocket = new VirtualRocket(realRocket);
 
         /* line renderer settings */
-        lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
-        // lineRenderer.enabled = true;
-        lineRenderer.material = lineMaterial;
-        lineRenderer.material.color = Color.white;
-        lineRenderer.startColor = lineMaterial.color;
-        lineRenderer.endColor = lineMaterial.color;
+        lineRendererStart = gameObject.GetComponentInChildren<LineRenderer>();
+        // lineRendererStart.enabled = true;
+        lineRendererStart.material = lineMaterial;
+        lineRendererStart.material.color = Color.white;
+        lineRendererStart.startColor = lineMaterial.color;
+        lineRendererStart.endColor = lineMaterial.color;
 
+        lineRendererEnd = Instantiate(lineRendererStart);
     }
 
     // Update is called once per frame
     void FixedUpdate() {
-        // create a new virtual rocket
-        rocket = new VirtualRocket(realRocket);
         DrawOrbit();
     }
 
@@ -79,35 +92,62 @@ public class RocketOrbitDraw : MonoBehaviour {
                 if (mainCameraController == null) {
                     mainCameraController = Camera.main.GetComponent<MainCameraController>();
                 }
-                lineRenderer.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
+                lineRendererStart.widthMultiplier = Vector3.Distance(mainCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
             }
             else if (Camera.main.name == "MapCamera") {
                 if (mapCameraController == null) {
                     mapCameraController = Camera.main.GetComponent<MapCameraController>();
                 }
-                lineRenderer.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
+                lineRendererStart.widthMultiplier = Vector3.Distance(mapCameraController.planetToFollow.transform.position, Camera.main.transform.position) / 400;
             }
             currentCameraPrevPosZ = Camera.main.transform.position.z;
         }
     }
 
     void DrawOrbit() {
-        Vector3[] drawPoints = new Vector3[nodeAmount];
+        // find current rocket pos index
+        while (drawPoints[i] != DrawOrbit[orbitArrStart]) {
+            orbitArrStart = (orbitArrStart + 1) % 1000;
+        }
 
-        // Update velocity and position
-        for (uint i = 0; i < nodeAmount; i++) {
-            drawPoints[i] = rocket.position;
-            UpdateVelocity();
-            UpdatePosition();
-            // check for colliision and exit if so
+        // add new rocket positions
+        while (orbitArrStart + orbitArrEnd != nodeAmount - 1) {
             if (hasCollided(rocket, planets)) {
                 break;
             }
+
+            Universe.UpdateGeorgianDate(ref georgianDate);
+            UpdateVelocity();
+            UpdatePosition();
+            orbitArrEnd = (orbitArrEnd + 1) % 1000;
+            drawPoints[orbitArrEnd] = rocket.position;
         }
 
-        lineRenderer.positionCount = drawPoints.Length;
-        lineRenderer.SetPositions(drawPoints);
-        // lineRenderer.widthMultiplier = lineWidth;
+        lineRendererStart.positionCount = drawPoints.Length - orbitArrStart;
+        lineRendererStart.SetPositions(drawPoints[orbitArrStart]);
+        lineRendererStart.widthMultiplier = lineWidth;
+
+        lineRendererEnd.positionCount = drawPoints.Length - lineRendererStart.positionCount;
+        lineRendererEnd.SetPositions(drawPoints[orbitArrEnd]);
+        lineRendererEnd.widthMultiplier = lineWidth;
+
+    }
+
+    void UpdateVelocity(DateTime georgianDate) {
+        double julianDateSinceEpoch = Universe.ToJulianCenturiesSinceEpoch(Universe.ToJulianDate(georgianDate));
+        Vector3 planetPos;
+        Vector3 planetVel;
+
+        foreach (GravityObject planet in planets) {
+            planetaryOrbit.CalculateCoordinates(ref planetPos, ref planetVel, julianDateSinceEpoch);
+
+
+            float sqrDst = (planetPos - rocket.position).sqrMagnitude;
+
+            Vector3 forceDir = (planetPos - rocket.position).normalized;
+            Vector3 acceleration = forceDir * Universe.gravitationalConstant * planet.mass / sqrDst;
+            rocket.velocity += acceleration * timeStep;
+        }
     }
 
     void UpdateVelocity() {

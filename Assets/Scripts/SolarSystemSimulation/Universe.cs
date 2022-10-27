@@ -60,11 +60,16 @@ public class Universe : MonoBehaviour {
 
     void FixedUpdate() {
         if (!isFrozen) {
-            georgianDate = georgianDate.AddMinutes(minuteTimeStep * Time.fixedDeltaTime);
+            UpdateGeorgianDate(ref georgianDate);
             julianDate = ToJulianDate(georgianDate);
             julianCenturiesSinceEpoch = ToJulianCenturiesSinceEpoch(julianDate);
             //print("Georgian date: " + georgianDate);
         }
+    }
+
+
+    public static void UpdateGeorgianDate(ref DateTime georgianDate) {
+            georgianDate = georgianDate.AddMinutes(minuteTimeStep * Time.fixedDeltaTime);
     }
 
     /*
