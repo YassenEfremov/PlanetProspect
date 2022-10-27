@@ -49,13 +49,14 @@ public class MapCameraController : MonoBehaviour {
             planetPreviousPos = planetToFollow.transform.position;
         }
 
+        // If we click on an interactable UI element => don't move the camera
+        if (Input.touchCount >= 1 && IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            touchedUI = true;
+        }
+
         // Are there touchscreen controls?
         if (Input.touchSupported) {
-            // If we click on an interactable UI element => don't move the camera
-            if (Input.touchCount >= 1 && IsPointerOverUIObject() && Input.GetTouch(0).phase == TouchPhase.Began) {
-                touchedUI = true;
-            }
-
             // Pinch
             if (Input.touchCount >= 2 && !touchedUI) {
                 var pos1 = PlanePosition(Input.GetTouch(0).position);
@@ -99,10 +100,6 @@ public class MapCameraController : MonoBehaviour {
                 }
             }
 
-            if (Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended) {
-                touchedUI = false;
-            }
-
             /*
             Limit the camera movement within a circle around the current planet
             if (Vector2.Distance(planetToFollow.transform.position, gameObject.transform.position) > MAX_DIST_AWAY)
@@ -129,25 +126,28 @@ public class MapCameraController : MonoBehaviour {
             Vector3 zoomDist = scroll * zoomAxis;
 
             gameObject.transform.position = gameObject.transform.position + zoomDist;
+        }
 
+        // Scroll
+        if (Input.touchCount >= 1 && !touchedUI)
+        {
+            plane.SetNormalAndPosition(Vector3.back, planetToFollow.transform.position);   // Update reference plane
+            var delta1 = PlanePositionDelta(Input.GetTouch(0));
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                if (Input.touchCount >= 2)
+                    gameObject.transform.Translate(delta1 / 5, Space.World);    // Scroll slower when zooming limit has been reached
+                else
+                    gameObject.transform.Translate(delta1, Space.World);
 
-
-            /* // Scroll
-            if (Input.touchCount >= 1 && !touchedUI) {
-                plane.SetNormalAndPosition(Vector3.back, planetToFollow.transform.position);   // Update reference plane
-                var delta1 = PlanePositionDelta(Input.GetTouch(0));
-                if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                {
-                    if (Input.touchCount >= 2)
-                        gameObject.transform.Translate(delta1 / 5, Space.World);    // Scroll slower when zooming limit has been reached
-                    else
-                        gameObject.transform.Translate(delta1, Space.World);
-
-                    focused = false;
-                    planetPreviousPos = Vector3.zero;
-                }
+                focused = false;
+                planetPreviousPos = Vector3.zero;
             }
-            */
+        }
+
+        if (Input.touchCount >= 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            touchedUI = false;
         }
     }
 
@@ -205,5 +205,39 @@ public class MapCameraController : MonoBehaviour {
 
         // Didn't hit the plane
         return Vector3.zero;
+    }
+
+    public void zoomIn()
+    {
+        if (-gameObject.transform.position.z >= MAX_ZOOM)
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(planetToFollow.transform.position, gameObject.transform.position, 0.99f);
+        }
+        else if (Vector3.Distance(planetToFollow.transform.position, gameObject.transform.position) <= MIN_ZOOM)
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(planetToFollow.transform.position, gameObject.transform.position, 1.01f);
+        }
+        else
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0),
+                                                                  gameObject.transform.position, 0.8f);
+        }
+    }
+
+    public void zoomOut()
+    {
+        if (-gameObject.transform.position.z >= MAX_ZOOM)
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(planetToFollow.transform.position, gameObject.transform.position, 0.99f);
+        }
+        else if (Vector3.Distance(planetToFollow.transform.position, gameObject.transform.position) <= MIN_ZOOM)
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(planetToFollow.transform.position, gameObject.transform.position, 1.01f);
+        }
+        else
+        {
+            gameObject.transform.position = Vector3.LerpUnclamped(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0),
+                                                                  gameObject.transform.position, 1.2f);
+        }
     }
 }

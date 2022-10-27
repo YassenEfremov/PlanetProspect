@@ -9,13 +9,14 @@ public class PanelOpener : MonoBehaviour
     [SerializeField] GameObject backgroundDimmer;
 
 
+
     void Start()
     {
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
             //Debug.Log(button.GetComponent<Image>().color);
             //button.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
-            button.gameObject.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
+            //button.gameObject.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
         }
     }
 

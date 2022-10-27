@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ResourceManager : MonoBehaviour
 {
-    public int energy { get; private set; } = 1000;
+    public int energy { get; private set; } = 6000;
     public int steel { get; private set; } = 1000;
 
     public int maxEnergy { get; private set; } = 10000;
