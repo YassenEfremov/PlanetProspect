@@ -9,7 +9,7 @@ public class ScaleMeter : MonoBehaviour
 
     [SerializeField] GameObject edge1;
     [SerializeField] GameObject edge2;
-    [SerializeField] GameObject distance;
+    [SerializeField] GameObject distanceText;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +25,16 @@ public class ScaleMeter : MonoBehaviour
 
         if (plane.Raycast(rayEdge1, out var enterEdge1) && plane.Raycast(rayEdge2, out var enterEdge2))
         {
-            string distanceAsText = (Vector3.Distance(rayEdge1.GetPoint(enterEdge1), rayEdge2.GetPoint(enterEdge2)) * 127420).ToString() + " km";
-            distance.GetComponent<Text>().text = distanceAsText;
+            float distance = Vector3.Distance(rayEdge1.GetPoint(enterEdge1), rayEdge2.GetPoint(enterEdge2)) * 127420;
+            if(distance < 10000000)
+            {
+                distanceText.GetComponent<Text>().text = distance.ToString() + " km";
+            }
+            else
+            {
+                float distanceInAU = distance / 1.496e+8f;
+                distanceText.GetComponent<Text>().text = distanceInAU.ToString() + " AU";
+            }
         }
     }
 }
