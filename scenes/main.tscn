@@ -1,0 +1,734 @@
+[gd_scene load_steps=37 format=3 uid="uid://bhr7cijggtmgh"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ra1mo"]
+[ext_resource type="PackedScene" uid="uid://d0g2x5bwqslji" path="res://scenes/planets/earth.tscn" id="1_vcejk"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_0q80i"]
+[ext_resource type="PackedScene" uid="uid://bnve5tu3wp0ix" path="res://scenes/planets/mars.tscn" id="2_b4t1u"]
+[ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_qxb3m"]
+[ext_resource type="Script" path="res://scripts/resources.gd" id="4_q5y8r"]
+[ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="6_6bnj6"]
+[ext_resource type="PackedScene" uid="uid://bpalcsrnhywek" path="res://scenes/planets/saturn.tscn" id="7_jebfb"]
+[ext_resource type="PackedScene" uid="uid://idkyrf6s4j5p" path="res://scenes/planets/jupiter.tscn" id="9_asmuw"]
+[ext_resource type="PackedScene" uid="uid://d2g774msbe6bl" path="res://scenes/planets/venus.tscn" id="10_t2od6"]
+[ext_resource type="Texture2D" uid="uid://4wo6l2wgygni" path="res://assets/constellation_figures_4k_print.jpg" id="11_jw22f"]
+[ext_resource type="Script" path="res://scripts/star_map.gd" id="11_u65ka"]
+[ext_resource type="PackedScene" uid="uid://bbcysxygw8jyy" path="res://scenes/star.tscn" id="12_civow"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="12_sn777"]
+[ext_resource type="Texture2D" uid="uid://bft7aboj62b25" path="res://assets/UI/energy.png" id="14_2cq4n"]
+[ext_resource type="Script" path="res://scripts/ui/main_view.gd" id="14_tkdlh"]
+[ext_resource type="Theme" uid="uid://c1xstvb5vh4n" path="res://themes/button.tres" id="15_667dd"]
+[ext_resource type="PackedScene" uid="uid://cwtgyew201s7r" path="res://scenes/planets/neptune.tscn" id="15_ldpkc"]
+[ext_resource type="Texture2D" uid="uid://d0aakepkqews0" path="res://assets/UI/steel.png" id="15_wf13l"]
+[ext_resource type="PackedScene" uid="uid://j5ypbp3op0ln" path="res://scenes/planets/uranus.tscn" id="16_cknls"]
+[ext_resource type="Script" path="res://scripts/ui/news_panel.gd" id="16_crw00"]
+[ext_resource type="Texture2D" uid="uid://diqa8orfo2n3i" path="res://assets/UI/arrow.png" id="17_nr8st"]
+[ext_resource type="Script" path="res://scripts/ui/build_view.gd" id="18_io5ck"]
+[ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel2.png" id="20_buiqw"]
+[ext_resource type="Script" path="res://scripts/ui/actions.gd" id="20_rbs5p"]
+[ext_resource type="Texture2D" uid="uid://b0megwy0cvjx4" path="res://assets/buildings/storage.png" id="21_qum1r"]
+[ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace.png" id="22_uj08w"]
+[ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/lauch_pad.png" id="22_uj744"]
+[ext_resource type="Script" path="res://scripts/star_map_view.gd" id="24_rqw7x"]
+
+[sub_resource type="Environment" id="Environment_5r7c1"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a6hiw"]
+radius = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sehba"]
+shading_mode = 0
+albedo_color = Color(0.588235, 0.588235, 0.588235, 1)
+albedo_texture = ExtResource("11_jw22f")
+
+[sub_resource type="SphereMesh" id="SphereMesh_2swpc"]
+flip_faces = true
+radius = 10.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_jlisa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sxc4a"]
+resource_name = "pointing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 16), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgkcn"]
+_data = {
+"RESET": SubResource("Animation_jlisa"),
+"pointing": SubResource("Animation_sxc4a")
+}
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ra1mo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5r7c1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 10, 40)
+size = 35.0
+script = ExtResource("2_0q80i")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 13.7782, 65)
+light_color = Color(1, 1, 0.862745, 1)
+light_energy = 50.0
+omni_range = 332.0
+
+[node name="SolarSystem" type="Node3D" parent="."]
+
+[node name="Mercury" parent="SolarSystem" instance=ExtResource("6_6bnj6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -198.966, 0, 0)
+
+[node name="Venus" parent="SolarSystem" instance=ExtResource("10_t2od6")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -89, 0, 0)
+
+[node name="Earth" parent="SolarSystem" instance=ExtResource("1_vcejk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+max_buildings = 5
+
+[node name="Mars" parent="SolarSystem" instance=ExtResource("2_b4t1u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 146, 0, 0)
+
+[node name="Jupiter" parent="SolarSystem" instance=ExtResource("9_asmuw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -390.929, -297, 0)
+giant = true
+
+[node name="Saturn" parent="SolarSystem" instance=ExtResource("7_jebfb")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 34.4723, -307, 0)
+giant = true
+
+[node name="Uranus" parent="SolarSystem" instance=ExtResource("16_cknls")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 414.978, -308.63, 0)
+giant = true
+
+[node name="Neptune" parent="SolarSystem" instance=ExtResource("15_ldpkc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 811.164, -336.031, 0)
+giant = true
+
+[node name="StarMap" type="StaticBody3D" parent="."]
+visible = false
+script = ExtResource("11_u65ka")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap"]
+shape = SubResource("SphereShape3D_a6hiw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap"]
+material_override = SubResource("StandardMaterial3D_sehba")
+mesh = SubResource("SphereMesh_2swpc")
+skeleton = NodePath("../..")
+
+[node name="Star1" parent="StarMap" instance=ExtResource("12_civow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 1, -8.1052)
+
+[node name="Star2" parent="StarMap" instance=ExtResource("12_civow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.139, 0, -8.1052)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("12_sn777")
+
+[node name="Tutorial" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Message" type="Label" parent="UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_top = 32.0
+offset_right = 224.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme = ExtResource("3_qxb3m")
+text = "Welcome!
+You are playing from here!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Arrow" type="Control" parent="UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 144.0
+offset_right = 32.0
+offset_bottom = 208.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
+
+[node name="Icon" type="TextureRect" parent="UI/Tutorial/Arrow"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 63.9999
+texture = ExtResource("17_nr8st")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Tutorial/Arrow/Icon"]
+autoplay = "pointing"
+libraries = {
+"": SubResource("AnimationLibrary_fgkcn")
+}
+
+[node name="Timer" type="Timer" parent="UI/Tutorial"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="MainView" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("14_tkdlh")
+
+[node name="StarMapButton" type="Button" parent="UI/MainView"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 31.0
+offset_right = 160.0
+offset_bottom = 127.0
+theme = ExtResource("15_667dd")
+text = "Star
+Map"
+
+[node name="BuildButton" type="Button" parent="UI/MainView"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("15_667dd")
+text = "Build"
+
+[node name="NewsButton" type="Button" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+offset_left = 32.0
+offset_top = 136.0
+offset_right = 88.0
+offset_bottom = 192.0
+text = "News"
+
+[node name="NewsPanel" type="Panel" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_crw00")
+
+[node name="APODGetter" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+
+[node name="ImageDownloader" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+
+[node name="CloseButton" type="Button" parent="UI/MainView/NewsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+text = "X"
+
+[node name="Actions" type="HBoxContainer" parent="UI/MainView"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -96.0
+offset_right = 192.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_qxb3m")
+alignment = 1
+script = ExtResource("20_rbs5p")
+
+[node name="RemoveBuildingButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "Remove"
+
+[node name="AddRocketButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "Add Rocket"
+
+[node name="LaunchButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+disabled = true
+text = "Launch"
+
+[node name="CollectButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "Collect"
+
+[node name="CancelButton" type="Button" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -128.0
+offset_right = 48.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("15_667dd")
+text = "Cancel"
+
+[node name="Sensors" type="Label" parent="UI/MainView"]
+visible = false
+layout_mode = 0
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 208.0
+
+[node name="BuildView" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.392157, 0.392157, 1)
+script = ExtResource("18_io5ck")
+
+[node name="Label" type="Label" parent="UI/BuildView"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 40.0
+offset_right = 128.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme = ExtResource("3_qxb3m")
+text = "Buildings"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="UI/BuildView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -196.0
+offset_right = 448.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="Panel1" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SteelFurnaceButton" type="Button" parent="UI/BuildView/GridContainer/Panel1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -95.0
+offset_right = 84.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("22_uj08w")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = 73.0
+offset_right = 84.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Steel Furnace
+100 kg"
+horizontal_alignment = 1
+
+[node name="Panel2" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SolarPanelButton" type="Button" parent="UI/BuildView/GridContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("20_buiqw")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = 71.0
+offset_right = 84.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Solar Panel
+50 kg"
+horizontal_alignment = 1
+
+[node name="Panel3" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StorageButton" type="Button" parent="UI/BuildView/GridContainer/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("21_qum1r")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 71.0
+offset_right = 80.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Storage
+400 kg"
+horizontal_alignment = 1
+
+[node name="Panel4" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadButton" type="Button" parent="UI/BuildView/GridContainer/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("22_uj744")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = 71.0
+offset_right = 84.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lauch Pad
+300 kg"
+horizontal_alignment = 1
+
+[node name="StarMapView" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("24_rqw7x")
+
+[node name="Resources" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 128.0
+grow_horizontal = 0
+script = ExtResource("4_q5y8r")
+
+[node name="EnergyBar" type="ProgressBar" parent="UI/Resources"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -304.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 56.0
+grow_horizontal = 0
+max_value = 1000.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 0
+texture = ExtResource("14_2cq4n")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Value" type="Label" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = -8.0
+offset_right = -80.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Unit" type="Label" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_right = -32.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.788235, 0.788235, 0.788235, 1)
+text = "kWh"
+horizontal_alignment = 1
+
+[node name="SteelBar" type="ProgressBar" parent="UI/Resources"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -304.0
+offset_top = 72.0
+offset_right = -32.0
+offset_bottom = 96.0
+grow_horizontal = 0
+max_value = 1000.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 0
+texture = ExtResource("15_wf13l")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Value" type="Label" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = -8.0
+offset_right = -80.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Unit" type="Label" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_right = -32.0
+offset_bottom = 31.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.788235, 0.788235, 0.788235, 1)
+text = "kg"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = -32.0
+grow_vertical = 0
+theme = ExtResource("15_667dd")
+text = "Back"
+
+[node name="Message" type="Label" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -200.0
+offset_right = 256.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_earth_building_placed"]
+[connection signal="camera_rotate" from="UI" to="Camera3D" method="_on_ui_camera_rotate"]
+[connection signal="camera_zoom" from="UI" to="Camera3D" method="_on_ui_camera_zoom"]
+[connection signal="pressed" from="UI/MainView/StarMapButton" to="UI" method="_on_star_map_button_pressed"]
+[connection signal="pressed" from="UI/MainView/BuildButton" to="UI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="UI/MainView/NewsButton" to="UI/MainView/NewsPanel" method="_on_news_button_pressed"]
+[connection signal="request_completed" from="UI/MainView/NewsPanel/APODGetter" to="UI/MainView/NewsPanel" method="_on_apod_getter_request_completed"]
+[connection signal="request_completed" from="UI/MainView/NewsPanel/ImageDownloader" to="UI/MainView/NewsPanel" method="_on_image_downloader_request_completed"]
+[connection signal="pressed" from="UI/MainView/NewsPanel/CloseButton" to="UI/MainView/NewsPanel" method="_on_close_button_pressed"]
+[connection signal="max_resources_reached" from="UI/MainView/Actions" to="UI" method="_on_actions_max_resources_reached"]
+[connection signal="pressed" from="UI/MainView/Actions/RemoveBuildingButton" to="UI/MainView/Actions" method="_on_remove_building_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/AddRocketButton" to="UI/MainView/Actions" method="_on_add_rocket_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/LaunchButton" to="UI/MainView/Actions" method="_on_launch_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/CollectButton" to="UI/MainView/Actions" method="_on_collect_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="UI" method="_on_cancel_button_pressed"]
+[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Earth" method="_on_build_view_building_selected"]
+[connection signal="building_selected" from="UI/BuildView" to="UI" method="_on_build_view_building_selected"]
+[connection signal="max_buildings_reached" from="UI/BuildView" to="UI" method="_on_build_view_max_buildings_reached"]
+[connection signal="not_enough_resources" from="UI/BuildView" to="UI" method="_on_build_view_not_enough_resources"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel1/SteelFurnaceButton" to="UI/BuildView" method="_on_steel_furnace_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel2/SolarPanelButton" to="UI/BuildView" method="_on_solar_panel_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel3/StorageButton" to="UI/BuildView" method="_on_storage_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel4/PadButton" to="UI/BuildView" method="_on_pad_button_pressed"]
+[connection signal="pressed" from="UI/BackButton" to="UI" method="_on_back_button_pressed"]
