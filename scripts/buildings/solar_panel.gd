@@ -1,4 +1,4 @@
-extends "../building.gd"
+class_name SolarPanel extends Building
 
 
 var generated_energy: int

@@ -1,9 +1,10 @@
-extends Area3D
+class_name Building extends Area3D
 
+
+@export var steel_cost: int
 
 var action_buttons: Array[Button]
-@export var steel_cost: int
-var last_press_pos
+var last_press_pos: Vector2
 
 
 func _on_input_event(camera, event, position, normal, shape_idx):

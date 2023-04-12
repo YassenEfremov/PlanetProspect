@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqjqskel5golw"
-path="res://.godot/imported/starmap.jpg-d8c523ec1605269cb03711f92fb4fe0d.ctex"
+uid="uid://dgjxu4eodlmnl"
+path="res://.godot/imported/wastebasket.png-be1d8f4bfa5d3834d34d1b4aa411b9b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/starmap.jpg"
-dest_files=["res://.godot/imported/starmap.jpg-d8c523ec1605269cb03711f92fb4fe0d.ctex"]
+source_file="res://assets/UI/wastebasket.png"
+dest_files=["res://.godot/imported/wastebasket.png-be1d8f4bfa5d3834d34d1b4aa411b9b2.ctex"]
 
 [params]
 

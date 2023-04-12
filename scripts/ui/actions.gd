@@ -24,15 +24,15 @@ func _on_launch_button_pressed():
 
 
 func _on_collect_button_pressed():
-	if $"../../".selected_planet.selected_building.get("generated_energy") \
+	if $"../../".selected_planet.selected_building.get("generated_energy") != null \
 		and $"../../Resources".can_store_energy($"../../".selected_planet.selected_building.generated_energy):
 		$"../../Resources".add_energy($"../../".selected_planet.selected_building.generated_energy)
 		$"../../".selected_planet.selected_building.generated_energy = 0
 		$"../../".selected_planet.selected_building.get_node("Label3D").text = str(0)
 
-	elif $"../../".selected_planet.selected_building.get("generated_steel") \
-		and $"../../Resources".can_store_energy($"../../".selected_planet.selected_building.generated_steel):
-		$"../../Resources".add_energy($"../../".selected_planet.selected_building.generated_steel)
+	elif $"../../".selected_planet.selected_building.get("generated_steel") != null \
+		and $"../../Resources".can_store_steel($"../../".selected_planet.selected_building.generated_steel):
+		$"../../Resources".add_steel($"../../".selected_planet.selected_building.generated_steel)
 		$"../../".selected_planet.selected_building.generated_steel = 0
 		$"../../".selected_planet.selected_building.get_node("Label3D").text = str(0)
 

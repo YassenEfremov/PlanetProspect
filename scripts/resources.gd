@@ -1,6 +1,8 @@
 extends Control
 
 
+var max_energy: int = 1000
+var max_steel: int = 1000
 var total_energy: int = 800
 var total_steel: int = 900
 
@@ -33,6 +35,7 @@ func take_energy(energy: int):
 
 
 func update_energy_indicator():
+	$EnergyBar.max_value = max_energy
 	$EnergyBar.value = total_energy
 	$EnergyBar/Value.text = str(total_energy)
 
@@ -60,9 +63,13 @@ func take_steel(steel: int):
 
 
 func update_steel_indicator():
+	$SteelBar.max_value = max_steel
 	$SteelBar.value = total_steel
 	$SteelBar/Value.text = str(total_steel)
 
 
-func _on_earth_building_placed(steel_cost: int):
-	take_steel(steel_cost)
+func _on_earth_building_placed(building: Building):
+	take_steel(building.steel_cost)
+	if building is Storage:
+		max_steel += 1000
+		update_steel_indicator()

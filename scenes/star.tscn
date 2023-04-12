@@ -66,6 +66,7 @@ offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_s2c3m")
-text = "Select"
+text = "Info"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="pressed" from="Actions/SelectButton" to="." method="_on_select_button_pressed"]

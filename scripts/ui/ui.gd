@@ -1,7 +1,7 @@
 extends Control
 
 
-var selected_planet: Area3D = null
+var selected_planet: Planet = null
 var current_view
 
 signal camera_rotate(delta: InputEventScreenDrag)
@@ -74,24 +74,30 @@ func select_planet(planet):
 
 func _on_star_map_button_pressed():
 	current_view = $StarMapView
-	$"../Camera3D".star_view = true
 	$"../Camera3D".save_camera = $"../Camera3D".duplicate()
 	var star_map = $"../StarMap"
 	star_map.position = $"../Camera3D".position
-	star_map.show()
-	$"../OmniLight3D".hide()
-	$BackButton.show()
-	$MainView.hide()
+	
 	$"../SolarSystem".hide()
+	$"../OmniLight3D".hide()
+	$MainView.hide()
+	$Resources.hide()
+	selected_planet.get_node("UI/BuildingsLabel").hide()
+	
+	$"../Camera3D".star_view = true
+	star_map.show()
 	$StarMapView.show()
+	$BackButton.show()
 
 
 func _on_build_button_pressed():
 	current_view = $BuildView
 	$"../Camera3D".save_camera = $"../Camera3D"
+	
+	$MainView.hide()
+	
 	$BuildView.show()
 	$BackButton.show()
-	$MainView.hide()
 
 
 func _on_build_view_building_selected(building_name):
@@ -139,8 +145,11 @@ func _on_back_button_pressed():
 	$"../Camera3D".transform = $"../Camera3D".save_camera.transform
 	$"../Camera3D".fov = $"../Camera3D".save_camera.fov
 #	$"../StarMap".select_star($"../StarMap".selected_star)
-	$StarMapView.hide()
+	
+	$"../SolarSystem".show()
 	$"../OmniLight3D".show()
 	$BackButton.hide()
+	
 	$MainView.show()
-	$"../SolarSystem".show()
+	$Resources.show()
+	selected_planet.get_node("UI/BuildingsLabel").show()

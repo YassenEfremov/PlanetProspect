@@ -1,4 +1,4 @@
-extends "../building.gd"
+class_name Storage extends Building
 
 
 func _ready():

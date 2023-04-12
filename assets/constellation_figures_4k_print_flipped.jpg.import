@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cds3hnshpv7yk"
-path.s3tc="res://.godot/imported/venus.png-a40a8c6b6a0cd2e9f05fcc773d0dc98c.s3tc.ctex"
-path.etc2="res://.godot/imported/venus.png-a40a8c6b6a0cd2e9f05fcc773d0dc98c.etc2.ctex"
+uid="uid://du0rtkir43wnh"
+path.s3tc="res://.godot/imported/constellation_figures_4k_print_flipped.jpg-f460274855db4a2d6a37749ec8424a69.s3tc.ctex"
+path.etc2="res://.godot/imported/constellation_figures_4k_print_flipped.jpg-f460274855db4a2d6a37749ec8424a69.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/UI/venus.png"
-dest_files=["res://.godot/imported/venus.png-a40a8c6b6a0cd2e9f05fcc773d0dc98c.s3tc.ctex", "res://.godot/imported/venus.png-a40a8c6b6a0cd2e9f05fcc773d0dc98c.etc2.ctex"]
+source_file="res://assets/constellation_figures_4k_print_flipped.jpg"
+dest_files=["res://.godot/imported/constellation_figures_4k_print_flipped.jpg-f460274855db4a2d6a37749ec8424a69.s3tc.ctex", "res://.godot/imported/constellation_figures_4k_print_flipped.jpg-f460274855db4a2d6a37749ec8424a69.etc2.ctex"]
 
 [params]
 

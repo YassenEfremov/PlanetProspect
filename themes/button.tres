@@ -1,10 +1,14 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c1xstvb5vh4n"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c1xstvb5vh4n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36f35"]
-bg_color = Color(0, 0.396078, 0.862745, 1)
+bg_color = Color(0, 0.392157, 0.862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvwew"]
+bg_color = Color(0, 0.27451, 0.627451, 1)
 
 [resource]
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 10
 Button/font_sizes/font_size = 24
 Button/styles/normal = SubResource("StyleBoxFlat_36f35")
+Button/styles/pressed = SubResource("StyleBoxFlat_lvwew")

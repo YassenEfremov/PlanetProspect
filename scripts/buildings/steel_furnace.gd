@@ -1,4 +1,4 @@
-extends "../building.gd"
+class_name SteelFurnace extends Building
 
 
 var generated_steel: int

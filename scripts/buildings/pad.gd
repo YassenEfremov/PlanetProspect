@@ -1,8 +1,8 @@
-extends "../building.gd"
+class_name Pad extends Building
 
 
 var rocket = null
-var launched = false
+var launched: bool = false
 
 
 func _ready():

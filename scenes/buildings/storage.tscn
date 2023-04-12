@@ -66,5 +66,5 @@ theme = ExtResource("3_gsi0k")
 text = "Remove"
 
 [connection signal="input_event" from="." to="." method="_on_input_event" flags=18]
-[connection signal="pressed" from="Actions/RemoveButton" to="." method="_on_info_pressed" flags=18]
 [connection signal="pressed" from="Actions/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="Actions/RemoveButton" to="." method="_on_info_pressed" flags=18]

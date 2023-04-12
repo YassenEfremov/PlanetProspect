@@ -1,4 +1,4 @@
-extends Area3D
+class_name Planet extends Area3D
 
 
 @export var rotation_speed: float
@@ -6,12 +6,13 @@ extends Area3D
 @export var giant: bool
 
 var axis
-var last_press_pos
+var last_press_pos: Vector2
 var building_to_place: PackedScene = null
-var buildings = []
-var selected_building: Area3D = null
+var buildings: Array[Building] = []
+var selected_building: Building = null
 
-signal building_placed(steel_cost: int)
+signal building_placed(building: Building)
+
 
 func _ready():
 	axis = Vector3(0, cos($Axis.rotation.x), sin($Axis.rotation.x))
@@ -85,7 +86,7 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 			building.rotate_object_local(Vector3.RIGHT, PI/2)
 
 			buildings.push_back(building)
-			building_placed.emit(building.steel_cost)
+			building_placed.emit(building)
 			building_to_place = null
 			$UI/BuildingsLabel/Current.text = str(buildings.size())
 			$"../../UI/Message".text = ""
