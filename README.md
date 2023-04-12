@@ -1,13 +1,17 @@
 <!--![mainBG_compressed](https://user-images.githubusercontent.com/48584741/157915560-746ebb2e-23da-446f-82a0-911202f8aae6.svg)-->
 
-# Team ArchBTW - Planet Prospect
+# Planet Prospect
 
-Нашият проект представлява мобилна игра/симулатор, използваща реалната информация от космоса. Идеята е да предоставим на обикновения човек не само достоверна и актуална информация за заобикалящия ни космос, но и начин да взаимодейства с обектите в него. Това се случва посредством изстрелване на ракети, събиране на различни ресурси и изследване на всякакви космически тела. Действието на играта се развива в нашата Слънчева система.
+Нашият проект представлява мобилна игра, в която можете да създадете собствена космическа колония, като междувременно научавате много за заобикалящата ни Вселена.
 
 
 # In-game screenshots
-![screenshot1](https://user-images.githubusercontent.com/48584741/175512145-0fc67cf5-1011-42c5-b948-e169bb843f5b.jpg)
 
-![screenshot2](https://user-images.githubusercontent.com/48584741/175512302-804fd67b-737f-46b8-a67d-687e24783c9c.jpg)
+![image](https://user-images.githubusercontent.com/48584741/231423363-283bc941-3fec-4398-b9c5-7b00e6c1a39f.png)
 
-![screenshot3](https://user-images.githubusercontent.com/48584741/175512337-4e0e9af4-efc3-46a5-98c8-9b7ba18f2c86.jpg)
+![image](https://user-images.githubusercontent.com/48584741/231423491-8f937b62-e2ed-4bd9-a2d7-a77988f1672a.png)
+
+![image](https://user-images.githubusercontent.com/48584741/231423565-cb9ed267-55a8-496d-b415-ae5cafffb965.png)
+
+![image](https://user-images.githubusercontent.com/48584741/231423652-6c0ad2ec-0e94-4110-9308-b313122655bf.png)
+
