@@ -100,41 +100,44 @@ func _on_build_button_pressed():
 	$BackButton.show()
 
 
+func _on_travel_button_pressed():
+	current_view = $TravelView
+	$"../Camera3D".save_camera = $"../Camera3D"
+	
+	$MainView.hide()
+	
+	$TravelView.show()
+	$BackButton.show()
+
+
 func _on_build_view_building_selected(building_name):
 	_on_back_button_pressed()
 	$Message.text = "Click somewhere on the planet to place the building"
-	$Message.show()
 	$MainView/CancelButton.show()
 
 
 func _on_cancel_button_pressed():
 	$Message.text = ""
-	$Message.hide()
 	$MainView/CancelButton.hide()
 
 
 func _on_build_view_max_buildings_reached():
 	_on_back_button_pressed()
 	$Message.text = "Maximum number of buildings reached!"
-	$Message.show()
 	await get_tree().create_timer(2.0).timeout
-	$Message.hide()
+	$Message.text = ""
 
 
 func _on_build_view_not_enough_resources():
 	$Message.text = "Not enough resources!"
-	$Message.show()
 	await get_tree().create_timer(2.0).timeout
 	$Message.text = ""
-	$Message.hide()
 
 
 func _on_actions_max_resources_reached():
 	$Message.text = "Max resources reached!"
-	$Message.show()
 	await get_tree().create_timer(2.0).timeout
 	$Message.text = ""
-	$Message.hide()
 
 
 func _on_back_button_pressed():

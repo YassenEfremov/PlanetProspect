@@ -223,6 +223,7 @@ shadow_mesh = SubResource("ArrayMesh_vw3wr")
 
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_42fa1")
+steel_cost = 100
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

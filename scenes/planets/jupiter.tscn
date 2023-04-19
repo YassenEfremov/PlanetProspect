@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://gissgb0ukfkd" path="res://assets/planets/jupiter.png" id="2_sfg06"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_lf3jr"]
 [ext_resource type="Material" uid="uid://b714gbb3nj7f8" path="res://assets/planets/blank.tres" id="3_om643"]
-[ext_resource type="PackedScene" uid="uid://coqb8mr06ssfq" path="res://scenes/planet_panel.tscn" id="4_rkytw"]
+[ext_resource type="PackedScene" path="res://scenes/planet_panel.tscn" id="4_rkytw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
 radius = 71.492

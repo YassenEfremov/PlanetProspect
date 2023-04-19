@@ -72,4 +72,5 @@ func _on_earth_building_placed(building: Building):
 	take_steel(building.steel_cost)
 	if building is Storage:
 		max_steel += 1000
-		update_steel_indicator()
+	
+	update_steel_indicator()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ybehxo6wm81y"
-path="res://.godot/imported/closeView.png-909cae95bf9d0bce9cd7054b1e8f0e52.ctex"
+uid="uid://b245qanhtnva8"
+path="res://.godot/imported/moon_emoji.png-3178f9723fe74a0bb30ef677e0342db0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/closeView.png"
-dest_files=["res://.godot/imported/closeView.png-909cae95bf9d0bce9cd7054b1e8f0e52.ctex"]
+source_file="res://assets/UI/moon_emoji.png"
+dest_files=["res://.godot/imported/moon_emoji.png-3178f9723fe74a0bb30ef677e0342db0.ctex"]
 
 [params]
 

@@ -38,3 +38,9 @@ func _on_collect_button_pressed():
 
 	else:
 		max_resources_reached.emit()
+
+
+func _on_destination_button_pressed():
+	pass
+#	$"../../"._on_star_map_button_pressed()
+#	$"../../Message".text = "Select a destination"

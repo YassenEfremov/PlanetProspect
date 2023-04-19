@@ -18,3 +18,7 @@ func _input_event(camera, event, position, normal, shape_idx):
 		if not event.pressed and event.position == last_press_pos:
 #			get_node("/root/Main/UI/StarMapView/%sStats" % name).position = camera.unproject_position(position)
 			$"../../UI/StarMapView".select_body(self)
+
+
+func toggle_visibility():
+	visible = !visible
