@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PlanetProspect"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/solar_system.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://assets/default_icon.svg"
 

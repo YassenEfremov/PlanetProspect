@@ -1,0 +1,3164 @@
+[gd_scene load_steps=65 format=3 uid="uid://byjl5qmowhowv"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_xumog"]
+[ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
+[ext_resource type="PackedScene" uid="uid://d2g774msbe6bl" path="res://scenes/planets/venus.tscn" id="4_vvhyn"]
+[ext_resource type="PackedScene" uid="uid://d0g2x5bwqslji" path="res://scenes/planets/earth.tscn" id="5_hq3wi"]
+[ext_resource type="PackedScene" uid="uid://bnve5tu3wp0ix" path="res://scenes/planets/mars.tscn" id="6_2808a"]
+[ext_resource type="PackedScene" uid="uid://idkyrf6s4j5p" path="res://scenes/planets/jupiter.tscn" id="7_s46d3"]
+[ext_resource type="PackedScene" uid="uid://bpalcsrnhywek" path="res://scenes/planets/saturn.tscn" id="8_7w08l"]
+[ext_resource type="PackedScene" uid="uid://j5ypbp3op0ln" path="res://scenes/planets/uranus.tscn" id="9_peerq"]
+[ext_resource type="PackedScene" uid="uid://cwtgyew201s7r" path="res://scenes/planets/neptune.tscn" id="10_a03cp"]
+[ext_resource type="Texture2D" uid="uid://du0rtkir43wnh" path="res://assets/constellation_figures_4k_print_flipped.jpg" id="11_p0dlg"]
+[ext_resource type="Script" path="res://scripts/star_map.gd" id="12_owcun"]
+[ext_resource type="Script" path="res://scripts/map_icon.gd" id="13_52fsq"]
+[ext_resource type="Texture2D" uid="uid://cds3hnshpv7yk" path="res://assets/UI/venus.png" id="14_nu4gj"]
+[ext_resource type="Texture2D" uid="uid://cka20tqw6ihsp" path="res://assets/UI/mercury.png" id="14_rjqj7"]
+[ext_resource type="Texture2D" uid="uid://ckj4c1hyt2f5y" path="res://assets/UI/locked.png" id="15_gpnof"]
+[ext_resource type="Texture2D" uid="uid://blm4ow410s33c" path="res://assets/UI/mars.png" id="16_bbryf"]
+[ext_resource type="Texture2D" uid="uid://dtcdtewkgo616" path="res://assets/UI/moon.png" id="17_jed64"]
+[ext_resource type="Texture2D" uid="uid://dtj0k68fobpn4" path="res://assets/UI/jupiter.png" id="18_5u8yt"]
+[ext_resource type="PackedScene" uid="uid://bbcysxygw8jyy" path="res://scenes/star.tscn" id="19_p3ky3"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="20_jvi36"]
+[ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="21_678cw"]
+[ext_resource type="Texture2D" uid="uid://diqa8orfo2n3i" path="res://assets/UI/arrow.png" id="22_qssxd"]
+[ext_resource type="Script" path="res://scripts/ui/main_view.gd" id="23_o252s"]
+[ext_resource type="Theme" uid="uid://c1xstvb5vh4n" path="res://themes/button.tres" id="24_vpvyu"]
+[ext_resource type="Texture2D" uid="uid://bxbs0ymwgt1sw" path="res://assets/UI/sparkles.png" id="25_idfl1"]
+[ext_resource type="Texture2D" uid="uid://c6c8f15lj7ejq" path="res://assets/UI/rocket.png" id="26_s50qm"]
+[ext_resource type="Texture2D" uid="uid://b7sdsx6bxda3u" path="res://assets/UI/trophy.png" id="27_x4iq5"]
+[ext_resource type="Texture2D" uid="uid://dkypjrgx54ndm" path="res://assets/UI/build.png" id="28_52gwm"]
+[ext_resource type="Script" path="res://scripts/ui/news_panel.gd" id="29_wfb2y"]
+[ext_resource type="Script" path="res://scripts/ui/actions.gd" id="30_7gu2d"]
+[ext_resource type="Texture2D" uid="uid://cbuav4kr8pb0r" path="res://assets/UI/cross.png" id="31_powc8"]
+[ext_resource type="Texture2D" uid="uid://c0gkk5qtnu0rk" path="res://assets/UI/plus.png" id="32_2seaf"]
+[ext_resource type="Texture2D" uid="uid://blt7ohd8mkraw" path="res://assets/UI/question-mark.png" id="33_a3y1u"]
+[ext_resource type="Texture2D" uid="uid://be1i6pv2l4yph" path="res://assets/UI/bucket.png" id="34_cmybn"]
+[ext_resource type="Script" path="res://scripts/ui/build_view.gd" id="35_2jexq"]
+[ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace.png" id="36_poevk"]
+[ext_resource type="Texture2D" uid="uid://d0aakepkqews0" path="res://assets/UI/steel.png" id="37_jd6vv"]
+[ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel2.png" id="38_niita"]
+[ext_resource type="Texture2D" uid="uid://b0megwy0cvjx4" path="res://assets/buildings/storage.png" id="39_4cf2i"]
+[ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/lauch_pad.png" id="40_wef8k"]
+[ext_resource type="Script" path="res://scripts/ui/star_map_view.gd" id="41_x74bm"]
+[ext_resource type="Texture2D" uid="uid://ybehxo6wm81y" path="res://assets/UI/planet.png" id="42_sc6qh"]
+[ext_resource type="Texture2D" uid="uid://b245qanhtnva8" path="res://assets/UI/moon_emoji.png" id="43_2rc3n"]
+[ext_resource type="Texture2D" uid="uid://dql4l23uwr37" path="res://assets/UI/star.png" id="44_u60pq"]
+[ext_resource type="Texture2D" uid="uid://dph75fmaq6rxh" path="res://assets/UI/diameter_icon.png" id="45_bwhl4"]
+[ext_resource type="Texture2D" uid="uid://br6hw8qy17o6j" path="res://assets/UI/axial_tilt_icon.png" id="46_rjcer"]
+[ext_resource type="Texture2D" uid="uid://cp42nj8ogl0wx" path="res://assets/UI/distance_icon.png" id="47_2l6ts"]
+[ext_resource type="Script" path="res://scripts/ui/trips_view.gd" id="49_07b3o"]
+[ext_resource type="Script" path="res://scripts/resources.gd" id="51_kdxlg"]
+[ext_resource type="Texture2D" uid="uid://bft7aboj62b25" path="res://assets/UI/energy.png" id="52_1gsyu"]
+[ext_resource type="Texture2D" uid="uid://ctiofqmnu1i5x" path="res://assets/UI/back.png" id="53_rfldv"]
+
+[sub_resource type="Environment" id="Environment_5r7c1"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1utp8"]
+shading_mode = 0
+albedo_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+albedo_texture = ExtResource("11_p0dlg")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ccror"]
+flip_faces = true
+radius = 100.0
+height = 200.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cc51d"]
+radius = 0.605
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uoth4"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8bvxb"]
+radius = 7.149
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_riy26"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_78gs5"]
+material = SubResource("StandardMaterial3D_riy26")
+
+[sub_resource type="Animation" id="Animation_jlisa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sxc4a"]
+resource_name = "pointing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 16), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgkcn"]
+_data = {
+"RESET": SubResource("Animation_jlisa"),
+"pointing": SubResource("Animation_sxc4a")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exflh"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="Main" type="Node"]
+script = ExtResource("1_f70wa")
+metadata/_edit_vertical_guides_ = []
+metadata/_edit_horizontal_guides_ = []
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5r7c1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 10, 40)
+size = 35.0
+script = ExtResource("2_xumog")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 13.7782, 65)
+light_color = Color(1, 1, 0.862745, 1)
+light_energy = 50.0
+omni_range = 332.0
+
+[node name="SolarSystem" type="Node3D" parent="."]
+
+[node name="Mercury" parent="SolarSystem" instance=ExtResource("3_ayca5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -198.966, 0, 0)
+visible = false
+
+[node name="Venus" parent="SolarSystem" instance=ExtResource("4_vvhyn")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -89, 0, 0)
+visible = false
+
+[node name="Earth" parent="SolarSystem" instance=ExtResource("5_hq3wi")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+max_buildings = 5
+
+[node name="Mars" parent="SolarSystem" instance=ExtResource("6_2808a")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 128, 0, 0)
+visible = false
+
+[node name="Jupiter" parent="SolarSystem" instance=ExtResource("7_s46d3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -390.929, -297, 0)
+visible = false
+giant = true
+
+[node name="Saturn" parent="SolarSystem" instance=ExtResource("8_7w08l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 34.4723, -307, 0)
+visible = false
+giant = true
+
+[node name="Uranus" parent="SolarSystem" instance=ExtResource("9_peerq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 414.978, -308.63, 0)
+visible = false
+giant = true
+
+[node name="Neptune" parent="SolarSystem" instance=ExtResource("10_a03cp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 811.164, -336.031, 0)
+visible = false
+giant = true
+
+[node name="StarMap" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_1utp8")
+mesh = SubResource("SphereMesh_ccror")
+script = ExtResource("12_owcun")
+
+[node name="Mercury" type="Area3D" parent="StarMap" groups=["planets"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, 6.91388, -21)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Mercury"]
+shape = SubResource("SphereShape3D_cc51d")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Mercury"]
+billboard = 1
+texture = ExtResource("14_rjqj7")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Mercury"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="Venus" type="Area3D" parent="StarMap" groups=["planets"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.4086, -6, -70.627)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Venus"]
+shape = SubResource("SphereShape3D_cc51d")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Venus"]
+billboard = 1
+texture = ExtResource("14_nu4gj")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Venus"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="Earth" type="Area3D" parent="StarMap" groups=["planets"]]
+visible = false
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Earth"]
+shape = SubResource("SphereShape3D_uoth4")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Earth"]
+billboard = 1
+texture = ExtResource("16_bbryf")
+
+[node name="Moon" type="Area3D" parent="StarMap" groups=["moons"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 71, -43)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Moon"]
+shape = SubResource("SphereShape3D_uoth4")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Moon"]
+billboard = 1
+texture = ExtResource("17_jed64")
+
+[node name="Mars" type="Area3D" parent="StarMap" groups=["planets"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 18.9596, -80)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Mars"]
+shape = SubResource("SphereShape3D_uoth4")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Mars"]
+billboard = 1
+texture = ExtResource("16_bbryf")
+
+[node name="Phobos" type="Area3D" parent="StarMap" groups=["moons"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 12, -82)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Phobos"]
+shape = SubResource("SphereShape3D_uoth4")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Phobos"]
+billboard = 1
+texture = ExtResource("17_jed64")
+
+[node name="Deimos" type="Area3D" parent="StarMap" groups=["moons"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 22, -85)
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Deimos"]
+shape = SubResource("SphereShape3D_uoth4")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Deimos"]
+billboard = 1
+texture = ExtResource("17_jed64")
+
+[node name="Jupiter" type="Area3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
+visible = false
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Jupiter"]
+shape = SubResource("SphereShape3D_8bvxb")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Jupiter"]
+visible = false
+billboard = 1
+texture = ExtResource("18_5u8yt")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Jupiter"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="Saturn" type="Area3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
+visible = false
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Saturn"]
+shape = SubResource("SphereShape3D_8bvxb")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Saturn"]
+visible = false
+billboard = 1
+texture = ExtResource("18_5u8yt")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Saturn"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="Uranus" type="Area3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
+visible = false
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Uranus"]
+shape = SubResource("SphereShape3D_8bvxb")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Uranus"]
+visible = false
+billboard = 1
+texture = ExtResource("18_5u8yt")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Uranus"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="Neptune" type="Area3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
+visible = false
+script = ExtResource("13_52fsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Neptune"]
+shape = SubResource("SphereShape3D_8bvxb")
+
+[node name="Icon" type="Sprite3D" parent="StarMap/Neptune"]
+visible = false
+billboard = 1
+texture = ExtResource("18_5u8yt")
+
+[node name="Locked" type="Sprite3D" parent="StarMap/Neptune"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = ExtResource("15_gpnof")
+
+[node name="ProximaCentauri" parent="StarMap" groups=["stars"] instance=ExtResource("19_p3ky3")]
+transform = Transform3D(0.119144, -7.90545e-09, -0.275327, -0.275327, -1.20349e-08, -0.119144, -7.90545e-09, 0.3, -1.20349e-08, -2.2946, -4.21267, -8.64075)
+visible = false
+
+[node name="North" type="Node3D" parent="StarMap"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap/North"]
+mesh = SubResource("BoxMesh_78gs5")
+skeleton = NodePath("../..")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("20_jvi36")
+
+[node name="Tutorial" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Message" type="Label" parent="UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_top = 32.0
+offset_right = 224.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme = ExtResource("21_678cw")
+text = "Welcome!
+You are playing from here!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Arrow" type="Control" parent="UI/Tutorial"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 144.0
+offset_right = 32.0
+offset_bottom = 208.0
+grow_horizontal = 2
+metadata/_edit_group_ = true
+
+[node name="Icon" type="TextureRect" parent="UI/Tutorial/Arrow"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 63.9999
+texture = ExtResource("22_qssxd")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Tutorial/Arrow/Icon"]
+autoplay = "pointing"
+libraries = {
+"": SubResource("AnimationLibrary_fgkcn")
+}
+
+[node name="Timer" type="Timer" parent="UI/Tutorial"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="MainView" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("23_o252s")
+
+[node name="StarMapButton" type="Button" parent="UI/MainView"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 128.0
+theme = ExtResource("24_vpvyu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/MainView/StarMapButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+offset_right = 40.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Star Map"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/StarMapButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -39.0
+offset_right = 32.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_idfl1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TripsButton" type="Button" parent="UI/MainView"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -136.0
+offset_right = 160.0
+offset_bottom = -40.0
+grow_vertical = 0
+theme = ExtResource("24_vpvyu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/MainView/TripsButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+offset_right = 40.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Trips"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/TripsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_s50qm")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AchievementsButton" type="Button" parent="UI/MainView"]
+visible = false
+layout_mode = 0
+offset_left = 64.0
+offset_top = 144.0
+offset_right = 128.0
+offset_bottom = 208.0
+theme = ExtResource("24_vpvyu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/MainView/AchievementsButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "Achievements"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/AchievementsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_x4iq5")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BuildButton" type="Button" parent="UI/MainView"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("24_vpvyu")
+
+[node name="Label" type="Label" parent="UI/MainView/BuildButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Build"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/BuildButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_52gwm")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="NewsButton" type="Button" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+offset_left = 32.0
+offset_top = 136.0
+offset_right = 88.0
+offset_bottom = 192.0
+text = "News"
+
+[node name="NewsPanel" type="Panel" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("29_wfb2y")
+
+[node name="APODGetter" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+
+[node name="ImageDownloader" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+
+[node name="CloseButton" type="Button" parent="UI/MainView/NewsPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+text = "X"
+
+[node name="Actions" type="HBoxContainer" parent="UI/MainView"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -96.0
+offset_right = 192.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("30_7gu2d")
+
+[node name="RemoveBuildingButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "
+
+Remove"
+
+[node name="Label" type="Label" parent="UI/MainView/Actions/RemoveBuildingButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+offset_right = 40.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Remove"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/RemoveBuildingButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -25.5
+offset_right = 20.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_powc8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AddRocketButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "
+
+Add Rocket"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/AddRocketButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.5
+offset_right = 20.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_2seaf")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="DestinationButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "
+
+Destination"
+
+[node name="Icon" type="TextureRect" parent="UI/MainView/Actions/DestinationButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -25.5
+offset_right = 20.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_a3y1u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LaunchButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+disabled = true
+text = "
+
+Launch"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/LaunchButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -25.5
+offset_right = 20.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_s50qm")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CollectButton" type="Button" parent="UI/MainView/Actions"]
+visible = false
+layout_mode = 2
+text = "
+
+Collect"
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/CollectButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -25.5
+offset_right = 20.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_cmybn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CancelButton" type="Button" parent="UI/MainView"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -120.0
+offset_right = 40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("24_vpvyu")
+
+[node name="Label" type="Label" parent="UI/MainView/CancelButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Cancel"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/MainView/CancelButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_powc8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Sensors" type="Label" parent="UI/MainView"]
+visible = false
+layout_mode = 0
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 208.0
+
+[node name="BuildView" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.392157, 0.392157, 1)
+script = ExtResource("35_2jexq")
+
+[node name="Label" type="Label" parent="UI/BuildView"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme = ExtResource("21_678cw")
+text = "Buildings"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="UI/BuildView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -196.0
+offset_right = 448.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="Panel1" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SteelFurnaceButton" type="Button" parent="UI/BuildView/GridContainer/Panel1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -95.0
+offset_right = 84.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("36_poevk")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = 84.0
+offset_right = 84.5
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Steel Furnace
+
+100 kg"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel1/Label"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -51.0
+offset_top = 48.0
+offset_right = -19.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("37_jd6vv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Panel2" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SolarPanelButton" type="Button" parent="UI/BuildView/GridContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("38_niita")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = 84.0
+offset_right = 84.5
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Solar Panel
+
+50 kg"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel2/Label"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_top = 48.0
+offset_right = -20.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("37_jd6vv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Panel3" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StorageButton" type="Button" parent="UI/BuildView/GridContainer/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("39_4cf2i")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.5
+offset_top = 84.0
+offset_right = 80.5
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Storage
+
+400 kg"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel3/Label"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -49.0
+offset_top = 48.0
+offset_right = -17.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("37_jd6vv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Panel4" type="Panel" parent="UI/BuildView/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PadButton" type="Button" parent="UI/BuildView/GridContainer/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -97.0
+offset_right = 84.0
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("40_wef8k")
+
+[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = 84.0
+offset_right = 84.5
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lauch Pad
+
+300 kg"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel4/Label"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -54.0
+offset_top = 48.0
+offset_right = -22.0
+offset_bottom = 80.0
+grow_horizontal = 0
+texture = ExtResource("37_jd6vv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="StarMapView" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("41_x74bm")
+
+[node name="Actions" type="VBoxContainer" parent="UI/StarMapView"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -132.0
+offset_right = -32.0
+offset_bottom = 132.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PlanetButton" type="Button" parent="UI/StarMapView/Actions"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "
+
+Planets"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/PlanetButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -30.5
+offset_right = 24.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_sc6qh")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MoonButton" type="Button" parent="UI/StarMapView/Actions"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "
+
+Moons"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/MoonButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.5
+offset_right = 20.0
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_2rc3n")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="StarButton" type="Button" parent="UI/StarMapView/Actions"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "
+
+Stars"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/StarButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -25.5
+offset_right = 20.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("44_u60pq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MercuryStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/MercuryStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Mercury"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MercuryStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/MercuryStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="VenusStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/VenusStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Venus"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/VenusStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/VenusStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="EarthStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/EarthStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Earth"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/EarthStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "23.4"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/EarthStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="MoonStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/MoonStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Moon"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MoonStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "3 474.8"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "6.68"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "384 400"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/MoonStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="MarsStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/MarsStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Mars"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MarsStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "6,779"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "25.2"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/MarsStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="PhobosStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/PhobosStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Phobos"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/PhobosStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/PhobosStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="DeimosStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/DeimosStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Deimos"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/DeimosStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/DeimosStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="JupiterStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/JupiterStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Jupiter"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/JupiterStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/JupiterStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="SaturnStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/SaturnStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Saturn"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/SaturnStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/SaturnStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="UranusStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/UranusStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Uranus"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/UranusStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/UranusStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="NeptuneStats" type="Panel" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="Name" type="Label" parent="UI/StarMapView/NeptuneStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 312.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 42
+text = "Neptune"
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/NeptuneStats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 72.0
+offset_right = 312.0
+offset_bottom = 248.0
+
+[node name="Diameter" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Diameter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("45_bwhl4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Diameter"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="Tilt" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Tilt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("46_rjcer")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Axial tilt"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "°"
+
+[node name="Distance" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Distance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("47_2l6ts")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 20
+text = "Distance"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_font_sizes/font_size = 20
+text = "?"
+horizontal_alignment = 2
+
+[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "km"
+
+[node name="DestButton" type="Button" parent="UI/StarMapView/NeptuneStats/Stats"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Choose"
+
+[node name="Sensors" type="Label" parent="UI/StarMapView"]
+visible = false
+layout_mode = 0
+offset_left = 192.0
+offset_top = 80.0
+offset_right = 400.0
+offset_bottom = 208.0
+
+[node name="TripsView" type="ColorRect" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("49_07b3o")
+
+[node name="Label" type="Label" parent="UI/TripsView"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme = ExtResource("21_678cw")
+text = "Trips"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/TripsView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -188.0
+offset_right = 512.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TripsView/ScrollContainer"]
+layout_mode = 2
+
+[node name="NoTripsLabel" type="Label" parent="UI/TripsView"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.5
+offset_top = -24.0
+offset_right = 127.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("21_678cw")
+text = "Launch a rocket to start a trip!"
+horizontal_alignment = 1
+
+[node name="Resources" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_bottom = 128.0
+grow_horizontal = 0
+mouse_filter = 1
+script = ExtResource("51_kdxlg")
+
+[node name="EnergyBar" type="ProgressBar" parent="UI/Resources"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -304.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_exflh")
+fill_mode = 1
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 0
+texture = ExtResource("52_1gsyu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Value" type="Label" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = -8.0
+offset_right = -80.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Unit" type="Label" parent="UI/Resources/EnergyBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_right = -32.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "kWh"
+horizontal_alignment = 1
+
+[node name="SteelBar" type="ProgressBar" parent="UI/Resources"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -304.0
+offset_top = 72.0
+offset_right = -32.0
+offset_bottom = 96.0
+grow_horizontal = 0
+fill_mode = 1
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 32.0
+grow_horizontal = 0
+texture = ExtResource("37_jd6vv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Value" type="Label" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = -8.0
+offset_right = -80.0
+offset_bottom = 32.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Unit" type="Label" parent="UI/Resources/SteelBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_right = -32.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "kg"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = -32.0
+grow_vertical = 0
+theme = ExtResource("24_vpvyu")
+icon = ExtResource("53_rfldv")
+expand_icon = true
+
+[node name="Message" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -200.0
+offset_right = 256.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_earth_building_placed"]
+[connection signal="camera_rotate" from="UI" to="Camera3D" method="_on_ui_camera_rotate"]
+[connection signal="camera_zoom" from="UI" to="Camera3D" method="_on_ui_camera_zoom"]
+[connection signal="pressed" from="UI/MainView/StarMapButton" to="UI" method="_on_star_map_button_pressed"]
+[connection signal="pressed" from="UI/MainView/TripsButton" to="UI" method="_on_trips_button_pressed"]
+[connection signal="pressed" from="UI/MainView/AchievementsButton" to="UI" method="_on_star_map_button_pressed"]
+[connection signal="pressed" from="UI/MainView/BuildButton" to="UI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="UI/MainView/NewsButton" to="UI/MainView/NewsPanel" method="_on_news_button_pressed"]
+[connection signal="request_completed" from="UI/MainView/NewsPanel/APODGetter" to="UI/MainView/NewsPanel" method="_on_apod_getter_request_completed"]
+[connection signal="request_completed" from="UI/MainView/NewsPanel/ImageDownloader" to="UI/MainView/NewsPanel" method="_on_image_downloader_request_completed"]
+[connection signal="pressed" from="UI/MainView/NewsPanel/CloseButton" to="UI/MainView/NewsPanel" method="_on_close_button_pressed"]
+[connection signal="max_resources_reached" from="UI/MainView/Actions" to="UI" method="_on_actions_max_resources_reached"]
+[connection signal="pressed" from="UI/MainView/Actions/RemoveBuildingButton" to="UI/MainView/Actions" method="_on_remove_building_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/AddRocketButton" to="UI/MainView/Actions" method="_on_add_rocket_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/DestinationButton" to="UI/MainView/Actions" method="_on_destination_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/LaunchButton" to="UI/MainView/Actions" method="_on_launch_button_pressed"]
+[connection signal="pressed" from="UI/MainView/Actions/CollectButton" to="UI/MainView/Actions" method="_on_collect_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="UI" method="_on_cancel_button_pressed"]
+[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Earth" method="_on_build_view_building_selected"]
+[connection signal="building_selected" from="UI/BuildView" to="UI" method="_on_build_view_building_selected"]
+[connection signal="max_buildings_reached" from="UI/BuildView" to="UI" method="_on_build_view_max_buildings_reached"]
+[connection signal="not_enough_resources" from="UI/BuildView" to="UI" method="_on_build_view_not_enough_resources"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel1/SteelFurnaceButton" to="UI/BuildView" method="_on_steel_furnace_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel2/SolarPanelButton" to="UI/BuildView" method="_on_solar_panel_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel3/StorageButton" to="UI/BuildView" method="_on_storage_button_pressed"]
+[connection signal="pressed" from="UI/BuildView/GridContainer/Panel4/PadButton" to="UI/BuildView" method="_on_pad_button_pressed"]
+[connection signal="toggled" from="UI/StarMapView/Actions/PlanetButton" to="StarMap" method="_on_planet_button_toggled"]
+[connection signal="toggled" from="UI/StarMapView/Actions/PlanetButton" to="UI/StarMapView" method="_on_planet_button_toggled"]
+[connection signal="toggled" from="UI/StarMapView/Actions/MoonButton" to="StarMap" method="_on_moon_button_toggled"]
+[connection signal="toggled" from="UI/StarMapView/Actions/MoonButton" to="UI/StarMapView" method="_on_moon_button_toggled"]
+[connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="StarMap" method="_on_star_button_toggled"]
+[connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="UI/StarMapView" method="_on_star_button_toggled"]
+[connection signal="pressed" from="UI/StarMapView/MercuryStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/VenusStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/EarthStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/MoonStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/MarsStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/PhobosStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/DeimosStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/JupiterStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/SaturnStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/UranusStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/NeptuneStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/BackButton" to="UI" method="_on_back_button_pressed"]
