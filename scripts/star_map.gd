@@ -3,6 +3,24 @@ extends MeshInstance3D
 
 var selected_star: Area3D = null
 
+#var immediate_mesh
+
+
+#func _ready():
+#	immediate_mesh = ImmediateMesh.new()
+#	var material = ORMMaterial3D.new()
+#	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+#	immediate_mesh.surface_add_vertex($"../Camera3D".position + Vector3.DOWN * 2)
+#	immediate_mesh.surface_add_vertex(Input.get_magnetometer())
+#	immediate_mesh.surface_end()
+#	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+#	material.albedo_color = Color.GREEN
+
+
+func _process(delta):
+#	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
+	$North.position = Input.get_magnetometer().normalized() * 3
+
 
 func select_star(star):
 	if !selected_star:

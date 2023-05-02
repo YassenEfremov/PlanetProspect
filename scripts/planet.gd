@@ -90,7 +90,6 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 			building_to_place = null
 			$UI/BuildingsLabel/Current.text = str(buildings.size())
 			$"../../UI/Message".text = ""
-			$"../../UI/Message".hide()
 			$"../../UI/MainView/CancelButton".hide()
 
 

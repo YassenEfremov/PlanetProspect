@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmgedt4g6clm1"]
+[gd_scene load_steps=19 format=3 uid="uid://bw2rd7hb4w6n3"]
 
-[ext_resource type="Script" path="res://scripts/building.gd" id="1_bryae"]
+[ext_resource type="Script" path="res://scripts/rocket.gd" id="1_6544j"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_r0ghb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r1qci"]
@@ -175,8 +175,7 @@ _surfaces = [{
 }]
 
 [node name="Area3D" type="Area3D"]
-script = ExtResource("1_bryae")
-steel_cost = 300
+script = ExtResource("1_6544j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_r1qci")

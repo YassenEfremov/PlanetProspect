@@ -1,6 +1,8 @@
 extends Area3D
 
 
+@export var locked: bool
+
 var last_press_pos: Vector2
 
 

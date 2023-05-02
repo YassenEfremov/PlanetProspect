@@ -14,7 +14,8 @@ func _ready():
 
 
 func _process(delta):
-#	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
+	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
+	$StarMapView/Sensors.text = "camera: %s" % str($"../Camera3D".rotation_degrees)
 	pass
 
 
@@ -24,6 +25,7 @@ func _unhandled_input(event):
 			Global.touches[event.index] = event
 		else:
 			Global.touches.erase(event.index)
+#			await $"../SolarSystem/Earth".select_building()
 
 	if event is InputEventScreenDrag:
 		Global.touches[event.index] = event
@@ -79,7 +81,7 @@ func _on_star_map_button_pressed():
 	star_map.position = $"../Camera3D".position
 	
 	$"../SolarSystem".hide()
-	$"../OmniLight3D".hide()
+#	$"../OmniLight3D".hide()
 	$MainView.hide()
 	$Resources.hide()
 	selected_planet.get_node("UI/BuildingsLabel").hide()
@@ -100,13 +102,13 @@ func _on_build_button_pressed():
 	$BackButton.show()
 
 
-func _on_travel_button_pressed():
-	current_view = $TravelView
+func _on_trips_button_pressed():
+	current_view = $TripsView
 	$"../Camera3D".save_camera = $"../Camera3D"
 	
 	$MainView.hide()
 	
-	$TravelView.show()
+	$TripsView.show()
 	$BackButton.show()
 
 
@@ -148,6 +150,7 @@ func _on_back_button_pressed():
 	$"../Camera3D".transform = $"../Camera3D".save_camera.transform
 	$"../Camera3D".fov = $"../Camera3D".save_camera.fov
 #	$"../StarMap".select_star($"../StarMap".selected_star)
+	$StarMapView.choosing_destination = false
 	
 	$"../SolarSystem".show()
 	$"../OmniLight3D".show()
@@ -156,3 +159,4 @@ func _on_back_button_pressed():
 	$MainView.show()
 	$Resources.show()
 	selected_planet.get_node("UI/BuildingsLabel").show()
+	$Message.text = ""
