@@ -1,11 +1,8 @@
-extends Control
+extends CanvasLayer
 
 
 var selected_planet: Planet = null
 var current_view
-
-signal camera_rotate(delta: InputEventScreenDrag)
-signal camera_zoom(delta1: InputEventScreenDrag, delta2: InputEventScreenDrag)
 
 
 func _ready():
@@ -15,24 +12,8 @@ func _ready():
 
 func _process(delta):
 	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
-	$StarMapView/Sensors.text = "camera: %s" % str($"../Camera3D".rotation_degrees)
+#	$StarMapView/Sensors.text = "camera: %s" % str($"../Camera3D".rotation_degrees)
 	pass
-
-
-func _unhandled_input(event):
-	if event is InputEventScreenTouch:
-		if event.pressed:
-			Global.touches[event.index] = event
-		else:
-			Global.touches.erase(event.index)
-#			await $"../SolarSystem/Earth".select_building()
-
-	if event is InputEventScreenDrag:
-		Global.touches[event.index] = event
-		if Global.touches.size() == 2:
-			camera_zoom.emit(Global.touches[0], Global.touches[1])
-		else:
-			camera_rotate.emit(event)
 
 
 func select_planet(planet):
@@ -76,25 +57,20 @@ func select_planet(planet):
 
 func _on_star_map_button_pressed():
 	current_view = $StarMapView
-	$"../Camera3D".save_camera = $"../Camera3D".duplicate()
-	var star_map = $"../StarMap"
-	star_map.position = $"../Camera3D".position
-	
 	$"../SolarSystem".hide()
 #	$"../OmniLight3D".hide()
 	$MainView.hide()
 	$Resources.hide()
 	selected_planet.get_node("UI/BuildingsLabel").hide()
-	
-	$"../Camera3D".star_view = true
-	star_map.show()
+
+	$"../StarMap/Camera3D".make_current()
+	$"../StarMap".show()
 	$StarMapView.show()
 	$BackButton.show()
 
 
 func _on_build_button_pressed():
 	current_view = $BuildView
-	$"../Camera3D".save_camera = $"../Camera3D"
 	
 	$MainView.hide()
 	
@@ -103,12 +79,11 @@ func _on_build_button_pressed():
 
 
 func _on_trips_button_pressed():
-	current_view = $TripsView
-	$"../Camera3D".save_camera = $"../Camera3D"
+	current_view = $TripView
 	
 	$MainView.hide()
 	
-	$TripsView.show()
+	$TripView.show()
 	$BackButton.show()
 
 
@@ -146,10 +121,7 @@ func _on_back_button_pressed():
 	current_view.hide()
 	current_view = $MainView
 	$"../StarMap".hide()
-	$"../Camera3D".star_view = false
-	$"../Camera3D".transform = $"../Camera3D".save_camera.transform
-	$"../Camera3D".fov = $"../Camera3D".save_camera.fov
-#	$"../StarMap".select_star($"../StarMap".selected_star)
+	selected_planet.get_node("Camera3D").make_current()
 	$StarMapView.choosing_destination = false
 	
 	$"../SolarSystem".show()

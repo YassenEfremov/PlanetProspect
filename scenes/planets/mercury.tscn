@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlhf8cacbhqjd"]
+[gd_scene load_steps=12 format=3 uid="uid://dlhf8cacbhqjd"]
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_rmjmj"]
 [ext_resource type="Texture2D" uid="uid://cdcw21b7wvad2" path="res://assets/planets/mercury.png" id="2_84c0p"]
 [ext_resource type="Material" uid="uid://b714gbb3nj7f8" path="res://assets/planets/blank.tres" id="3_lobwi"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_qredm"]
-[ext_resource type="PackedScene" path="res://scenes/planet_panel.tscn" id="4_q8ax4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
 radius = 2.44
@@ -75,26 +74,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="InfoButton" type="Button" parent="UI"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -112.0
-offset_right = 40.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("3_qredm")
-text = "Info"
-
-[node name="PlanetPanel" parent="UI" instance=ExtResource("4_q8ax4")]
-visible = false
-layout_mode = 1
-
 [node name="BuildingsLabel" type="Label" parent="UI"]
 layout_mode = 1
 anchors_preset = 7
@@ -160,4 +139,3 @@ text = "-"
 horizontal_alignment = 1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="pressed" from="UI/InfoButton" to="." method="_on_info_pressed"]

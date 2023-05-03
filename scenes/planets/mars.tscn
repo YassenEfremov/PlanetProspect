@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnve5tu3wp0ix"]
+[gd_scene load_steps=12 format=3 uid="uid://bnve5tu3wp0ix"]
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_8l6jc"]
 [ext_resource type="Texture2D" uid="uid://bcghbtvguvpvs" path="res://assets/planets/mars.png" id="2_42fur"]
+[ext_resource type="Script" path="res://scripts/camera_main.gd" id="2_shb0p"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_4y5ym"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
@@ -45,12 +46,17 @@ height = 8.0
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_8l6jc")
 rotation_speed = 0.086
+max_buildings = 8
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+script = ExtResource("2_shb0p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_d2ddj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.904827, -0.425779, 0, 0.425779, 0.904827, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.425779, 0.904827, 0, 0.904827, -0.425779, -1, -1.86114e-08, -3.95512e-08, 0, 0, 0)
 mesh = SubResource("SphereMesh_07p8r")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -58,34 +64,21 @@ visible = false
 mesh = SubResource("ArrayMesh_k6anc")
 
 [node name="Axis" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.904827, -0.425779, 0, 0.425779, 0.904827, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.425779, 0.904827, 0, 0.904827, -0.425779, -1, -1.86114e-08, -3.95512e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("CylinderMesh_2kb3t")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme = ExtResource("3_4y5ym")
 
 [node name="BuildingsLabel" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -128.0
-offset_top = -136.0
 offset_right = 128.0
-offset_bottom = -72.0
+offset_bottom = 64.0
 grow_horizontal = 2
-grow_vertical = 0
 theme = ExtResource("3_4y5ym")
 text = "Buildings:"
 vertical_alignment = 1

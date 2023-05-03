@@ -25,7 +25,7 @@ func _on_destination_button_pressed():
 
 
 func _on_launch_button_pressed():
-	$"/root/Main/UI/TripsView".start_trip()
+	$"/root/Main/UI/TripView".start_trip()
 	$"../../".selected_planet.selected_building.launch_rocket()
 	$"/root/Main/UI/MainView/Actions/AddRocketButton".disabled = false
 	$"/root/Main/UI/MainView/Actions/DestinationButton".disabled = false

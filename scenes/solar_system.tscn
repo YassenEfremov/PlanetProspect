@@ -1,7 +1,6 @@
 [gd_scene load_steps=65 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
-[ext_resource type="Script" path="res://scripts/camera.gd" id="2_xumog"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
 [ext_resource type="PackedScene" uid="uid://d2g774msbe6bl" path="res://scenes/planets/venus.tscn" id="4_vvhyn"]
 [ext_resource type="PackedScene" uid="uid://d0g2x5bwqslji" path="res://scenes/planets/earth.tscn" id="5_hq3wi"]
@@ -12,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cwtgyew201s7r" path="res://scenes/planets/neptune.tscn" id="10_a03cp"]
 [ext_resource type="Texture2D" uid="uid://du0rtkir43wnh" path="res://assets/constellation_figures_4k_print_flipped.jpg" id="11_p0dlg"]
 [ext_resource type="Script" path="res://scripts/star_map.gd" id="12_owcun"]
+[ext_resource type="Script" path="res://scripts/camera_stars.gd" id="12_q6aps"]
 [ext_resource type="Script" path="res://scripts/map_icon.gd" id="13_52fsq"]
 [ext_resource type="Texture2D" uid="uid://cds3hnshpv7yk" path="res://assets/UI/venus.png" id="14_nu4gj"]
 [ext_resource type="Texture2D" uid="uid://cka20tqw6ihsp" path="res://assets/UI/mercury.png" id="14_rjqj7"]
@@ -56,7 +56,7 @@
 [sub_resource type="Environment" id="Environment_5r7c1"]
 background_mode = 1
 ambient_light_source = 2
-ambient_light_color = Color(0.117647, 0.117647, 0.117647, 1)
+ambient_light_color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1utp8"]
 shading_mode = 0
@@ -135,11 +135,6 @@ metadata/_edit_horizontal_guides_ = []
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5r7c1")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 10, 40)
-size = 35.0
-script = ExtResource("2_xumog")
-
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 13.7782, 65)
 light_color = Color(1, 1, 0.862745, 1)
@@ -149,46 +144,48 @@ omni_range = 332.0
 [node name="SolarSystem" type="Node3D" parent="."]
 
 [node name="Mercury" parent="SolarSystem" instance=ExtResource("3_ayca5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -198.966, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 0)
 visible = false
 
 [node name="Venus" parent="SolarSystem" instance=ExtResource("4_vvhyn")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -89, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
 visible = false
 
 [node name="Earth" parent="SolarSystem" instance=ExtResource("5_hq3wi")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-max_buildings = 5
 
 [node name="Mars" parent="SolarSystem" instance=ExtResource("6_2808a")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 128, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 0)
 visible = false
 
 [node name="Jupiter" parent="SolarSystem" instance=ExtResource("7_s46d3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -390.929, -297, 0)
 visible = false
-giant = true
+script = null
 
 [node name="Saturn" parent="SolarSystem" instance=ExtResource("8_7w08l")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 34.4723, -307, 0)
 visible = false
-giant = true
+script = null
 
 [node name="Uranus" parent="SolarSystem" instance=ExtResource("9_peerq")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 414.978, -308.63, 0)
 visible = false
-giant = true
+script = null
 
 [node name="Neptune" parent="SolarSystem" instance=ExtResource("10_a03cp")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 811.164, -336.031, 0)
 visible = false
-giant = true
+script = null
 
 [node name="StarMap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 visible = false
 material_override = SubResource("StandardMaterial3D_1utp8")
 mesh = SubResource("SphereMesh_ccror")
 script = ExtResource("12_owcun")
+
+[node name="Camera3D" type="Camera3D" parent="StarMap"]
+script = ExtResource("12_q6aps")
 
 [node name="Mercury" type="Area3D" parent="StarMap" groups=["planets"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, 6.91388, -21)
@@ -362,19 +359,12 @@ visible = false
 mesh = SubResource("BoxMesh_78gs5")
 skeleton = NodePath("../..")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
+[node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("20_jvi36")
 
 [node name="Tutorial" type="Control" parent="UI"]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -429,7 +419,7 @@ one_shot = true
 autostart = true
 
 [node name="MainView" type="Control" parent="UI"]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -875,7 +865,6 @@ offset_bottom = 208.0
 
 [node name="BuildView" type="ColorRect" parent="UI"]
 visible = false
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1123,7 +1112,7 @@ stretch_mode = 4
 
 [node name="StarMapView" type="Control" parent="UI"]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2908,9 +2897,8 @@ offset_top = 80.0
 offset_right = 400.0
 offset_bottom = 208.0
 
-[node name="TripsView" type="ColorRect" parent="UI"]
+[node name="TripView" type="ColorRect" parent="UI"]
 visible = false
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2919,7 +2907,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("49_07b3o")
 
-[node name="Label" type="Label" parent="UI/TripsView"]
+[node name="Label" type="Label" parent="UI/TripView"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2933,7 +2921,7 @@ theme = ExtResource("21_678cw")
 text = "Trips"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TripsView"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/TripView"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2948,10 +2936,10 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/TripsView/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TripView/ScrollContainer"]
 layout_mode = 2
 
-[node name="NoTripsLabel" type="Label" parent="UI/TripsView"]
+[node name="NoTripsLabel" type="Label" parent="UI/TripView"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2969,7 +2957,7 @@ text = "Launch a rocket to start a trip!"
 horizontal_alignment = 1
 
 [node name="Resources" type="Control" parent="UI"]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -3088,7 +3076,6 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="UI"]
 visible = false
-layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -3102,7 +3089,6 @@ icon = ExtResource("53_rfldv")
 expand_icon = true
 
 [node name="Message" type="Label" parent="UI"]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -3117,12 +3103,11 @@ grow_vertical = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_earth_building_placed"]
-[connection signal="camera_rotate" from="UI" to="Camera3D" method="_on_ui_camera_rotate"]
-[connection signal="camera_zoom" from="UI" to="Camera3D" method="_on_ui_camera_zoom"]
+[connection signal="building_placed" from="SolarSystem/Venus" to="UI/Resources" method="_on_building_placed"]
+[connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_building_placed"]
+[connection signal="building_placed" from="SolarSystem/Mars" to="UI/Resources" method="_on_building_placed"]
 [connection signal="pressed" from="UI/MainView/StarMapButton" to="UI" method="_on_star_map_button_pressed"]
 [connection signal="pressed" from="UI/MainView/TripsButton" to="UI" method="_on_trips_button_pressed"]
-[connection signal="pressed" from="UI/MainView/AchievementsButton" to="UI" method="_on_star_map_button_pressed"]
 [connection signal="pressed" from="UI/MainView/BuildButton" to="UI" method="_on_build_button_pressed"]
 [connection signal="pressed" from="UI/MainView/NewsButton" to="UI/MainView/NewsPanel" method="_on_news_button_pressed"]
 [connection signal="request_completed" from="UI/MainView/NewsPanel/APODGetter" to="UI/MainView/NewsPanel" method="_on_apod_getter_request_completed"]
@@ -3134,9 +3119,13 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/MainView/Actions/DestinationButton" to="UI/MainView/Actions" method="_on_destination_button_pressed"]
 [connection signal="pressed" from="UI/MainView/Actions/LaunchButton" to="UI/MainView/Actions" method="_on_launch_button_pressed"]
 [connection signal="pressed" from="UI/MainView/Actions/CollectButton" to="UI/MainView/Actions" method="_on_collect_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Venus" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Mars" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="UI/MainView/CancelButton" to="UI" method="_on_cancel_button_pressed"]
+[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Venus" method="_on_build_view_building_selected"]
 [connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Earth" method="_on_build_view_building_selected"]
+[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Mars" method="_on_build_view_building_selected"]
 [connection signal="building_selected" from="UI/BuildView" to="UI" method="_on_build_view_building_selected"]
 [connection signal="max_buildings_reached" from="UI/BuildView" to="UI" method="_on_build_view_max_buildings_reached"]
 [connection signal="not_enough_resources" from="UI/BuildView" to="UI" method="_on_build_view_not_enough_resources"]

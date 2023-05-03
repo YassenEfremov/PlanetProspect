@@ -10,7 +10,7 @@ func _ready():
 
 func _process(delta):
 	if launched:
-		position += basis.y * delta
+		position += basis.y * delta * 2
 
 
 func launch():

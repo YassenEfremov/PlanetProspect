@@ -3,7 +3,6 @@ class_name Planet extends Area3D
 
 @export var rotation_speed: float
 @export var max_buildings: int
-@export var giant: bool
 
 var axis
 var last_press_pos: Vector2
@@ -15,14 +14,13 @@ signal building_placed(building: Building)
 
 
 func _ready():
-	axis = Vector3(0, cos($Axis.rotation.x), sin($Axis.rotation.x))
-	if not giant:
+	axis = Vector3(sin($Axis.rotation.x), cos($Axis.rotation.x), 0)
 #		await $UI/BuildingsLabel/Current.tree_entered
 #		await $UI/BuildingsLabel/Max.tree_entered
-		while not $UI/BuildingsLabel/Current or not $UI/BuildingsLabel/Max:
-			pass # Wait for child labels to load
-		$UI/BuildingsLabel/Current.text = str(buildings.size())
-		$UI/BuildingsLabel/Max.text = str(max_buildings)
+	while not $UI/BuildingsLabel/Current or not $UI/BuildingsLabel/Max:
+		pass # Wait for child labels to load
+	$UI/BuildingsLabel/Current.text = str(buildings.size())
+	$UI/BuildingsLabel/Max.text = str(max_buildings)
 
 
 func _process(delta):
@@ -82,8 +80,8 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 			var building = building_to_place.instantiate()
 			$MeshInstance3D.add_child(building) # This comes before setting the position and rotation!
 #			building.scale = Vector3(0.5, 0.5, 0.5)
-			building.look_at_from_position(position, normal)
-			building.rotate_object_local(Vector3.RIGHT, PI/2)
+			building.look_at_from_position(position, self.position + normal)
+			building.rotate_object_local(basis.x, PI/2)
 
 			buildings.push_back(building)
 			building_placed.emit(building)
@@ -104,5 +102,7 @@ func _on_cancel_button_pressed():
 func remove_building():
 	$MeshInstance3D.remove_child(selected_building)
 	buildings.erase(selected_building)
+	for button in selected_building.action_buttons:
+		button.disabled = false
 	$UI/BuildingsLabel/Current.text = str(buildings.size())
 	select_building(selected_building)

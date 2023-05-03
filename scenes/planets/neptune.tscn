@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwtgyew201s7r"]
+[gd_scene load_steps=11 format=3 uid="uid://cwtgyew201s7r"]
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_gkdxu"]
 [ext_resource type="Texture2D" uid="uid://cudvyfqqk1nms" path="res://assets/planets/neptune.png" id="2_v5c4j"]
-[ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_3ir7h"]
 [ext_resource type="Material" uid="uid://b714gbb3nj7f8" path="res://assets/planets/blank.tres" id="3_u41ja"]
-[ext_resource type="PackedScene" uid="uid://coqb8mr06ssfq" path="res://scenes/planet_panel.tscn" id="4_gthne"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
 radius = 49.528
@@ -77,25 +75,4 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="InfoButton" type="Button" parent="Actions"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -112.0
-offset_right = 40.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("3_3ir7h")
-text = "Info"
-
-[node name="PlanetPanel" parent="Actions" instance=ExtResource("4_gthne")]
-visible = false
-layout_mode = 1
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="pressed" from="Actions/InfoButton" to="." method="_on_info_pressed"]

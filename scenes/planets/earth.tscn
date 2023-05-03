@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://d0g2x5bwqslji"]
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_8l6jc"]
+[ext_resource type="Script" path="res://scripts/camera_main.gd" id="2_5dvrh"]
 [ext_resource type="Texture2D" uid="uid://buvidrl73j5f5" path="res://assets/planets/earth.png" id="2_5rp0o"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_wew03"]
-[ext_resource type="PackedScene" path="res://scenes/planet_panel.tscn" id="4_f4wit"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
 radius = 6.371
@@ -46,12 +46,18 @@ height = 16.0
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_8l6jc")
 rotation_speed = 0.157
+max_buildings = 10
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+current = true
+script = ExtResource("2_5dvrh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_d2ddj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.917755, -0.397148, 0, 0.397148, 0.917755, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 mesh = SubResource("SphereMesh_07p8r")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -59,42 +65,13 @@ visible = false
 mesh = SubResource("ArrayMesh_s4jgm")
 
 [node name="Axis" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.917755, -0.397148, 0, 0.397148, 0.917755, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("CylinderMesh_2kb3t")
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="InfoButton" type="Button" parent="UI"]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -112.0
-offset_right = 40.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("3_wew03")
-text = "Info"
-
-[node name="PlanetPanel" parent="UI" instance=ExtResource("4_f4wit")]
-visible = false
-layout_mode = 1
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="BuildingsLabel" type="Label" parent="UI"]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -154,4 +131,3 @@ text = "-"
 horizontal_alignment = 1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="pressed" from="UI/InfoButton" to="." method="_on_info_pressed"]
