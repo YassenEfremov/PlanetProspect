@@ -91,10 +91,6 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 			$"../../UI/MainView/CancelButton".hide()
 
 
-func _on_build_view_building_selected(building_name: String):
-	building_to_place = load("res://scenes/buildings/%s.tscn" % building_name)
-
-
 func _on_cancel_button_pressed():
 	building_to_place = null
 

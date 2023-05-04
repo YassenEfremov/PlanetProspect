@@ -58,7 +58,7 @@ script = ExtResource("2_eylmw")
 shape = SubResource("SphereShape3D_d2ddj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.045363, 0.998971, 0, -0.998971, -0.045363, 1, -1.98288e-09, 4.36664e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.045363, -0.998971, 0, -0.998971, -0.045363, -1, -1.98288e-09, 4.36664e-08, 0, 0, 0)
 mesh = SubResource("SphereMesh_07p8r")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -66,7 +66,7 @@ visible = false
 mesh = SubResource("ArrayMesh_0yast")
 
 [node name="Axis" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.045363, 0.998971, 0, -0.998971, -0.045363, 1, -1.98288e-09, 4.36664e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0.045363, -0.998971, 0, -0.998971, -0.045363, -1, -1.98288e-09, 4.36664e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("CylinderMesh_2kb3t")
 

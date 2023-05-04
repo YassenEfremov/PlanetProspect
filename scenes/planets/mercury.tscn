@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_rmjmj"]
 [ext_resource type="Texture2D" uid="uid://cdcw21b7wvad2" path="res://assets/planets/mercury.png" id="2_84c0p"]
-[ext_resource type="Material" uid="uid://b714gbb3nj7f8" path="res://assets/planets/blank.tres" id="3_lobwi"]
+[ext_resource type="Script" path="res://scripts/camera_main.gd" id="2_mk4i2"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_qredm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d2ddj"]
@@ -48,45 +48,39 @@ height = 6.0
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_rmjmj")
 rotation_speed = 0.001
+max_buildings = 5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+script = ExtResource("2_mk4i2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_d2ddj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("SphereMesh_07p8r")
-surface_material_override/0 = ExtResource("3_lobwi")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
 visible = false
 mesh = SubResource("ArrayMesh_n1kbf")
 
 [node name="Axis" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("CylinderMesh_2kb3t")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
 
 [node name="BuildingsLabel" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = -128.0
-offset_top = -136.0
 offset_right = 128.0
-offset_bottom = -72.0
+offset_bottom = 64.0
 grow_horizontal = 2
-grow_vertical = 0
 theme = ExtResource("3_qredm")
 text = "Buildings:"
 vertical_alignment = 1

@@ -7,9 +7,7 @@ var focused_object
 
 
 func _ready():
-#	while not focused_object:
-	await $"../../../UI".ready
-	focused_object = $"../../../UI".selected_planet
+	focused_object = $"../CollisionShape3D"
 
 
 func _unhandled_input(event):
@@ -48,9 +46,7 @@ func camera_rotate(drag: InputEventScreenDrag):
 
 
 func camera_zoom(drag1: InputEventScreenDrag, drag2: InputEventScreenDrag):
-	MAX_ZOOM = 1000
-	if MIN_ZOOM != focused_object.get_node("MeshInstance3D").get_mesh().radius * 2:
-		MIN_ZOOM = focused_object.get_node("MeshInstance3D").get_mesh().radius * 2
+	MIN_ZOOM = focused_object.get_shape().radius * 2
 	
 	# Calculate zoom
 	var zoom = drag1.position.distance_to(drag2.position) / (drag1.position - drag1.relative).distance_to(drag2.position - drag2.relative)

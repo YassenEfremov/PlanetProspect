@@ -87,7 +87,7 @@ func _on_trips_button_pressed():
 	$BackButton.show()
 
 
-func _on_build_view_building_selected(building_name):
+func _on_build_view_building_selected():
 	_on_back_button_pressed()
 	$Message.text = "Click somewhere on the planet to place the building"
 	$MainView/CancelButton.show()

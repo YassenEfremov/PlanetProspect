@@ -1,7 +1,7 @@
 extends ColorRect
 
 
-signal building_selected(building_name: String)
+signal building_selected
 signal not_enough_resources
 signal max_buildings_reached
 
@@ -14,7 +14,8 @@ func _on_steel_furnace_button_pressed():
 		max_buildings_reached.emit()
 
 	else:
-		building_selected.emit("steel_furnace")
+		$"../".selected_planet.building_to_place = load("res://scenes/buildings/steel_furnace.tscn")
+		building_selected.emit()
 
 
 func _on_solar_panel_button_pressed():
@@ -25,7 +26,8 @@ func _on_solar_panel_button_pressed():
 		max_buildings_reached.emit()
 
 	else:
-		building_selected.emit("solar_panel")
+		$"../".selected_planet.building_to_place = load("res://scenes/buildings/solar_panel.tscn")
+		building_selected.emit()
 
 
 func _on_storage_button_pressed():
@@ -36,7 +38,8 @@ func _on_storage_button_pressed():
 		max_buildings_reached.emit()
 
 	else:
-		building_selected.emit("storage")
+		$"../".selected_planet.building_to_place = load("res://scenes/buildings/storage.tscn")
+		building_selected.emit()
 
 
 func _on_pad_button_pressed():
@@ -47,4 +50,5 @@ func _on_pad_button_pressed():
 		max_buildings_reached.emit()
 
 	else:
-		building_selected.emit("pad")
+		$"../".selected_planet.building_to_place = load("res://scenes/buildings/pad.tscn")
+		building_selected.emit()

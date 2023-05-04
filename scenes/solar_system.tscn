@@ -136,7 +136,6 @@ metadata/_edit_horizontal_guides_ = []
 environment = SubResource("Environment_5r7c1")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 13.7782, 65)
 light_color = Color(1, 1, 0.862745, 1)
 light_energy = 50.0
 omni_range = 332.0
@@ -144,17 +143,18 @@ omni_range = 332.0
 [node name="SolarSystem" type="Node3D" parent="."]
 
 [node name="Mercury" parent="SolarSystem" instance=ExtResource("3_ayca5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -200, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
 visible = false
 
 [node name="Venus" parent="SolarSystem" instance=ExtResource("4_vvhyn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -16)
 visible = false
 
 [node name="Earth" parent="SolarSystem" instance=ExtResource("5_hq3wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, -16)
 
 [node name="Mars" parent="SolarSystem" instance=ExtResource("6_2808a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, -16)
 visible = false
 
 [node name="Jupiter" parent="SolarSystem" instance=ExtResource("7_s46d3")]
@@ -3103,6 +3103,7 @@ grow_vertical = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="building_placed" from="SolarSystem/Mercury" to="UI/Resources" method="_on_building_placed"]
 [connection signal="building_placed" from="SolarSystem/Venus" to="UI/Resources" method="_on_building_placed"]
 [connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_building_placed"]
 [connection signal="building_placed" from="SolarSystem/Mars" to="UI/Resources" method="_on_building_placed"]
@@ -3123,9 +3124,6 @@ vertical_alignment = 1
 [connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Mars" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="UI/MainView/CancelButton" to="UI" method="_on_cancel_button_pressed"]
-[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Venus" method="_on_build_view_building_selected"]
-[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Earth" method="_on_build_view_building_selected"]
-[connection signal="building_selected" from="UI/BuildView" to="SolarSystem/Mars" method="_on_build_view_building_selected"]
 [connection signal="building_selected" from="UI/BuildView" to="UI" method="_on_build_view_building_selected"]
 [connection signal="max_buildings_reached" from="UI/BuildView" to="UI" method="_on_build_view_max_buildings_reached"]
 [connection signal="not_enough_resources" from="UI/BuildView" to="UI" method="_on_build_view_not_enough_resources"]
