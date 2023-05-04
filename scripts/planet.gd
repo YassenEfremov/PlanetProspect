@@ -28,19 +28,36 @@ func _process(delta):
 
 
 func select_building(building):
+#	var actions = building.get_node("Actions")
+#	if actions.get_parent():
+#		actions.get_parent().remove_child(actions)
+#	get_node("/root/Main/UI/MainView").add_child(actions)
+		
+	selected_building = building
+	building.get_node("MeshInstance3D/Outline").visible = true
+	for button in selected_building.action_buttons:
+		button.show()
+#	actions.show()
+#	get_node("/root/Main/UI/MainView/Actions").show()
+
+
+func deselect_building(building):
+#	var actions = get_node("/root/Main/UI/MainView/Actions")
+#	if actions.get_parent():
+#		actions.get_parent().remove_child(actions)
+#	building.add_child(actions)
+			
+	for button in selected_building.action_buttons:
+		button.hide()
+	building.get_node("MeshInstance3D/Outline").visible = false
+	selected_building = null
+#	actions.hide()
+
+
+func click_building(building):
 	if !selected_building:
 		# Newly selected building
-#		var actions = building.get_node("Actions")
-#		if actions.get_parent():
-#			actions.get_parent().remove_child(actions)
-#		get_node("/root/Main/UI/MainView").add_child(actions)
-		
-		selected_building = building
-		building.get_node("MeshInstance3D/Outline").visible = true
-		for button in selected_building.action_buttons:
-			button.show()
-#		actions.show()
-#		get_node("/root/Main/UI/MainView/Actions").show()
+		select_building(building)
 	
 	else:
 		if building != selected_building:
@@ -57,16 +74,7 @@ func select_building(building):
 		
 		else:
 			# Deselect current building
-#			var actions = get_node("/root/Main/UI/MainView/Actions")
-#			if actions.get_parent():
-#				actions.get_parent().remove_child(actions)
-#			building.add_child(actions)
-			
-			for button in selected_building.action_buttons:
-				button.hide()
-			building.get_node("MeshInstance3D/Outline").visible = false
-			selected_building = null
-#			actions.hide()
+			deselect_building(building)
 
 
 func _on_input_event(camera, event, position, normal, shape_idx):
@@ -79,7 +87,7 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 
 			var building = building_to_place.instantiate()
 			$MeshInstance3D.add_child(building) # This comes before setting the position and rotation!
-#			building.scale = Vector3(0.5, 0.5, 0.5)
+			building.scale = Vector3(0.8, 0.8, 0.8)
 			building.look_at_from_position(position, self.position + normal)
 			building.rotate_object_local(basis.x, PI/2)
 
@@ -101,4 +109,4 @@ func remove_building():
 	for button in selected_building.action_buttons:
 		button.disabled = false
 	$UI/BuildingsLabel/Current.text = str(buildings.size())
-	select_building(selected_building)
+	click_building(selected_building)

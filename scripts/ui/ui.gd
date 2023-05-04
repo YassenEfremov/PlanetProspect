@@ -88,6 +88,8 @@ func _on_trips_button_pressed():
 
 
 func _on_build_view_building_selected():
+	if selected_planet.selected_building:
+		selected_planet.deselect_building(selected_planet.selected_building)
 	_on_back_button_pressed()
 	$Message.text = "Click somewhere on the planet to place the building"
 	$MainView/CancelButton.show()
@@ -123,6 +125,8 @@ func _on_back_button_pressed():
 	$"../StarMap".hide()
 	selected_planet.get_node("Camera3D").make_current()
 	$StarMapView.choosing_destination = false
+	if $StarMapView.selected_body:
+		$StarMapView.select_body($StarMapView.selected_body)
 	
 	$"../SolarSystem".show()
 	$"../OmniLight3D".show()

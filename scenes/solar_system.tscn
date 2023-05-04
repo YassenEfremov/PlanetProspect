@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://byjl5qmowhowv"]
+[gd_scene load_steps=69 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
@@ -46,11 +46,15 @@
 [ext_resource type="Texture2D" uid="uid://b245qanhtnva8" path="res://assets/UI/moon_emoji.png" id="43_2rc3n"]
 [ext_resource type="Texture2D" uid="uid://dql4l23uwr37" path="res://assets/UI/star.png" id="44_u60pq"]
 [ext_resource type="Texture2D" uid="uid://dph75fmaq6rxh" path="res://assets/UI/diameter_icon.png" id="45_bwhl4"]
+[ext_resource type="Theme" uid="uid://bo0gq7hajv2ta" path="res://themes/stats_panel.tres" id="46_27uux"]
 [ext_resource type="Texture2D" uid="uid://br6hw8qy17o6j" path="res://assets/UI/axial_tilt_icon.png" id="46_rjcer"]
 [ext_resource type="Texture2D" uid="uid://cp42nj8ogl0wx" path="res://assets/UI/distance_icon.png" id="47_2l6ts"]
+[ext_resource type="Theme" uid="uid://dfj17anyx43t6" path="res://themes/stat.tres" id="47_eo3ud"]
 [ext_resource type="Script" path="res://scripts/ui/trips_view.gd" id="49_07b3o"]
 [ext_resource type="Script" path="res://scripts/resources.gd" id="51_kdxlg"]
+[ext_resource type="Theme" uid="uid://dik8ofd36ssnk" path="res://themes/button_sec.tres" id="51_kkiq2"]
 [ext_resource type="Texture2D" uid="uid://bft7aboj62b25" path="res://assets/UI/energy.png" id="52_1gsyu"]
+[ext_resource type="Texture2D" uid="uid://b40a0b6t15xdp" path="res://assets/UI/target.png" id="52_oc144"]
 [ext_resource type="Texture2D" uid="uid://ctiofqmnu1i5x" path="res://assets/UI/back.png" id="53_rfldv"]
 
 [sub_resource type="Environment" id="Environment_5r7c1"]
@@ -1215,6 +1219,7 @@ visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/MercuryStats"]
 layout_mode = 0
@@ -1235,6 +1240,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Diameter"]
 layout_mode = 1
@@ -1276,6 +1282,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Tilt"]
 layout_mode = 1
@@ -1317,6 +1324,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Distance"]
 layout_mode = 1
@@ -1355,19 +1363,47 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MercuryStats/Stats"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+[node name="DestButton" type="Button" parent="UI/StarMapView/MercuryStats"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="VenusStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/VenusStats"]
 layout_mode = 0
@@ -1388,6 +1424,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Diameter"]
 layout_mode = 1
@@ -1429,6 +1466,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Tilt"]
 layout_mode = 1
@@ -1470,6 +1508,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Distance"]
 layout_mode = 1
@@ -1508,19 +1547,48 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/VenusStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/VenusStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="EarthStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/EarthStats"]
 layout_mode = 0
@@ -1541,6 +1609,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Diameter"]
 layout_mode = 1
@@ -1582,6 +1651,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Tilt"]
 layout_mode = 1
@@ -1623,6 +1693,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Distance"]
 layout_mode = 1
@@ -1661,19 +1732,48 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/EarthStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/EarthStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="MoonStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/MoonStats"]
 layout_mode = 0
@@ -1694,6 +1794,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Diameter"]
 layout_mode = 1
@@ -1735,6 +1836,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Tilt"]
 layout_mode = 1
@@ -1776,6 +1878,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Distance"]
 layout_mode = 1
@@ -1814,19 +1917,48 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MoonStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/MoonStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="MarsStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/MarsStats"]
 layout_mode = 0
@@ -1847,6 +1979,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Diameter"]
 layout_mode = 1
@@ -1888,6 +2021,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Tilt"]
 layout_mode = 1
@@ -1929,6 +2063,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Distance"]
 layout_mode = 1
@@ -1967,19 +2102,48 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MarsStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/MarsStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="PhobosStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/PhobosStats"]
 layout_mode = 0
@@ -2000,6 +2164,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Diameter"]
 layout_mode = 1
@@ -2041,6 +2206,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Tilt"]
 layout_mode = 1
@@ -2082,6 +2248,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Distance"]
 layout_mode = 1
@@ -2120,19 +2287,48 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/PhobosStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/PhobosStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="DeimosStats" type="Panel" parent="UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
+theme = ExtResource("46_27uux")
 
 [node name="Name" type="Label" parent="UI/StarMapView/DeimosStats"]
 layout_mode = 0
@@ -2153,6 +2349,7 @@ offset_bottom = 248.0
 [node name="Diameter" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Diameter"]
 layout_mode = 1
@@ -2194,6 +2391,7 @@ text = "km"
 [node name="Tilt" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Tilt"]
 layout_mode = 1
@@ -2235,6 +2433,7 @@ text = "°"
 [node name="Distance" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("47_eo3ud")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Distance"]
 layout_mode = 1
@@ -2273,13 +2472,41 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/DeimosStats/Stats"]
+[node name="DestButton" type="Button" parent="UI/StarMapView/DeimosStats"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-text = "Choose"
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("51_kkiq2")
+text = "
+
+Choose"
+
+[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/DestButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("52_oc144")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="JupiterStats" type="Panel" parent="UI/StarMapView"]
 visible = false
@@ -3137,13 +3364,13 @@ vertical_alignment = 1
 [connection signal="toggled" from="UI/StarMapView/Actions/MoonButton" to="UI/StarMapView" method="_on_moon_button_toggled"]
 [connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="StarMap" method="_on_star_button_toggled"]
 [connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="UI/StarMapView" method="_on_star_button_toggled"]
-[connection signal="pressed" from="UI/StarMapView/MercuryStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/VenusStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/EarthStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/MoonStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/MarsStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/PhobosStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/DeimosStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/MercuryStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/VenusStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/EarthStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/MoonStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/MarsStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/PhobosStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="UI/StarMapView/DeimosStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
 [connection signal="pressed" from="UI/StarMapView/JupiterStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
 [connection signal="pressed" from="UI/StarMapView/SaturnStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
 [connection signal="pressed" from="UI/StarMapView/UranusStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]

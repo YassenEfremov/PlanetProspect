@@ -16,7 +16,7 @@ func _process(delta):
 
 func _on_visit_button_pressed():
 	if get_node("/root/Main/UI").selected_planet.selected_building:
-		get_node("/root/Main/UI").selected_planet.select_building(get_node("/root/Main/UI").selected_planet.selected_building)
+		get_node("/root/Main/UI").selected_planet.click_building(get_node("/root/Main/UI").selected_planet.selected_building)
 	get_node("/root/Main/UI").selected_planet.hide()
 	get_node("/root/Main/UI").selected_planet.get_node("UI").hide()
 	get_node("/root/Main/UI").select_planet(destination)

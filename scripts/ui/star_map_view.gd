@@ -14,7 +14,7 @@ func select_body(body):
 	if !selected_body:
 		# Newly selected body
 		selected_body = body
-		if choosing_destination: get_node("%sStats/Stats/DestButton" % body.name).show()
+		if choosing_destination: get_node("%sStats/DestButton" % body.name).show()
 		get_node("%sStats" % body.name).show()
 	
 	else:
@@ -22,15 +22,15 @@ func select_body(body):
 			# Change selected body
 #			get_node("/root/Main/UI/MainView").remove_child($UI.selected_planet.get_node("Actions"))
 			
-			if choosing_destination: get_node("%sStats/Stats/DestButton" % body.name).hide()
+			if choosing_destination: get_node("%sStats/DestButton" % body.name).hide()
 			get_node("%sStats" % selected_body.name).hide()
 			selected_body = body
-			if choosing_destination: get_node("%sStats/Stats/DestButton" % body.name).show()
+			if choosing_destination: get_node("%sStats/DestButton" % body.name).show()
 			get_node("%sStats" % body.name).show()
 		
 		else:
 			# Deselect current body
-			if choosing_destination: get_node("%sStats/Stats/DestButton" % body.name).hide()
+			if choosing_destination: get_node("%sStats/DestButton" % body.name).hide()
 			get_node("%sStats" % body.name).hide()
 			selected_body = null
 

@@ -18,7 +18,7 @@ func _unhandled_input(event):
 				Global.touches[event.index] = event
 			else:
 				Global.touches.erase(event.index)
-	#			await $"../SolarSystem/Earth".select_building()
+	#			await $"../SolarSystem/Earth".click_building()
 
 		if event is InputEventScreenDrag:
 			Global.touches[event.index] = event

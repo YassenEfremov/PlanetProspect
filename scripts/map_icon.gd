@@ -8,8 +8,10 @@ var last_press_pos: Vector2
 
 func _process(delta):
 #	get_node("/root/Main/UI/StarMapView/%sStats" % name).visible = not get_viewport().get_camera_3d().is_position_behind(global_transform.origin)
-	if get_node("/root/Main/UI/StarMapView/%sStats" % name).visible:
-		get_node("/root/Main/UI/StarMapView/%sStats" % name).position = get_viewport().get_camera_3d().unproject_position(global_transform.origin)
+	var stats_panel = get_node("/root/Main/UI/StarMapView/%sStats" % name)
+	if stats_panel.visible:
+		stats_panel.position = get_viewport().get_camera_3d().unproject_position(global_transform.origin)
+		stats_panel.position += Vector2(20, -stats_panel.size.y / 2)
 
 
 func _input_event(camera, event, position, normal, shape_idx):

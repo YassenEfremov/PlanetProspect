@@ -221,7 +221,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_vw3wr")
 
-[node name="Area3D" type="Area3D"]
+[node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_42fa1")
 steel_cost = 100
 
@@ -328,5 +328,4 @@ grow_vertical = 0
 theme = ExtResource("1_0hfu3")
 text = "Collect"
 
-[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

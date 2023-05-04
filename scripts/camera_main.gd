@@ -4,6 +4,7 @@ extends Camera3D
 var MIN_ZOOM: float
 var MAX_ZOOM: float = 1000
 var focused_object
+var last_press_pos: Vector2
 
 
 func _ready():
@@ -15,9 +16,22 @@ func _unhandled_input(event):
 		if event is InputEventScreenTouch:
 			if event.pressed:
 				Global.touches[event.index] = event
+				last_press_pos = event.position
 			else:
 				Global.touches.erase(event.index)
-	#			await $"../SolarSystem/Earth".select_building()
+	#			await $"../SolarSystem/Earth".click_building()
+
+			if not event.pressed and event.position == last_press_pos:
+				var from = project_ray_origin(event.position)
+				var to = from + project_ray_normal(event.position) * 50
+				
+				var query = PhysicsRayQueryParameters3D.create(from, to)
+				var collision = get_world_3d().direct_space_state.intersect_ray(query)
+				
+				if collision:
+					$"../".click_building(collision.collider)
+				elif $"../".selected_building:
+					$"../".deselect_building($"../".selected_building)
 
 		if event is InputEventScreenDrag:
 			Global.touches[event.index] = event
@@ -33,16 +47,6 @@ func camera_rotate(drag: InputEventScreenDrag):
 	var rotated_basis = transform.basis.rotated(Vector3.UP, angle)	# Rotate basis
 	var rotated_origin = focused_object.position + (position - focused_object.position).rotated(Vector3.UP, angle)	# Rotate origin
 	transform = Transform3D(rotated_basis, rotated_origin)
-
-#		var from = project_ray_origin()
-#		var to = from + camera.project_ray_normal(event.position) * position.distance_to(camera.position)
-
-# use global coordinates, not local to node
-#		var query = PhysicsRayQueryParameters3D.create(position, position + Vector3(0, 0, 100))
-#		var collision = get_world_3d().direct_space_state.intersect_ray(query)
-#		print("Hit: ", collision)
-#		if collision:
-#			print("Hit at point: ", collision)
 
 
 func camera_zoom(drag1: InputEventScreenDrag, drag2: InputEventScreenDrag):
