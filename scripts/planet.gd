@@ -87,7 +87,7 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 
 			var building = building_to_place.instantiate()
 			$MeshInstance3D.add_child(building) # This comes before setting the position and rotation!
-			building.scale = Vector3(0.8, 0.8, 0.8)
+			building.scale = Vector3(0.5, 0.5, 0.5)
 			building.look_at_from_position(position, self.position + normal)
 			building.rotate_object_local(basis.x, PI/2)
 
