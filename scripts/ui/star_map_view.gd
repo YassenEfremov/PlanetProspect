@@ -20,7 +20,7 @@ func select_body(body):
 	else:
 		if body != selected_body:
 			# Change selected body
-#			get_node("/root/Main/UI/MainView").remove_child($UI.selected_planet.get_node("Actions"))
+#			get_node("/root/Main/SafeArea/UI/MainView").remove_child($UI.selected_planet.get_node("Actions"))
 			
 			if choosing_destination: get_node("%sStats/DestButton" % body.name).hide()
 			get_node("%sStats" % selected_body.name).hide()
@@ -55,6 +55,6 @@ func _on_dest_button_pressed():
 	selected_destination = selected_body
 	$"../"._on_back_button_pressed()
 	$"../Message".text = ""
-	if $"/root/Main/UI/MainView/Actions/AddRocketButton".disabled:
-		$"/root/Main/UI/MainView/Actions/LaunchButton".disabled = false
+	if $"/root/Main/SafeArea/UI/MainView/Actions/AddRocketButton".disabled:
+		$"/root/Main/SafeArea/UI/MainView/Actions/LaunchButton".disabled = false
 	$"../MainView/Actions/DestinationButton/Icon".texture = load("res://assets/UI/%s.png" % selected_destination.name.to_lower())

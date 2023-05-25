@@ -9,8 +9,8 @@ var energy_capacity: int = 20
 
 func _ready():
 	$Timer.wait_time = energy_generation_interval
-	action_buttons.push_back(get_node("/root/Main/UI/MainView/Actions/RemoveBuildingButton"))
-	action_buttons.push_back(get_node("/root/Main/UI/MainView/Actions/CollectButton"))
+	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton"))
+	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/CollectButton"))
 	$Label3D.text = str(generated_energy)
 
 

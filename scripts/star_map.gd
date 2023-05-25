@@ -28,17 +28,17 @@ func select_star(star):
 #		var actions = star.get_node("Actions")
 #		if actions.get_parent():
 #			actions.get_parent().remove_child(actions)
-#		get_node("/root/Main/UI/StarMapView").add_child(actions)
+#		get_node("/root/Main/SafeArea/UI/StarMapView").add_child(actions)
 		
 		selected_star = star
 		star.get_node("MeshInstance3D/Outline").visible = true
 #		actions.show()
-#		get_node("/root/Main/UI/StarMapView/Actions").show()
+#		get_node("/root/Main/SafeArea/UI/StarMapView/Actions").show()
 	
 	else:
 		if star != selected_star:
 			# Change selected building
-#			get_node("/root/Main/UI/StarMapView").remove_child(selected_star.get_node("Actions"))
+#			get_node("/root/Main/SafeArea/UI/StarMapView").remove_child(selected_star.get_node("Actions"))
 
 			selected_star.get_node("MeshInstance3D/Outline").visible = false
 			selected_star = star
@@ -46,7 +46,7 @@ func select_star(star):
 		
 		else:
 			# Deselect current building
-#			var actions = get_node("/root/Main/UI/StarMapView/Actions")
+#			var actions = get_node("/root/Main/SafeArea/UI/StarMapView/Actions")
 #			if actions.get_parent():
 #				actions.get_parent().remove_child(actions)
 #			star.add_child(actions)

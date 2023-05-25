@@ -9,8 +9,8 @@ var steel_capacity: int = 50
 
 func _ready():
 	$Timer.wait_time = steel_generation_interval
-	action_buttons.push_back(get_node("/root/Main/UI/MainView/Actions/RemoveBuildingButton"))
-	action_buttons.push_back(get_node("/root/Main/UI/MainView/Actions/CollectButton"))
+	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton"))
+	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/CollectButton"))
 	$Label3D.text = str(generated_steel)
 
 

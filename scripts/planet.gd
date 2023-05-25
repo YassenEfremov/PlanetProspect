@@ -31,18 +31,18 @@ func select_building(building):
 #	var actions = building.get_node("Actions")
 #	if actions.get_parent():
 #		actions.get_parent().remove_child(actions)
-#	get_node("/root/Main/UI/MainView").add_child(actions)
+#	get_node("/root/Main/SafeArea/UI/MainView").add_child(actions)
 		
 	selected_building = building
 	building.get_node("MeshInstance3D/Outline").visible = true
 	for button in selected_building.action_buttons:
 		button.show()
 #	actions.show()
-#	get_node("/root/Main/UI/MainView/Actions").show()
+#	get_node("/root/Main/SafeArea/UI/MainView/Actions").show()
 
 
 func deselect_building(building):
-#	var actions = get_node("/root/Main/UI/MainView/Actions")
+#	var actions = get_node("/root/Main/SafeArea/UI/MainView/Actions")
 #	if actions.get_parent():
 #		actions.get_parent().remove_child(actions)
 #	building.add_child(actions)
@@ -62,7 +62,7 @@ func click_building(building):
 	else:
 		if building != selected_building:
 			# Change selected building
-#			get_node("/root/Main/UI/MainView").remove_child($UI.selected_planet.get_node("Actions"))
+#			get_node("/root/Main/SafeArea/UI/MainView").remove_child($UI.selected_planet.get_node("Actions"))
 			
 			for button in selected_building.action_buttons:
 				button.hide()
@@ -95,8 +95,8 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 			building_placed.emit(building)
 			building_to_place = null
 			$UI/BuildingsLabel/Current.text = str(buildings.size())
-			$"../../UI/Message".text = ""
-			$"../../UI/MainView/CancelButton".hide()
+			$"../../SafeArea/UI/Message".text = ""
+			$"../../SafeArea/UI/MainView/CancelButton".hide()
 
 
 func _on_cancel_button_pressed():

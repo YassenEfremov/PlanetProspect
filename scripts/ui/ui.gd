@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 
 var selected_planet: Planet = null
@@ -7,7 +7,7 @@ var current_view
 
 func _ready():
 	current_view = $MainView
-	select_planet($"../SolarSystem/Earth")
+	select_planet($"../../SolarSystem/Earth")
 
 
 func _process(delta):
@@ -22,18 +22,18 @@ func select_planet(planet):
 #		var actions = planet.get_node("Actions")
 #		if actions.get_parent():
 #			actions.get_parent().remove_child(actions)
-#		get_node("/root/Main/UI").add_child(actions)
+#		get_node("/root/Main/SafeArea/UI").add_child(actions)
 		
 		selected_planet = planet
 		planet.get_node("MeshInstance3D/Outline").visible = true
 		planet.get_node("Axis").visible = true
 #		actions.show()
-#		get_node("/root/Main/UI/MainView/Actions").show()
+#		get_node("/root/Main/SafeArea/UI/MainView/Actions").show()
 	
 	else:
 		if planet != selected_planet:
 			# Change selected planet
-#			get_node("/root/Main/UI").remove_child(selected_planet.get_node("Actions"))
+#			get_node("/root/Main/SafeArea/UI").remove_child(selected_planet.get_node("Actions"))
 
 			selected_planet.get_node("MeshInstance3D/Outline").visible = false
 			selected_planet.get_node("Axis").visible = false
@@ -43,7 +43,7 @@ func select_planet(planet):
 		
 		else:
 			# Deselect current planet
-#			var actions = get_node("/root/Main/UI/Actions")
+#			var actions = get_node("/root/Main/SafeArea/UI/Actions")
 #			if actions.get_parent():
 #				actions.get_parent().remove_child(actions)
 #			planet.add_child(actions)
@@ -52,19 +52,19 @@ func select_planet(planet):
 			planet.get_node("MeshInstance3D/Outline").visible = false
 			planet.get_node("Axis").visible = false
 #			actions.hide()
-#			get_node("/root/Main/UI/MainView/Actions").hide()
+#			get_node("/root/Main/SafeArea/UI/MainView/Actions").hide()
 
 
 func _on_star_map_button_pressed():
 	current_view = $StarMapView
-	$"../SolarSystem".hide()
+	$"../../SolarSystem".hide()
 #	$"../OmniLight3D".hide()
 	$MainView.hide()
 	$Resources.hide()
 	selected_planet.get_node("UI/BuildingsLabel").hide()
 
-	$"../StarMap/Camera3D".make_current()
-	$"../StarMap".show()
+	$"../../StarMap/Camera3D".make_current()
+	$"../../StarMap".show()
 	$StarMapView.show()
 	$BackButton.show()
 
@@ -73,6 +73,7 @@ func _on_build_button_pressed():
 	current_view = $BuildView
 	
 	$MainView.hide()
+	selected_planet.get_node("UI/BuildingsLabel").hide()
 	
 	$BuildView.show()
 	$BackButton.show()
@@ -82,6 +83,7 @@ func _on_trips_button_pressed():
 	current_view = $TripView
 	
 	$MainView.hide()
+	selected_planet.get_node("UI/BuildingsLabel").hide()
 	
 	$TripView.show()
 	$BackButton.show()
@@ -122,14 +124,14 @@ func _on_actions_max_resources_reached():
 func _on_back_button_pressed():
 	current_view.hide()
 	current_view = $MainView
-	$"../StarMap".hide()
+	$"../../StarMap".hide()
 	selected_planet.get_node("Camera3D").make_current()
 	$StarMapView.choosing_destination = false
 	if $StarMapView.selected_body:
 		$StarMapView.select_body($StarMapView.selected_body)
 	
-	$"../SolarSystem".show()
-	$"../OmniLight3D".show()
+	$"../../SolarSystem".show()
+	$"../../OmniLight3D".show()
 	$BackButton.hide()
 	
 	$MainView.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://byjl5qmowhowv"]
+[gd_scene load_steps=70 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bbcysxygw8jyy" path="res://scenes/star.tscn" id="19_p3ky3"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="20_jvi36"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="21_678cw"]
+[ext_resource type="Script" path="res://scripts/ui/safe_area.gd" id="22_8j2mx"]
 [ext_resource type="Texture2D" uid="uid://diqa8orfo2n3i" path="res://assets/UI/arrow.png" id="22_qssxd"]
 [ext_resource type="Script" path="res://scripts/ui/main_view.gd" id="23_o252s"]
 [ext_resource type="Theme" uid="uid://c1xstvb5vh4n" path="res://themes/button.tres" id="24_vpvyu"]
@@ -363,12 +364,22 @@ visible = false
 mesh = SubResource("BoxMesh_78gs5")
 skeleton = NodePath("../..")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="SafeArea" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_8j2mx")
+
+[node name="UI" type="Control" parent="SafeArea"]
+layout_mode = 2
+mouse_filter = 1
 script = ExtResource("20_jvi36")
 
-[node name="Tutorial" type="Control" parent="UI"]
+[node name="Tutorial" type="Control" parent="SafeArea/UI"]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -376,7 +387,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Message" type="Label" parent="UI/Tutorial"]
+[node name="Message" type="Label" parent="SafeArea/UI/Tutorial"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -392,7 +403,7 @@ You are playing from here!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Arrow" type="Control" parent="UI/Tutorial"]
+[node name="Arrow" type="Control" parent="SafeArea/UI/Tutorial"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -404,26 +415,26 @@ offset_bottom = 208.0
 grow_horizontal = 2
 metadata/_edit_group_ = true
 
-[node name="Icon" type="TextureRect" parent="UI/Tutorial/Arrow"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/Tutorial/Arrow"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 63.9999
 texture = ExtResource("22_qssxd")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Tutorial/Arrow/Icon"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SafeArea/UI/Tutorial/Arrow/Icon"]
 autoplay = "pointing"
 libraries = {
 "": SubResource("AnimationLibrary_fgkcn")
 }
 
-[node name="Timer" type="Timer" parent="UI/Tutorial"]
+[node name="Timer" type="Timer" parent="SafeArea/UI/Tutorial"]
 wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="MainView" type="Control" parent="UI"]
-layout_mode = 3
+[node name="MainView" type="Control" parent="SafeArea/UI"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -432,17 +443,16 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("23_o252s")
 
-[node name="StarMapButton" type="Button" parent="UI/MainView"]
+[node name="StarMapButton" type="Button" parent="SafeArea/UI/MainView"]
 layout_mode = 1
-offset_left = 64.0
 offset_top = 32.0
-offset_right = 160.0
+offset_right = 96.0
 offset_bottom = 128.0
 theme = ExtResource("24_vpvyu")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Label" type="Label" parent="UI/MainView/StarMapButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/StarMapButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -458,7 +468,7 @@ grow_vertical = 0
 text = "Star Map"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/StarMapButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/StarMapButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -475,21 +485,20 @@ texture = ExtResource("25_idfl1")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="TripsButton" type="Button" parent="UI/MainView"]
+[node name="TripsButton" type="Button" parent="SafeArea/UI/MainView"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = -136.0
-offset_right = 160.0
-offset_bottom = -40.0
+offset_top = -128.0
+offset_right = 96.0
+offset_bottom = -32.0
 grow_vertical = 0
 theme = ExtResource("24_vpvyu")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Label" type="Label" parent="UI/MainView/TripsButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/TripsButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -505,7 +514,7 @@ grow_vertical = 0
 text = "Trips"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/TripsButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/TripsButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -522,7 +531,7 @@ texture = ExtResource("26_s50qm")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="AchievementsButton" type="Button" parent="UI/MainView"]
+[node name="AchievementsButton" type="Button" parent="SafeArea/UI/MainView"]
 visible = false
 layout_mode = 0
 offset_left = 64.0
@@ -533,7 +542,7 @@ theme = ExtResource("24_vpvyu")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Label" type="Label" parent="UI/MainView/AchievementsButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/AchievementsButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -550,7 +559,7 @@ text = "Achievements"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/AchievementsButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/AchievementsButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -567,7 +576,7 @@ texture = ExtResource("27_x4iq5")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="BuildButton" type="Button" parent="UI/MainView"]
+[node name="BuildButton" type="Button" parent="SafeArea/UI/MainView"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -582,7 +591,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("24_vpvyu")
 
-[node name="Label" type="Label" parent="UI/MainView/BuildButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/BuildButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -598,7 +607,7 @@ grow_vertical = 0
 text = "Build"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/BuildButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/BuildButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -615,7 +624,7 @@ texture = ExtResource("28_52gwm")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="NewsButton" type="Button" parent="UI/MainView"]
+[node name="NewsButton" type="Button" parent="SafeArea/UI/MainView"]
 visible = false
 layout_mode = 1
 offset_left = 32.0
@@ -624,7 +633,7 @@ offset_right = 88.0
 offset_bottom = 192.0
 text = "News"
 
-[node name="NewsPanel" type="Panel" parent="UI/MainView"]
+[node name="NewsPanel" type="Panel" parent="SafeArea/UI/MainView"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -640,11 +649,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("29_wfb2y")
 
-[node name="APODGetter" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+[node name="APODGetter" type="HTTPRequest" parent="SafeArea/UI/MainView/NewsPanel"]
 
-[node name="ImageDownloader" type="HTTPRequest" parent="UI/MainView/NewsPanel"]
+[node name="ImageDownloader" type="HTTPRequest" parent="SafeArea/UI/MainView/NewsPanel"]
 
-[node name="CloseButton" type="Button" parent="UI/MainView/NewsPanel"]
+[node name="CloseButton" type="Button" parent="SafeArea/UI/MainView/NewsPanel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -656,7 +665,7 @@ offset_bottom = 56.0
 grow_horizontal = 0
 text = "X"
 
-[node name="Actions" type="HBoxContainer" parent="UI/MainView"]
+[node name="Actions" type="HBoxContainer" parent="SafeArea/UI/MainView"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -672,14 +681,14 @@ grow_vertical = 0
 alignment = 1
 script = ExtResource("30_7gu2d")
 
-[node name="RemoveBuildingButton" type="Button" parent="UI/MainView/Actions"]
+[node name="RemoveBuildingButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
 visible = false
 layout_mode = 2
 text = "
 
 Remove"
 
-[node name="Label" type="Label" parent="UI/MainView/Actions/RemoveBuildingButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/RemoveBuildingButton"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -696,7 +705,7 @@ grow_vertical = 0
 text = "Remove"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/RemoveBuildingButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/RemoveBuildingButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -713,14 +722,14 @@ texture = ExtResource("31_powc8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="AddRocketButton" type="Button" parent="UI/MainView/Actions"]
+[node name="AddRocketButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
 visible = false
 layout_mode = 2
 text = "
 
 Add Rocket"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/AddRocketButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/AddRocketButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -737,14 +746,14 @@ texture = ExtResource("32_2seaf")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="DestinationButton" type="Button" parent="UI/MainView/Actions"]
+[node name="DestinationButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
 visible = false
 layout_mode = 2
 text = "
 
 Destination"
 
-[node name="Icon" type="TextureRect" parent="UI/MainView/Actions/DestinationButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/MainView/Actions/DestinationButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -761,7 +770,7 @@ texture = ExtResource("33_a3y1u")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="LaunchButton" type="Button" parent="UI/MainView/Actions"]
+[node name="LaunchButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
 visible = false
 layout_mode = 2
 disabled = true
@@ -769,7 +778,7 @@ text = "
 
 Launch"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/LaunchButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/LaunchButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -786,14 +795,14 @@ texture = ExtResource("26_s50qm")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="CollectButton" type="Button" parent="UI/MainView/Actions"]
+[node name="CollectButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
 visible = false
 layout_mode = 2
 text = "
 
 Collect"
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/Actions/CollectButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/CollectButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -810,7 +819,7 @@ texture = ExtResource("34_cmybn")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="CancelButton" type="Button" parent="UI/MainView"]
+[node name="CancelButton" type="Button" parent="SafeArea/UI/MainView"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -826,7 +835,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("24_vpvyu")
 
-[node name="Label" type="Label" parent="UI/MainView/CancelButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/CancelButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -842,7 +851,7 @@ grow_vertical = 0
 text = "Cancel"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/MainView/CancelButton"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/CancelButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -859,7 +868,7 @@ texture = ExtResource("31_powc8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Sensors" type="Label" parent="UI/MainView"]
+[node name="Sensors" type="Label" parent="SafeArea/UI/MainView"]
 visible = false
 layout_mode = 0
 offset_left = 192.0
@@ -867,17 +876,30 @@ offset_top = 80.0
 offset_right = 400.0
 offset_bottom = 208.0
 
-[node name="BuildView" type="ColorRect" parent="UI"]
+[node name="BuildView" type="Control" parent="SafeArea/UI"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.392157, 0.392157, 0.392157, 1)
 script = ExtResource("35_2jexq")
 
-[node name="Label" type="Label" parent="UI/BuildView"]
+[node name="Background" type="ColorRect" parent="SafeArea/UI/BuildView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.392157, 0.392157, 0.392157, 1)
+
+[node name="Label" type="Label" parent="SafeArea/UI/BuildView"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -891,7 +913,7 @@ theme = ExtResource("21_678cw")
 text = "Buildings"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="UI/BuildView"]
+[node name="GridContainer" type="GridContainer" parent="SafeArea/UI/BuildView"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -906,12 +928,12 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 4
 
-[node name="Panel1" type="Panel" parent="UI/BuildView/GridContainer"]
+[node name="Panel1" type="Panel" parent="SafeArea/UI/BuildView/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SteelFurnaceButton" type="Button" parent="UI/BuildView/GridContainer/Panel1"]
+[node name="SteelFurnaceButton" type="Button" parent="SafeArea/UI/BuildView/GridContainer/Panel1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -926,7 +948,7 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("36_poevk")
 
-[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel1"]
+[node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -944,7 +966,7 @@ text = "Steel Furnace
 100 kg"
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel1/Label"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/BuildView/GridContainer/Panel1/Label"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -958,12 +980,12 @@ texture = ExtResource("37_jd6vv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Panel2" type="Panel" parent="UI/BuildView/GridContainer"]
+[node name="Panel2" type="Panel" parent="SafeArea/UI/BuildView/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SolarPanelButton" type="Button" parent="UI/BuildView/GridContainer/Panel2"]
+[node name="SolarPanelButton" type="Button" parent="SafeArea/UI/BuildView/GridContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -978,7 +1000,7 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("38_niita")
 
-[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel2"]
+[node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -996,7 +1018,7 @@ text = "Solar Panel
 50 kg"
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel2/Label"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/BuildView/GridContainer/Panel2/Label"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1010,12 +1032,12 @@ texture = ExtResource("37_jd6vv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Panel3" type="Panel" parent="UI/BuildView/GridContainer"]
+[node name="Panel3" type="Panel" parent="SafeArea/UI/BuildView/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="StorageButton" type="Button" parent="UI/BuildView/GridContainer/Panel3"]
+[node name="StorageButton" type="Button" parent="SafeArea/UI/BuildView/GridContainer/Panel3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1030,7 +1052,7 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("39_4cf2i")
 
-[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel3"]
+[node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1048,7 +1070,7 @@ text = "Storage
 400 kg"
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel3/Label"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/BuildView/GridContainer/Panel3/Label"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1062,12 +1084,12 @@ texture = ExtResource("37_jd6vv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Panel4" type="Panel" parent="UI/BuildView/GridContainer"]
+[node name="Panel4" type="Panel" parent="SafeArea/UI/BuildView/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PadButton" type="Button" parent="UI/BuildView/GridContainer/Panel4"]
+[node name="PadButton" type="Button" parent="SafeArea/UI/BuildView/GridContainer/Panel4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1082,7 +1104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("40_wef8k")
 
-[node name="Label" type="Label" parent="UI/BuildView/GridContainer/Panel4"]
+[node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1100,7 +1122,7 @@ text = "Lauch Pad
 300 kg"
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="UI/BuildView/GridContainer/Panel4/Label"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/BuildView/GridContainer/Panel4/Label"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -1114,9 +1136,9 @@ texture = ExtResource("37_jd6vv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="StarMapView" type="Control" parent="UI"]
+[node name="StarMapView" type="Control" parent="SafeArea/UI"]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1125,7 +1147,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("41_x74bm")
 
-[node name="Actions" type="VBoxContainer" parent="UI/StarMapView"]
+[node name="Actions" type="VBoxContainer" parent="SafeArea/UI/StarMapView"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -1139,7 +1161,7 @@ offset_bottom = 132.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="PlanetButton" type="Button" parent="UI/StarMapView/Actions"]
+[node name="PlanetButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
@@ -1147,7 +1169,7 @@ text = "
 
 Planets"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/PlanetButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/PlanetButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1164,7 +1186,7 @@ texture = ExtResource("42_sc6qh")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MoonButton" type="Button" parent="UI/StarMapView/Actions"]
+[node name="MoonButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
@@ -1172,7 +1194,7 @@ text = "
 
 Moons"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/MoonButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/MoonButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1189,7 +1211,7 @@ texture = ExtResource("43_2rc3n")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="StarButton" type="Button" parent="UI/StarMapView/Actions"]
+[node name="StarButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
@@ -1197,7 +1219,7 @@ text = "
 
 Stars"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/Actions/StarButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/StarButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1214,14 +1236,14 @@ texture = ExtResource("44_u60pq")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MercuryStats" type="Panel" parent="UI/StarMapView"]
+[node name="MercuryStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/MercuryStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -1230,19 +1252,19 @@ theme_override_font_sizes/font_size = 42
 text = "Mercury"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MercuryStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/MercuryStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1250,14 +1272,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1265,7 +1287,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1273,18 +1295,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1292,14 +1314,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1307,7 +1329,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1315,18 +1337,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/MercuryStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/MercuryStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MercuryStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1334,14 +1356,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1349,7 +1371,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1357,13 +1379,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MercuryStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MercuryStats"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1381,7 +1403,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MercuryStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MercuryStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1398,14 +1420,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="VenusStats" type="Panel" parent="UI/StarMapView"]
+[node name="VenusStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/VenusStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/VenusStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -1414,19 +1436,19 @@ theme_override_font_sizes/font_size = 42
 text = "Venus"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/VenusStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/VenusStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1434,14 +1456,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1449,7 +1471,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1457,18 +1479,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1476,14 +1498,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1491,7 +1513,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1499,18 +1521,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/VenusStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/VenusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/VenusStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1518,14 +1540,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1533,7 +1555,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1541,13 +1563,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/VenusStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/VenusStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1566,7 +1588,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/VenusStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/VenusStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1583,14 +1605,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="EarthStats" type="Panel" parent="UI/StarMapView"]
+[node name="EarthStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/EarthStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/EarthStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -1599,19 +1621,19 @@ theme_override_font_sizes/font_size = 42
 text = "Earth"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/EarthStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/EarthStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1619,14 +1641,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1634,7 +1656,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1642,18 +1664,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1661,14 +1683,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1676,7 +1698,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1684,18 +1706,18 @@ theme_override_font_sizes/font_size = 20
 text = "23.4"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/EarthStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/EarthStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/EarthStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1703,14 +1725,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1718,7 +1740,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1726,13 +1748,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/EarthStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/EarthStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1751,7 +1773,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/EarthStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/EarthStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1768,14 +1790,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MoonStats" type="Panel" parent="UI/StarMapView"]
+[node name="MoonStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/MoonStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/MoonStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -1784,19 +1806,19 @@ theme_override_font_sizes/font_size = 42
 text = "Moon"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MoonStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/MoonStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1804,14 +1826,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1819,7 +1841,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1827,18 +1849,18 @@ theme_override_font_sizes/font_size = 20
 text = "3 474.8"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1846,14 +1868,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1861,7 +1883,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1869,18 +1891,18 @@ theme_override_font_sizes/font_size = 20
 text = "6.68"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/MoonStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/MoonStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MoonStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1888,14 +1910,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -1903,7 +1925,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -1911,13 +1933,13 @@ theme_override_font_sizes/font_size = 20
 text = "384 400"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MoonStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MoonStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1936,7 +1958,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MoonStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MoonStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1953,14 +1975,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MarsStats" type="Panel" parent="UI/StarMapView"]
+[node name="MarsStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/MarsStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/MarsStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -1969,19 +1991,19 @@ theme_override_font_sizes/font_size = 42
 text = "Mars"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/MarsStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/MarsStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1989,14 +2011,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2004,7 +2026,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2012,18 +2034,18 @@ theme_override_font_sizes/font_size = 20
 text = "6,779"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2031,14 +2053,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2046,7 +2068,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2054,18 +2076,18 @@ theme_override_font_sizes/font_size = 20
 text = "25.2"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/MarsStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/MarsStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/MarsStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2073,14 +2095,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2088,7 +2110,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2096,13 +2118,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/MarsStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MarsStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2121,7 +2143,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/MarsStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MarsStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2138,14 +2160,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="PhobosStats" type="Panel" parent="UI/StarMapView"]
+[node name="PhobosStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/PhobosStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2154,19 +2176,19 @@ theme_override_font_sizes/font_size = 42
 text = "Phobos"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/PhobosStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/PhobosStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2174,14 +2196,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2189,7 +2211,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2197,18 +2219,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2216,14 +2238,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2231,7 +2253,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2239,18 +2261,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/PhobosStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/PhobosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/PhobosStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2258,14 +2280,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2273,7 +2295,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2281,13 +2303,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/PhobosStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/PhobosStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2306,7 +2328,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/PhobosStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/PhobosStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2323,14 +2345,14 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="DeimosStats" type="Panel" parent="UI/StarMapView"]
+[node name="DeimosStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 theme = ExtResource("46_27uux")
 
-[node name="Name" type="Label" parent="UI/StarMapView/DeimosStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2339,19 +2361,19 @@ theme_override_font_sizes/font_size = 42
 text = "Deimos"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/DeimosStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/DeimosStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2359,14 +2381,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2374,7 +2396,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2382,18 +2404,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2401,14 +2423,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2416,7 +2438,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2424,18 +2446,18 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/DeimosStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/DeimosStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("47_eo3ud")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/DeimosStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2443,14 +2465,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2458,7 +2480,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2466,13 +2488,13 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/DeimosStats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/DeimosStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2491,7 +2513,7 @@ text = "
 
 Choose"
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/DeimosStats/DestButton"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/DeimosStats/DestButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2508,13 +2530,13 @@ texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="JupiterStats" type="Panel" parent="UI/StarMapView"]
+[node name="JupiterStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 
-[node name="Name" type="Label" parent="UI/StarMapView/JupiterStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2523,18 +2545,18 @@ theme_override_font_sizes/font_size = 42
 text = "Jupiter"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/JupiterStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/JupiterStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/JupiterStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2542,14 +2564,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2557,7 +2579,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2565,17 +2587,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/JupiterStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2583,14 +2605,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2598,7 +2620,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2606,17 +2628,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/JupiterStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/JupiterStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/JupiterStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2624,14 +2646,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2639,7 +2661,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2647,26 +2669,26 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/JupiterStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/JupiterStats/Stats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/JupiterStats/Stats"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "Choose"
 
-[node name="SaturnStats" type="Panel" parent="UI/StarMapView"]
+[node name="SaturnStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 
-[node name="Name" type="Label" parent="UI/StarMapView/SaturnStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2675,18 +2697,18 @@ theme_override_font_sizes/font_size = 42
 text = "Saturn"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/SaturnStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/SaturnStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/SaturnStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2694,14 +2716,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2709,7 +2731,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2717,17 +2739,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/SaturnStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2735,14 +2757,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2750,7 +2772,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2758,17 +2780,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/SaturnStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/SaturnStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/SaturnStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2776,14 +2798,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2791,7 +2813,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2799,26 +2821,26 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/SaturnStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/SaturnStats/Stats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/SaturnStats/Stats"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "Choose"
 
-[node name="UranusStats" type="Panel" parent="UI/StarMapView"]
+[node name="UranusStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 
-[node name="Name" type="Label" parent="UI/StarMapView/UranusStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/UranusStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2827,18 +2849,18 @@ theme_override_font_sizes/font_size = 42
 text = "Uranus"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/UranusStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/UranusStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/UranusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2846,14 +2868,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2861,7 +2883,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2869,17 +2891,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/UranusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2887,14 +2909,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2902,7 +2924,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2910,17 +2932,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/UranusStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/UranusStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/UranusStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2928,14 +2950,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -2943,7 +2965,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -2951,26 +2973,26 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/UranusStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/UranusStats/Stats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/UranusStats/Stats"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "Choose"
 
-[node name="NeptuneStats" type="Panel" parent="UI/StarMapView"]
+[node name="NeptuneStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 256.0
 
-[node name="Name" type="Label" parent="UI/StarMapView/NeptuneStats"]
+[node name="Name" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 312.0
@@ -2979,18 +3001,18 @@ theme_override_font_sizes/font_size = 42
 text = "Neptune"
 vertical_alignment = 1
 
-[node name="Stats" type="VBoxContainer" parent="UI/StarMapView/NeptuneStats"]
+[node name="Stats" type="VBoxContainer" parent="SafeArea/UI/StarMapView/NeptuneStats"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 72.0
 offset_right = 312.0
 offset_bottom = 248.0
 
-[node name="Diameter" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+[node name="Diameter" type="Panel" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Diameter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Diameter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2998,14 +3020,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("45_bwhl4")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -3013,7 +3035,7 @@ theme_override_font_sizes/font_size = 20
 text = "Diameter"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -3021,17 +3043,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Diameter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="Tilt" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+[node name="Tilt" type="Panel" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Tilt"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Tilt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3039,14 +3061,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("46_rjcer")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -3054,7 +3076,7 @@ theme_override_font_sizes/font_size = 20
 text = "Axial tilt"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -3062,17 +3084,17 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Tilt/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "°"
 
-[node name="Distance" type="Panel" parent="UI/StarMapView/NeptuneStats/Stats"]
+[node name="Distance" type="Panel" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/StarMapView/NeptuneStats/Stats/Distance"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Distance"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3080,14 +3102,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("47_2l6ts")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
@@ -3095,7 +3117,7 @@ theme_override_font_sizes/font_size = 20
 text = "Distance"
 vertical_alignment = 1
 
-[node name="Value" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+[node name="Value" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -3103,20 +3125,20 @@ theme_override_font_sizes/font_size = 20
 text = "?"
 horizontal_alignment = 2
 
-[node name="Unit" type="Label" parent="UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
+[node name="Unit" type="Label" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats/Distance/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="UI/StarMapView/NeptuneStats/Stats"]
+[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/NeptuneStats/Stats"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "Choose"
 
-[node name="Sensors" type="Label" parent="UI/StarMapView"]
+[node name="Sensors" type="Label" parent="SafeArea/UI/StarMapView"]
 visible = false
 layout_mode = 0
 offset_left = 192.0
@@ -3124,17 +3146,30 @@ offset_top = 80.0
 offset_right = 400.0
 offset_bottom = 208.0
 
-[node name="TripView" type="ColorRect" parent="UI"]
+[node name="TripView" type="Control" parent="SafeArea/UI"]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 script = ExtResource("49_07b3o")
 
-[node name="Label" type="Label" parent="UI/TripView"]
+[node name="Background" type="ColorRect" parent="SafeArea/UI/TripView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="SafeArea/UI/TripView"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -3148,7 +3183,7 @@ theme = ExtResource("21_678cw")
 text = "Trips"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TripView"]
+[node name="ScrollContainer" type="ScrollContainer" parent="SafeArea/UI/TripView"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3163,10 +3198,10 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/TripView/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea/UI/TripView/ScrollContainer"]
 layout_mode = 2
 
-[node name="NoTripsLabel" type="Label" parent="UI/TripView"]
+[node name="NoTripsLabel" type="Label" parent="SafeArea/UI/TripView"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3183,8 +3218,8 @@ theme = ExtResource("21_678cw")
 text = "Launch a rocket to start a trip!"
 horizontal_alignment = 1
 
-[node name="Resources" type="Control" parent="UI"]
-layout_mode = 3
+[node name="Resources" type="Control" parent="SafeArea/UI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -3194,7 +3229,7 @@ grow_horizontal = 0
 mouse_filter = 1
 script = ExtResource("51_kdxlg")
 
-[node name="EnergyBar" type="ProgressBar" parent="UI/Resources"]
+[node name="EnergyBar" type="ProgressBar" parent="SafeArea/UI/Resources"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3208,7 +3243,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_exflh")
 fill_mode = 1
 show_percentage = false
 
-[node name="Icon" type="TextureRect" parent="UI/Resources/EnergyBar"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/Resources/EnergyBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3222,7 +3257,7 @@ texture = ExtResource("52_1gsyu")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Value" type="Label" parent="UI/Resources/EnergyBar"]
+[node name="Value" type="Label" parent="SafeArea/UI/Resources/EnergyBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3236,7 +3271,7 @@ theme_override_font_sizes/font_size = 22
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Unit" type="Label" parent="UI/Resources/EnergyBar"]
+[node name="Unit" type="Label" parent="SafeArea/UI/Resources/EnergyBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3248,7 +3283,7 @@ grow_horizontal = 0
 text = "kWh"
 horizontal_alignment = 1
 
-[node name="SteelBar" type="ProgressBar" parent="UI/Resources"]
+[node name="SteelBar" type="ProgressBar" parent="SafeArea/UI/Resources"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3261,7 +3296,7 @@ grow_horizontal = 0
 fill_mode = 1
 show_percentage = false
 
-[node name="Icon" type="TextureRect" parent="UI/Resources/SteelBar"]
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/Resources/SteelBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3275,7 +3310,7 @@ texture = ExtResource("37_jd6vv")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Value" type="Label" parent="UI/Resources/SteelBar"]
+[node name="Value" type="Label" parent="SafeArea/UI/Resources/SteelBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3289,7 +3324,7 @@ theme_override_font_sizes/font_size = 22
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Unit" type="Label" parent="UI/Resources/SteelBar"]
+[node name="Unit" type="Label" parent="SafeArea/UI/Resources/SteelBar"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3301,21 +3336,22 @@ grow_horizontal = 0
 text = "kg"
 horizontal_alignment = 1
 
-[node name="BackButton" type="Button" parent="UI"]
+[node name="BackButton" type="Button" parent="SafeArea/UI"]
 visible = false
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
 offset_top = -128.0
-offset_right = 128.0
+offset_right = 96.0
 offset_bottom = -32.0
 grow_vertical = 0
 theme = ExtResource("24_vpvyu")
 icon = ExtResource("53_rfldv")
 expand_icon = true
 
-[node name="Message" type="Label" parent="UI"]
+[node name="Message" type="Label" parent="SafeArea/UI"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -3330,49 +3366,66 @@ grow_vertical = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="building_placed" from="SolarSystem/Mercury" to="UI/Resources" method="_on_building_placed"]
-[connection signal="building_placed" from="SolarSystem/Venus" to="UI/Resources" method="_on_building_placed"]
-[connection signal="building_placed" from="SolarSystem/Earth" to="UI/Resources" method="_on_building_placed"]
-[connection signal="building_placed" from="SolarSystem/Mars" to="UI/Resources" method="_on_building_placed"]
-[connection signal="pressed" from="UI/MainView/StarMapButton" to="UI" method="_on_star_map_button_pressed"]
-[connection signal="pressed" from="UI/MainView/TripsButton" to="UI" method="_on_trips_button_pressed"]
-[connection signal="pressed" from="UI/MainView/BuildButton" to="UI" method="_on_build_button_pressed"]
-[connection signal="pressed" from="UI/MainView/NewsButton" to="UI/MainView/NewsPanel" method="_on_news_button_pressed"]
-[connection signal="request_completed" from="UI/MainView/NewsPanel/APODGetter" to="UI/MainView/NewsPanel" method="_on_apod_getter_request_completed"]
-[connection signal="request_completed" from="UI/MainView/NewsPanel/ImageDownloader" to="UI/MainView/NewsPanel" method="_on_image_downloader_request_completed"]
-[connection signal="pressed" from="UI/MainView/NewsPanel/CloseButton" to="UI/MainView/NewsPanel" method="_on_close_button_pressed"]
-[connection signal="max_resources_reached" from="UI/MainView/Actions" to="UI" method="_on_actions_max_resources_reached"]
-[connection signal="pressed" from="UI/MainView/Actions/RemoveBuildingButton" to="UI/MainView/Actions" method="_on_remove_building_button_pressed"]
-[connection signal="pressed" from="UI/MainView/Actions/AddRocketButton" to="UI/MainView/Actions" method="_on_add_rocket_button_pressed"]
-[connection signal="pressed" from="UI/MainView/Actions/DestinationButton" to="UI/MainView/Actions" method="_on_destination_button_pressed"]
-[connection signal="pressed" from="UI/MainView/Actions/LaunchButton" to="UI/MainView/Actions" method="_on_launch_button_pressed"]
-[connection signal="pressed" from="UI/MainView/Actions/CollectButton" to="UI/MainView/Actions" method="_on_collect_button_pressed"]
-[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Venus" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="UI/MainView/CancelButton" to="SolarSystem/Mars" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="UI/MainView/CancelButton" to="UI" method="_on_cancel_button_pressed"]
-[connection signal="building_selected" from="UI/BuildView" to="UI" method="_on_build_view_building_selected"]
-[connection signal="max_buildings_reached" from="UI/BuildView" to="UI" method="_on_build_view_max_buildings_reached"]
-[connection signal="not_enough_resources" from="UI/BuildView" to="UI" method="_on_build_view_not_enough_resources"]
-[connection signal="pressed" from="UI/BuildView/GridContainer/Panel1/SteelFurnaceButton" to="UI/BuildView" method="_on_steel_furnace_button_pressed"]
-[connection signal="pressed" from="UI/BuildView/GridContainer/Panel2/SolarPanelButton" to="UI/BuildView" method="_on_solar_panel_button_pressed"]
-[connection signal="pressed" from="UI/BuildView/GridContainer/Panel3/StorageButton" to="UI/BuildView" method="_on_storage_button_pressed"]
-[connection signal="pressed" from="UI/BuildView/GridContainer/Panel4/PadButton" to="UI/BuildView" method="_on_pad_button_pressed"]
-[connection signal="toggled" from="UI/StarMapView/Actions/PlanetButton" to="StarMap" method="_on_planet_button_toggled"]
-[connection signal="toggled" from="UI/StarMapView/Actions/PlanetButton" to="UI/StarMapView" method="_on_planet_button_toggled"]
-[connection signal="toggled" from="UI/StarMapView/Actions/MoonButton" to="StarMap" method="_on_moon_button_toggled"]
-[connection signal="toggled" from="UI/StarMapView/Actions/MoonButton" to="UI/StarMapView" method="_on_moon_button_toggled"]
-[connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="StarMap" method="_on_star_button_toggled"]
-[connection signal="toggled" from="UI/StarMapView/Actions/StarButton" to="UI/StarMapView" method="_on_star_button_toggled"]
-[connection signal="pressed" from="UI/StarMapView/MercuryStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/VenusStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/EarthStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/MoonStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/MarsStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/PhobosStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/DeimosStats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/JupiterStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/SaturnStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/UranusStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/StarMapView/NeptuneStats/Stats/DestButton" to="UI/StarMapView" method="_on_dest_button_pressed"]
-[connection signal="pressed" from="UI/BackButton" to="UI" method="_on_back_button_pressed"]
+[node name="DebugText" type="Label" parent="SafeArea/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -432.0
+offset_top = -496.0
+offset_right = 64.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="building_placed" from="SolarSystem/Mercury" to="SafeArea/UI/Resources" method="_on_building_placed"]
+[connection signal="building_placed" from="SolarSystem/Venus" to="SafeArea/UI/Resources" method="_on_building_placed"]
+[connection signal="building_placed" from="SolarSystem/Earth" to="SafeArea/UI/Resources" method="_on_building_placed"]
+[connection signal="building_placed" from="SolarSystem/Mars" to="SafeArea/UI/Resources" method="_on_building_placed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/StarMapButton" to="SafeArea/UI" method="_on_star_map_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/TripsButton" to="SafeArea/UI" method="_on_trips_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/BuildButton" to="SafeArea/UI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/NewsButton" to="SafeArea/UI/MainView/NewsPanel" method="_on_news_button_pressed"]
+[connection signal="request_completed" from="SafeArea/UI/MainView/NewsPanel/APODGetter" to="SafeArea/UI/MainView/NewsPanel" method="_on_apod_getter_request_completed"]
+[connection signal="request_completed" from="SafeArea/UI/MainView/NewsPanel/ImageDownloader" to="SafeArea/UI/MainView/NewsPanel" method="_on_image_downloader_request_completed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/NewsPanel/CloseButton" to="SafeArea/UI/MainView/NewsPanel" method="_on_close_button_pressed"]
+[connection signal="max_resources_reached" from="SafeArea/UI/MainView/Actions" to="SafeArea/UI" method="_on_actions_max_resources_reached"]
+[connection signal="pressed" from="SafeArea/UI/MainView/Actions/RemoveBuildingButton" to="SafeArea/UI/MainView/Actions" method="_on_remove_building_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/Actions/AddRocketButton" to="SafeArea/UI/MainView/Actions" method="_on_add_rocket_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/Actions/DestinationButton" to="SafeArea/UI/MainView/Actions" method="_on_destination_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/Actions/LaunchButton" to="SafeArea/UI/MainView/Actions" method="_on_launch_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/Actions/CollectButton" to="SafeArea/UI/MainView/Actions" method="_on_collect_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/CancelButton" to="SolarSystem/Venus" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/CancelButton" to="SolarSystem/Earth" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/CancelButton" to="SolarSystem/Mars" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/MainView/CancelButton" to="SafeArea/UI" method="_on_cancel_button_pressed"]
+[connection signal="building_selected" from="SafeArea/UI/BuildView" to="SafeArea/UI" method="_on_build_view_building_selected"]
+[connection signal="max_buildings_reached" from="SafeArea/UI/BuildView" to="SafeArea/UI" method="_on_build_view_max_buildings_reached"]
+[connection signal="not_enough_resources" from="SafeArea/UI/BuildView" to="SafeArea/UI" method="_on_build_view_not_enough_resources"]
+[connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel1/SteelFurnaceButton" to="SafeArea/UI/BuildView" method="_on_steel_furnace_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel2/SolarPanelButton" to="SafeArea/UI/BuildView" method="_on_solar_panel_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel3/StorageButton" to="SafeArea/UI/BuildView" method="_on_storage_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel4/PadButton" to="SafeArea/UI/BuildView" method="_on_pad_button_pressed"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/PlanetButton" to="StarMap" method="_on_planet_button_toggled"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/PlanetButton" to="SafeArea/UI/StarMapView" method="_on_planet_button_toggled"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/MoonButton" to="StarMap" method="_on_moon_button_toggled"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/MoonButton" to="SafeArea/UI/StarMapView" method="_on_moon_button_toggled"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/StarButton" to="StarMap" method="_on_star_button_toggled"]
+[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/StarButton" to="SafeArea/UI/StarMapView" method="_on_star_button_toggled"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/MercuryStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/VenusStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/EarthStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/MoonStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/MarsStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/PhobosStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/DeimosStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/JupiterStats/Stats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/SaturnStats/Stats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/UranusStats/Stats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/StarMapView/NeptuneStats/Stats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
+[connection signal="pressed" from="SafeArea/UI/BackButton" to="SafeArea/UI" method="_on_back_button_pressed"]
