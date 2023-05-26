@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://j8idixyaq84i"]
+[gd_scene load_steps=8 format=3 uid="uid://j8idixyaq84i"]
 
 [ext_resource type="Script" path="res://scripts/buildings/pad.gd" id="1_j0xvl"]
+[ext_resource type="PackedScene" uid="uid://codp2xoi6f7rg" path="res://scenes/buildings/construction.tscn" id="2_nci4h"]
 [ext_resource type="ArrayMesh" uid="uid://bn7oak3coaikq" path="res://assets/buildings/pad.obj" id="2_px768"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_emho6"]
 
@@ -28,11 +29,15 @@ _surfaces = [{
 script = ExtResource("1_j0xvl")
 steel_cost = 300
 
+[node name="Construction" parent="." instance=ExtResource("2_nci4h")]
+build_time = 30
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_chaw6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("2_px768")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -97,3 +102,5 @@ grow_vertical = 0
 theme = ExtResource("3_emho6")
 disabled = true
 text = "Lauch"
+
+[connection signal="finished" from="Construction" to="." method="_on_construction_finished"]

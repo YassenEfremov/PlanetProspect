@@ -8,13 +8,20 @@ var energy_capacity: int = 20
 
 
 func _ready():
-	$Timer.wait_time = energy_generation_interval
+	$GenerationTimer.wait_time = energy_generation_interval
 	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton"))
+	$Resources/Value.text = str(generated_energy)
+
+
+func _on_construction_finished():
+	$MeshInstance3D.show()
+	$solar_panel.show()
+	$Resources.show()
 	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/CollectButton"))
-	$Label3D.text = str(generated_energy)
+	$GenerationTimer.start()
 
 
-func _on_timer_timeout():
+func _on_generation_timer_timeout():
 	if generated_energy < energy_capacity:
 		generated_energy += energy_generation_rate
-		$Label3D.text = str(generated_energy)
+		$Resources/Value.text = str(generated_energy)

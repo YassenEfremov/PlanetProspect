@@ -8,18 +8,20 @@ var steel_capacity: int = 50
 
 
 func _ready():
-	$Timer.wait_time = steel_generation_interval
+	$GenerationTimer.wait_time = steel_generation_interval
 	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton"))
+	$Resources/Value.text = str(generated_steel)
+
+
+func _on_construction_finished():
+	$MeshInstance3D.show()
+	$steel_furnace.show()
+	$Resources.show()
 	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/CollectButton"))
-	$Label3D.text = str(generated_steel)
+	$GenerationTimer.start()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func _on_timer_timeout():
+func _on_generation_timer_timeout():
 	if generated_steel < steel_capacity:
 		generated_steel += steel_generation_rate
-		$Label3D.text = str(generated_steel)
+		$Resources/Value.text = str(generated_steel)

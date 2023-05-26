@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjomom275fkcg"]
+[gd_scene load_steps=8 format=3 uid="uid://bjomom275fkcg"]
 
 [ext_resource type="Script" path="res://scripts/buildings/storage.gd" id="1_qy11q"]
 [ext_resource type="ArrayMesh" uid="uid://d24o3h3n3nug7" path="res://assets/buildings/storage.obj" id="1_wsg6e"]
+[ext_resource type="PackedScene" uid="uid://codp2xoi6f7rg" path="res://scenes/buildings/construction.tscn" id="2_8dqbu"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="3_gsi0k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u8vca"]
@@ -26,12 +27,17 @@ _surfaces = [{
 
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_qy11q")
+steel_cost = 400
+
+[node name="Construction" parent="." instance=ExtResource("2_8dqbu")]
+build_time = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_u8vca")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("1_wsg6e")
 skeleton = NodePath("../..")
 
@@ -64,3 +70,5 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("3_gsi0k")
 text = "Remove"
+
+[connection signal="finished" from="Construction" to="." method="_on_construction_finished"]

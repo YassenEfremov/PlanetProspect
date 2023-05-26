@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bp12vj75q2c0a"]
+[gd_scene load_steps=26 format=3 uid="uid://bp12vj75q2c0a"]
 
 [ext_resource type="Script" path="res://scripts/buildings/solar_panel.gd" id="1_n4328"]
 [ext_resource type="Theme" uid="uid://yuqrvc1r73tw" path="res://themes/main.tres" id="2_02rgl"]
 [ext_resource type="Texture2D" uid="uid://bft7aboj62b25" path="res://assets/UI/energy.png" id="2_cxghn"]
+[ext_resource type="PackedScene" uid="uid://codp2xoi6f7rg" path="res://scenes/buildings/construction.tscn" id="2_ixo15"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jaso2"]
 size = Vector3(2, 1, 2)
@@ -212,12 +213,16 @@ _surfaces = [{
 script = ExtResource("1_n4328")
 steel_cost = 50
 
+[node name="Construction" parent="." instance=ExtResource("2_ixo15")]
+build_time = 10
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_jaso2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.5, 0)
+visible = false
 mesh = SubResource("ArrayMesh_6v0ps")
 skeleton = NodePath("")
 
@@ -226,6 +231,7 @@ visible = false
 mesh = SubResource("ArrayMesh_ctp5y")
 
 [node name="solar_panel" type="Node3D" parent="."]
+visible = false
 
 [node name="Plane" type="MeshInstance3D" parent="solar_panel"]
 transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.5, 0)
@@ -263,17 +269,21 @@ skeleton = NodePath("")
 visible = false
 mesh = SubResource("ArrayMesh_65dt6")
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="GenerationTimer" type="Timer" parent="."]
+wait_time = 3600.0
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 2, 0)
+[node name="Resources" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+
+[node name="Value" type="Label3D" parent="Resources"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
 billboard = 1
 text = "-"
 font_size = 144
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.4, 2, 0)
+[node name="Icon" type="Sprite3D" parent="Resources"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.4, 0, 0)
 billboard = 1
 texture = ExtResource("2_cxghn")
 
@@ -319,4 +329,5 @@ grow_vertical = 0
 theme = ExtResource("2_02rgl")
 text = "Collect"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="Construction" to="." method="_on_construction_finished"]
+[connection signal="timeout" from="GenerationTimer" to="." method="_on_generation_timer_timeout"]

@@ -27,7 +27,7 @@ func _process(delta):
 	$MeshInstance3D.rotate(axis, delta * rotation_speed)
 
 
-func select_building(building):
+func select_building(building: Building):
 #	var actions = building.get_node("Actions")
 #	if actions.get_parent():
 #		actions.get_parent().remove_child(actions)
@@ -41,7 +41,7 @@ func select_building(building):
 #	get_node("/root/Main/SafeArea/UI/MainView/Actions").show()
 
 
-func deselect_building(building):
+func deselect_building(building: Building):
 #	var actions = get_node("/root/Main/SafeArea/UI/MainView/Actions")
 #	if actions.get_parent():
 #		actions.get_parent().remove_child(actions)
@@ -54,7 +54,7 @@ func deselect_building(building):
 #	actions.hide()
 
 
-func click_building(building):
+func click_building(building: Building):
 	if !selected_building:
 		# Newly selected building
 		select_building(building)

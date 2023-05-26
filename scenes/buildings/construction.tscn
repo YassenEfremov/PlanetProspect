@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://codp2xoi6f7rg"]
+
+[ext_resource type="Script" path="res://scripts/buildings/construction.gd" id="1_rlape"]
+[ext_resource type="PackedScene" uid="uid://b6pw6bbnevln4" path="res://assets/buildings/construction.glb" id="2_3plxf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tlt27"]
+viewport_path = NodePath("ProgressBar/SubViewportContainer/SubViewport")
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_rlape")
+
+[node name="construction" parent="." instance=ExtResource("2_3plxf")]
+
+[node name="BuildTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProgressBar" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_tlt27")
+
+[node name="Value" type="Label3D" parent="ProgressBar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+text = "-"
+font_size = 96
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="ProgressBar"]
+offset_top = -64.0
+offset_right = 256.0
+offset_bottom = -32.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ProgressBar/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(256, 32)
+render_target_update_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="ProgressBar/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[connection signal="timeout" from="BuildTimer" to="." method="_on_build_timer_timeout"]
