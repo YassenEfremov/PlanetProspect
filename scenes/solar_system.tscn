@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://byjl5qmowhowv"]
+[gd_scene load_steps=73 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
@@ -25,9 +25,9 @@
 [ext_resource type="Script" path="res://scripts/ui/safe_area.gd" id="22_8j2mx"]
 [ext_resource type="Texture2D" uid="uid://diqa8orfo2n3i" path="res://assets/UI/arrow.png" id="22_qssxd"]
 [ext_resource type="Script" path="res://scripts/ui/main_view.gd" id="23_o252s"]
-[ext_resource type="Theme" uid="uid://c1xstvb5vh4n" path="res://themes/button.tres" id="24_vpvyu"]
 [ext_resource type="Texture2D" uid="uid://bxbs0ymwgt1sw" path="res://assets/UI/sparkles.png" id="25_idfl1"]
 [ext_resource type="Texture2D" uid="uid://c6c8f15lj7ejq" path="res://assets/UI/rocket.png" id="26_s50qm"]
+[ext_resource type="Theme" uid="uid://c1xstvb5vh4n" path="res://themes/button_space.tres" id="26_vo1gu"]
 [ext_resource type="Texture2D" uid="uid://b7sdsx6bxda3u" path="res://assets/UI/trophy.png" id="27_x4iq5"]
 [ext_resource type="Texture2D" uid="uid://dkypjrgx54ndm" path="res://assets/UI/build.png" id="28_52gwm"]
 [ext_resource type="Script" path="res://scripts/ui/news_panel.gd" id="29_wfb2y"]
@@ -37,10 +37,13 @@
 [ext_resource type="Texture2D" uid="uid://blt7ohd8mkraw" path="res://assets/UI/question-mark.png" id="33_a3y1u"]
 [ext_resource type="Texture2D" uid="uid://be1i6pv2l4yph" path="res://assets/UI/bucket.png" id="34_cmybn"]
 [ext_resource type="Script" path="res://scripts/ui/build_view.gd" id="35_2jexq"]
+[ext_resource type="Texture2D" uid="uid://bg22tjvcawis1" path="res://assets/UI/action_button_disabled.png" id="35_i5u0t"]
 [ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace.png" id="36_poevk"]
 [ext_resource type="Texture2D" uid="uid://d0aakepkqews0" path="res://assets/UI/steel.png" id="37_jd6vv"]
 [ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel2.png" id="38_niita"]
+[ext_resource type="Texture2D" uid="uid://d1btgtqk6lp51" path="res://assets/UI/action_button_normal.png" id="38_ram0f"]
 [ext_resource type="Texture2D" uid="uid://b0megwy0cvjx4" path="res://assets/buildings/storage.png" id="39_4cf2i"]
+[ext_resource type="Texture2D" uid="uid://cjokujbwodstt" path="res://assets/UI/action_button_pressed.png" id="39_hvnhx"]
 [ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/lauch_pad.png" id="40_wef8k"]
 [ext_resource type="Script" path="res://scripts/ui/star_map_view.gd" id="41_x74bm"]
 [ext_resource type="Texture2D" uid="uid://ybehxo6wm81y" path="res://assets/UI/planet.png" id="42_sc6qh"]
@@ -53,9 +56,9 @@
 [ext_resource type="Theme" uid="uid://dfj17anyx43t6" path="res://themes/stat.tres" id="47_eo3ud"]
 [ext_resource type="Script" path="res://scripts/ui/trips_view.gd" id="49_07b3o"]
 [ext_resource type="Script" path="res://scripts/resources.gd" id="51_kdxlg"]
-[ext_resource type="Theme" uid="uid://dik8ofd36ssnk" path="res://themes/button_sec.tres" id="51_kkiq2"]
 [ext_resource type="Texture2D" uid="uid://bft7aboj62b25" path="res://assets/UI/energy.png" id="52_1gsyu"]
 [ext_resource type="Texture2D" uid="uid://b40a0b6t15xdp" path="res://assets/UI/target.png" id="52_oc144"]
+[ext_resource type="Theme" uid="uid://dik8ofd36ssnk" path="res://themes/button_action.tres" id="52_prdlb"]
 [ext_resource type="Texture2D" uid="uid://ctiofqmnu1i5x" path="res://assets/UI/back.png" id="53_rfldv"]
 
 [sub_resource type="Environment" id="Environment_5r7c1"]
@@ -448,7 +451,7 @@ layout_mode = 1
 offset_top = 32.0
 offset_right = 96.0
 offset_bottom = 128.0
-theme = ExtResource("24_vpvyu")
+theme = ExtResource("26_vo1gu")
 icon_alignment = 1
 expand_icon = true
 
@@ -460,9 +463,8 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -40.0
-offset_top = -23.0
+offset_top = -28.0
 offset_right = 40.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Star Map"
@@ -476,9 +478,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -39.0
+offset_top = -40.0
 offset_right = 32.0
-offset_bottom = 25.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("25_idfl1")
@@ -487,16 +489,29 @@ stretch_mode = 4
 
 [node name="TripsButton" type="Button" parent="SafeArea/UI/MainView"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -128.0
+offset_top = 520.0
 offset_right = 96.0
-offset_bottom = -32.0
-grow_vertical = 0
-theme = ExtResource("24_vpvyu")
+offset_bottom = 616.0
+theme = ExtResource("26_vo1gu")
 icon_alignment = 1
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/TripsButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -36.0
+offset_right = 28.0
+offset_bottom = 19.9999
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_s50qm")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="SafeArea/UI/MainView/TripsButton"]
 layout_mode = 1
@@ -506,30 +521,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -40.0
-offset_top = -23.0
+offset_top = -28.0
 offset_right = 40.0
-offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Trips"
 horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/TripsButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("26_s50qm")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="AchievementsButton" type="Button" parent="SafeArea/UI/MainView"]
 visible = false
@@ -538,7 +535,7 @@ offset_left = 64.0
 offset_top = 144.0
 offset_right = 128.0
 offset_bottom = 208.0
-theme = ExtResource("24_vpvyu")
+theme = ExtResource("26_vo1gu")
 icon_alignment = 1
 expand_icon = true
 
@@ -589,7 +586,7 @@ offset_right = -32.0
 offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("24_vpvyu")
+theme = ExtResource("26_vo1gu")
 
 [node name="Label" type="Label" parent="SafeArea/UI/MainView/BuildButton"]
 layout_mode = 1
@@ -599,9 +596,8 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -40.0
-offset_top = -24.0
+offset_top = -28.0
 offset_right = 40.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Build"
@@ -617,7 +613,7 @@ anchor_bottom = 0.5
 offset_left = -32.0
 offset_top = -40.0
 offset_right = 32.0
-offset_bottom = 24.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("28_52gwm")
@@ -673,37 +669,23 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -192.0
-offset_top = -96.0
+offset_top = -128.0
 offset_right = 192.0
-offset_bottom = -32.0
+offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 script = ExtResource("30_7gu2d")
 
-[node name="RemoveBuildingButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
+[node name="RemoveBuildingButton" type="TextureButton" parent="SafeArea/UI/MainView/Actions"]
 visible = false
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-text = "
-
-Remove"
-
-[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/RemoveBuildingButton"]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
-offset_right = 40.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Remove"
-horizontal_alignment = 1
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/RemoveBuildingButton"]
 layout_mode = 1
@@ -712,130 +694,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.5
-offset_top = -25.5
-offset_right = 20.5
-offset_bottom = 14.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("31_powc8")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="AddRocketButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
-visible = false
-layout_mode = 2
-text = "
-
-Add Rocket"
-
-[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/AddRocketButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -25.5
-offset_right = 20.0
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("32_2seaf")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="DestinationButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
-visible = false
-layout_mode = 2
-text = "
-
-Destination"
-
-[node name="Icon" type="TextureRect" parent="SafeArea/UI/MainView/Actions/DestinationButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.5
-offset_top = -25.5
-offset_right = 20.5
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_a3y1u")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="LaunchButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
-visible = false
-layout_mode = 2
-disabled = true
-text = "
-
-Launch"
-
-[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/LaunchButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.5
-offset_top = -25.5
-offset_right = 20.5
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("26_s50qm")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CollectButton" type="Button" parent="SafeArea/UI/MainView/Actions"]
-visible = false
-layout_mode = 2
-text = "
-
-Collect"
-
-[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/CollectButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -19.5
-offset_top = -25.5
-offset_right = 20.5
-offset_bottom = 14.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("34_cmybn")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="CancelButton" type="Button" parent="SafeArea/UI/MainView"]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -120.0
-offset_right = 40.0
-offset_bottom = -40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("24_vpvyu")
-
-[node name="Label" type="Label" parent="SafeArea/UI/MainView/CancelButton"]
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/RemoveBuildingButton"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -845,7 +714,216 @@ anchor_bottom = 1.0
 offset_left = -40.0
 offset_top = -24.0
 offset_right = 40.0
-offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Remove"
+horizontal_alignment = 1
+
+[node name="AddRocketButton" type="TextureButton" parent="SafeArea/UI/MainView/Actions"]
+visible = false
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/AddRocketButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_2seaf")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/AddRocketButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 11
+text = "Add rocket"
+horizontal_alignment = 1
+
+[node name="DestinationButton" type="TextureButton" parent="SafeArea/UI/MainView/Actions"]
+visible = false
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Icon" type="TextureRect" parent="SafeArea/UI/MainView/Actions/DestinationButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_a3y1u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/DestinationButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 11
+text = "Destination"
+horizontal_alignment = 1
+
+[node name="LaunchButton" type="TextureButton" parent="SafeArea/UI/MainView/Actions"]
+visible = false
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/LaunchButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_s50qm")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/LaunchButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Launch"
+horizontal_alignment = 1
+
+[node name="CollectButton" type="TextureButton" parent="SafeArea/UI/MainView/Actions"]
+visible = false
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/MainView/Actions/CollectButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_cmybn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/Actions/CollectButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Collect"
+horizontal_alignment = 1
+
+[node name="CancelButton" type="TextureButton" parent="SafeArea/UI/MainView"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -128.0
+offset_right = 40.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/MainView/CancelButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -28.0
+offset_right = 40.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Cancel"
@@ -1162,12 +1240,10 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="PlanetButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme = ExtResource("26_vo1gu")
 toggle_mode = true
-button_pressed = true
-text = "
-
-Planets"
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/PlanetButton"]
 layout_mode = 1
@@ -1176,10 +1252,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -30.5
-offset_right = 24.0
-offset_bottom = 17.5
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("42_sc6qh")
@@ -1187,12 +1263,10 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="MoonButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme = ExtResource("26_vo1gu")
 toggle_mode = true
-button_pressed = true
-text = "
-
-Moons"
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/MoonButton"]
 layout_mode = 1
@@ -1202,9 +1276,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -25.5
+offset_top = -20.0
 offset_right = 20.0
-offset_bottom = 14.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("43_2rc3n")
@@ -1212,12 +1286,10 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="StarButton" type="Button" parent="SafeArea/UI/StarMapView/Actions"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+theme = ExtResource("26_vo1gu")
 toggle_mode = true
-button_pressed = true
-text = "
-
-Stars"
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/Actions/StarButton"]
 layout_mode = 1
@@ -1226,10 +1298,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.5
-offset_top = -25.5
-offset_right = 20.5
-offset_bottom = 14.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("44_u60pq")
@@ -1385,7 +1457,8 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MercuryStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/MercuryStats"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1395,13 +1468,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MercuryStats/DestButton"]
 layout_mode = 1
@@ -1410,15 +1485,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MercuryStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="VenusStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -1569,7 +1660,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/VenusStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/VenusStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1580,13 +1671,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/VenusStats/DestButton"]
 layout_mode = 1
@@ -1595,15 +1688,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/VenusStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="EarthStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -1754,7 +1863,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/EarthStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/EarthStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1765,13 +1874,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/EarthStats/DestButton"]
 layout_mode = 1
@@ -1780,15 +1891,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/EarthStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="MoonStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -1939,7 +2066,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MoonStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/MoonStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -1950,13 +2077,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MoonStats/DestButton"]
 layout_mode = 1
@@ -1965,15 +2094,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MoonStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="MarsStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -2124,7 +2269,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/MarsStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/MarsStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2135,13 +2280,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/MarsStats/DestButton"]
 layout_mode = 1
@@ -2150,15 +2297,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/MarsStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="PhobosStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -2309,7 +2472,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/PhobosStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/PhobosStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2320,13 +2483,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/PhobosStats/DestButton"]
 layout_mode = 1
@@ -2335,15 +2500,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/PhobosStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="DeimosStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -2494,7 +2675,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "km"
 
-[node name="DestButton" type="Button" parent="SafeArea/UI/StarMapView/DeimosStats"]
+[node name="DestButton" type="TextureButton" parent="SafeArea/UI/StarMapView/DeimosStats"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -2505,13 +2686,15 @@ anchor_bottom = 1.0
 offset_left = -48.0
 offset_top = 16.0
 offset_right = 48.0
-offset_bottom = 96.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = ExtResource("51_kkiq2")
-text = "
-
-Choose"
+theme = ExtResource("52_prdlb")
+texture_normal = ExtResource("38_ram0f")
+texture_pressed = ExtResource("39_hvnhx")
+texture_disabled = ExtResource("35_i5u0t")
+ignore_texture_size = true
+stretch_mode = 4
 
 [node name="Icon" type="TextureRect" parent="SafeArea/UI/StarMapView/DeimosStats/DestButton"]
 layout_mode = 1
@@ -2520,15 +2703,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 16.0
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("52_oc144")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/StarMapView/DeimosStats/DestButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 32.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Choose"
+horizontal_alignment = 1
 
 [node name="JupiterStats" type="Panel" parent="SafeArea/UI/StarMapView"]
 visible = false
@@ -3338,17 +3537,44 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="SafeArea/UI"]
 visible = false
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -128.0
+offset_top = 520.0
 offset_right = 96.0
-offset_bottom = -32.0
-grow_vertical = 0
-theme = ExtResource("24_vpvyu")
-icon = ExtResource("53_rfldv")
+offset_bottom = 616.0
+theme = ExtResource("26_vo1gu")
+icon_alignment = 1
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="SafeArea/UI/BackButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("53_rfldv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="SafeArea/UI/BackButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -28.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+horizontal_alignment = 1
 
 [node name="Message" type="Label" parent="SafeArea/UI"]
 layout_mode = 1

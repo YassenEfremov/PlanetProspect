@@ -37,17 +37,17 @@ func select_body(body):
 
 func _on_planet_button_toggled(button_pressed: bool):
 #	planets_shown = !planets_shown
-	$Actions/PlanetButton/Icon.modulate = Color.WHITE if button_pressed else Color.DIM_GRAY
+	$Actions/PlanetButton/Icon.modulate = Color(0.3, 0.3, 0.3) if button_pressed else Color.WHITE
 
 
 func _on_moon_button_toggled(button_pressed: bool):
 #	moons_shown = !moons_shown
-	$Actions/MoonButton/Icon.modulate = Color.WHITE if button_pressed else Color.DIM_GRAY
+	$Actions/MoonButton/Icon.modulate = Color(0.3, 0.3, 0.3) if button_pressed else Color.WHITE
 
 
 func _on_star_button_toggled(button_pressed: bool):
 #	stars_shown = !stars_shown
-	$Actions/StarButton/Icon.modulate = Color.WHITE if button_pressed else Color.DIM_GRAY
+	$Actions/StarButton/Icon.modulate = Color(0.3, 0.3, 0.3) if button_pressed else Color.WHITE
 
 
 func _on_dest_button_pressed():
