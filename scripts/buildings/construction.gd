@@ -31,6 +31,6 @@ func _process(delta):
 
 func _on_build_timer_timeout():
 	hide()
-	if get_node("/root/Main/SafeArea/UI").selected_planet.selected_building:
-		get_node("/root/Main/SafeArea/UI").selected_planet.deselect_building($"../")
+	if $"/root/Main/SafeArea/UI".selected_planet.selected_building == get_parent():
+		$"/root/Main/SafeArea/UI".selected_planet.deselect_building($"../")
 	finished.emit()

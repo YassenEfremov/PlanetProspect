@@ -9,7 +9,7 @@ var steel_capacity: int = 50
 
 func _ready():
 	$GenerationTimer.wait_time = steel_generation_interval
-	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton"))
+	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton")
 	$Resources/Value.text = str(generated_steel)
 
 
@@ -17,7 +17,7 @@ func _on_construction_finished():
 	$MeshInstance3D.show()
 	$steel_furnace.show()
 	$Resources.show()
-	action_buttons.push_back(get_node("/root/Main/SafeArea/UI/MainView/Actions/CollectButton"))
+	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/CollectButton")
 	$GenerationTimer.start()
 
 

@@ -42,6 +42,7 @@ mesh = ExtResource("1_wsg6e")
 skeleton = NodePath("../..")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
 visible = false
 mesh = SubResource("ArrayMesh_475sb")
 

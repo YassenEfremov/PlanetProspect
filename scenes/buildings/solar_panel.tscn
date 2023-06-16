@@ -227,6 +227,7 @@ mesh = SubResource("ArrayMesh_6v0ps")
 skeleton = NodePath("")
 
 [node name="Outline" type="MeshInstance3D" parent="MeshInstance3D"]
+unique_name_in_owner = true
 visible = false
 mesh = SubResource("ArrayMesh_ctp5y")
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://jbn5ioutwb4c"
-path="res://.godot/imported/steel_furnace.glb-d7e580e736cadc97fb54b5366eac1427.scn"
+uid="uid://boxawqlwe3efm"
+path="res://.godot/imported/earth.glb-03a703fcace140f9a6baf3ae82f5d085.scn"
 
 [deps]
 
-source_file="res://assets/buildings/steel_furnace.glb"
-dest_files=["res://.godot/imported/steel_furnace.glb-d7e580e736cadc97fb54b5366eac1427.scn"]
+source_file="res://assets/planets/earth/earth.glb"
+dest_files=["res://.godot/imported/earth.glb-03a703fcace140f9a6baf3ae82f5d085.scn"]
 
 [params]
 

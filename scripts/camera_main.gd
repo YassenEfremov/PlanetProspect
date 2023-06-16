@@ -8,7 +8,10 @@ var last_press_pos: Vector2
 
 
 func _ready():
-	focused_object = $"../CollisionShape3D"
+	# Not great, the focused object should be the planet itself, BUT that
+	# can't happen because the planet has only global position coordinates
+	# => the camera zooms sideways (grr)
+	focused_object = $"../Center"
 
 
 func _unhandled_input(event):
@@ -75,7 +78,7 @@ func camera_rotate(drag: InputEventScreenDrag):
 
 
 func camera_zoom(drag1: InputEventScreenDrag, drag2: InputEventScreenDrag):
-	MIN_ZOOM = focused_object.get_shape().radius * 1.5
+	MIN_ZOOM = get_parent().radius * 1.5
 	
 	# Calculate zoom
 	var zoom = drag1.position.distance_to(drag2.position) / (drag1.position - drag1.relative).distance_to(drag2.position - drag2.relative)

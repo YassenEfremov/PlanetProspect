@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1qj44d4javg1"
-path="res://.godot/imported/steel_furnace.png-11fe8c142e704b6c2d2e40989d4aec1f.ctex"
+uid="uid://dui86ed5wh2bp"
+path="res://.godot/imported/lauch_pad.png-42e45f1fca7c83302f867c575e204269.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildings/steel_furnace.png"
-dest_files=["res://.godot/imported/steel_furnace.png-11fe8c142e704b6c2d2e40989d4aec1f.ctex"]
+source_file="res://assets/buildings/pad/lauch_pad.png"
+dest_files=["res://.godot/imported/lauch_pad.png-42e45f1fca7c83302f867c575e204269.ctex"]
 
 [params]
 

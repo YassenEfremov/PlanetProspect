@@ -2,18 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l0houscuw2uo"
-path.s3tc="res://.godot/imported/venus.png-059d519f75509e839b35e4fbf3f0ede0.s3tc.ctex"
-path.etc2="res://.godot/imported/venus.png-059d519f75509e839b35e4fbf3f0ede0.etc2.ctex"
+uid="uid://cl2rt320gc4lp"
+path.s3tc="res://.godot/imported/mars_mars.png-21ef7cb82200069bbc73e0179966d968.s3tc.ctex"
+path.etc2="res://.godot/imported/mars_mars.png-21ef7cb82200069bbc73e0179966d968.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/planets/venus.png"
-dest_files=["res://.godot/imported/venus.png-059d519f75509e839b35e4fbf3f0ede0.s3tc.ctex", "res://.godot/imported/venus.png-059d519f75509e839b35e4fbf3f0ede0.etc2.ctex"]
+source_file="res://assets/planets/mars/mars_mars.png"
+dest_files=["res://.godot/imported/mars_mars.png-21ef7cb82200069bbc73e0179966d968.s3tc.ctex", "res://.godot/imported/mars_mars.png-21ef7cb82200069bbc73e0179966d968.etc2.ctex"]
 
 [params]
 

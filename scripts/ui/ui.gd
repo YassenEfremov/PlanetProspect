@@ -25,7 +25,7 @@ func select_planet(planet):
 #		get_node("/root/Main/SafeArea/UI").add_child(actions)
 		
 		selected_planet = planet
-		planet.get_node("MeshInstance3D/Outline").visible = true
+		planet.get_node("%Outline").visible = true
 		planet.get_node("Axis").visible = true
 #		actions.show()
 #		get_node("/root/Main/SafeArea/UI/MainView/Actions").show()
@@ -35,10 +35,10 @@ func select_planet(planet):
 			# Change selected planet
 #			get_node("/root/Main/SafeArea/UI").remove_child(selected_planet.get_node("Actions"))
 
-			selected_planet.get_node("MeshInstance3D/Outline").visible = false
+			selected_planet.get_node("%Outline").visible = false
 			selected_planet.get_node("Axis").visible = false
 			selected_planet = planet
-			planet.get_node("MeshInstance3D/Outline").visible = true
+			planet.get_node("%Outline").visible = true
 			planet.get_node("Axis").visible = true
 		
 		else:
@@ -49,7 +49,7 @@ func select_planet(planet):
 #			planet.add_child(actions)
 			
 			selected_planet = null
-			planet.get_node("MeshInstance3D/Outline").visible = false
+			planet.get_node("%Outline").visible = false
 			planet.get_node("Axis").visible = false
 #			actions.hide()
 #			get_node("/root/Main/SafeArea/UI/MainView/Actions").hide()

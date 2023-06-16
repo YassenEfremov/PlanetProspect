@@ -2,3 +2,5 @@
 
 [resource]
 default_font_size = 32
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 10

@@ -2,18 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdcw21b7wvad2"
-path.s3tc="res://.godot/imported/mercury.png-31194a0112d4d168d120fe8114a384a5.s3tc.ctex"
-path.etc2="res://.godot/imported/mercury.png-31194a0112d4d168d120fe8114a384a5.etc2.ctex"
+uid="uid://dbsmnqnjek1dj"
+path.s3tc="res://.godot/imported/earth_earth.png-6d3ff1d8a1f2009399e18809a417e9a5.s3tc.ctex"
+path.etc2="res://.godot/imported/earth_earth.png-6d3ff1d8a1f2009399e18809a417e9a5.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/planets/mercury.png"
-dest_files=["res://.godot/imported/mercury.png-31194a0112d4d168d120fe8114a384a5.s3tc.ctex", "res://.godot/imported/mercury.png-31194a0112d4d168d120fe8114a384a5.etc2.ctex"]
+source_file="res://assets/planets/earth/earth_earth.png"
+dest_files=["res://.godot/imported/earth_earth.png-6d3ff1d8a1f2009399e18809a417e9a5.s3tc.ctex", "res://.godot/imported/earth_earth.png-6d3ff1d8a1f2009399e18809a417e9a5.etc2.ctex"]
 
 [params]
 

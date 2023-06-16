@@ -15,13 +15,13 @@ func _process(delta):
 
 
 func _on_visit_button_pressed():
-	if get_node("/root/Main/SafeArea/UI").selected_planet.selected_building:
-		get_node("/root/Main/SafeArea/UI").selected_planet.click_building(get_node("/root/Main/SafeArea/UI").selected_planet.selected_building)
-	get_node("/root/Main/SafeArea/UI").selected_planet.hide()
-	get_node("/root/Main/SafeArea/UI").selected_planet.get_node("UI").hide()
-	get_node("/root/Main/SafeArea/UI").select_planet(destination)
-	get_node("/root/Main/SafeArea/UI").selected_planet.show()
-	get_node("/root/Main/SafeArea/UI").selected_planet.get_node("UI").show()
+	if $"/root/Main/SafeArea/UI".selected_planet.selected_building:
+		$"/root/Main/SafeArea/UI".selected_planet.click_building($"/root/Main/SafeArea/UI".selected_planet.selected_building)
+	$"/root/Main/SafeArea/UI".selected_planet.hide()
+	$"/root/Main/SafeArea/UI".selected_planet.get_node("UI").hide()
+	$"/root/Main/SafeArea/UI".select_planet(destination)
+	$"/root/Main/SafeArea/UI".selected_planet.show()
+	$"/root/Main/SafeArea/UI".selected_planet.get_node("UI").show()
 	destination.get_node("Camera3D").make_current()
-	get_node("/root/Main/SafeArea/UI")._on_back_button_pressed()
+	$"/root/Main/SafeArea/UI"._on_back_button_pressed()
 	$"../../../".end_trip(self)

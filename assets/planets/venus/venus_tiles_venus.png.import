@@ -2,18 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buvidrl73j5f5"
-path.s3tc="res://.godot/imported/earth.png-5c77209a8261efaa89dd573662e61a35.s3tc.ctex"
-path.etc2="res://.godot/imported/earth.png-5c77209a8261efaa89dd573662e61a35.etc2.ctex"
+uid="uid://by1tdr6ydvf7p"
+path.s3tc="res://.godot/imported/venus_tiles_venus.png-1e6e896dfd8264884495a542e88b32ef.s3tc.ctex"
+path.etc2="res://.godot/imported/venus_tiles_venus.png-1e6e896dfd8264884495a542e88b32ef.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/planets/earth.png"
-dest_files=["res://.godot/imported/earth.png-5c77209a8261efaa89dd573662e61a35.s3tc.ctex", "res://.godot/imported/earth.png-5c77209a8261efaa89dd573662e61a35.etc2.ctex"]
+source_file="res://assets/planets/venus/venus_tiles_venus.png"
+dest_files=["res://.godot/imported/venus_tiles_venus.png-1e6e896dfd8264884495a542e88b32ef.s3tc.ctex", "res://.godot/imported/venus_tiles_venus.png-1e6e896dfd8264884495a542e88b32ef.etc2.ctex"]
 
 [params]
 

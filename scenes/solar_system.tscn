@@ -38,13 +38,13 @@
 [ext_resource type="Texture2D" uid="uid://be1i6pv2l4yph" path="res://assets/UI/bucket.png" id="34_cmybn"]
 [ext_resource type="Script" path="res://scripts/ui/build_view.gd" id="35_2jexq"]
 [ext_resource type="Texture2D" uid="uid://bg22tjvcawis1" path="res://assets/UI/action_button_disabled.png" id="35_i5u0t"]
-[ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace.png" id="36_poevk"]
+[ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace/steel_furnace.png" id="36_poevk"]
 [ext_resource type="Texture2D" uid="uid://d0aakepkqews0" path="res://assets/UI/steel.png" id="37_jd6vv"]
-[ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel2.png" id="38_niita"]
+[ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel/solar_panel2.png" id="38_niita"]
 [ext_resource type="Texture2D" uid="uid://d1btgtqk6lp51" path="res://assets/UI/action_button_normal.png" id="38_ram0f"]
 [ext_resource type="Texture2D" uid="uid://b0megwy0cvjx4" path="res://assets/buildings/storage.png" id="39_4cf2i"]
 [ext_resource type="Texture2D" uid="uid://cjokujbwodstt" path="res://assets/UI/action_button_pressed.png" id="39_hvnhx"]
-[ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/lauch_pad.png" id="40_wef8k"]
+[ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/pad/lauch_pad.png" id="40_wef8k"]
 [ext_resource type="Script" path="res://scripts/ui/star_map_view.gd" id="41_x74bm"]
 [ext_resource type="Texture2D" uid="uid://ybehxo6wm81y" path="res://assets/UI/planet.png" id="42_sc6qh"]
 [ext_resource type="Texture2D" uid="uid://b245qanhtnva8" path="res://assets/UI/moon_emoji.png" id="43_2rc3n"]
@@ -3537,6 +3537,7 @@ horizontal_alignment = 1
 
 [node name="BackButton" type="Button" parent="SafeArea/UI"]
 visible = false
+layout_mode = 0
 offset_top = 520.0
 offset_right = 96.0
 offset_bottom = 616.0

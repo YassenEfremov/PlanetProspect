@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bqwxb7ton22bu"
-path="res://.godot/imported/solar_panel.glb-51f6c61321bf2610cf31c5e0317eb781.scn"
+uid="uid://cv1ycxma7p2xe"
+path="res://.godot/imported/mercury_tiles.glb-031e4d7ea4a84e8baca1131dfb5201cd.scn"
 
 [deps]
 
-source_file="res://assets/buildings/solar_panel.glb"
-dest_files=["res://.godot/imported/solar_panel.glb-51f6c61321bf2610cf31c5e0317eb781.scn"]
+source_file="res://assets/planets/mercury/mercury_tiles.glb"
+dest_files=["res://.godot/imported/mercury_tiles.glb-031e4d7ea4a84e8baca1131dfb5201cd.scn"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://depx47tk4i54k"
-path="res://.godot/imported/solar_panel2.png-186c9b9814d994d5ff94d82bf88023d0.ctex"
+uid="uid://d2mqgfr7ttctu"
+path="res://.godot/imported/earth_real.jpg-4a43ed91745f69b059a5dc07e089bda3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildings/solar_panel2.png"
-dest_files=["res://.godot/imported/solar_panel2.png-186c9b9814d994d5ff94d82bf88023d0.ctex"]
+source_file="res://assets/planets/earth/earth_real.jpg"
+dest_files=["res://.godot/imported/earth_real.jpg-4a43ed91745f69b059a5dc07e089bda3.ctex"]
 
 [params]
 

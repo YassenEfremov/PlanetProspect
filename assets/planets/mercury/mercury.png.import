@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcghbtvguvpvs"
-path.s3tc="res://.godot/imported/mars.png-b9d8cf204c44f4f185fc69265aea112c.s3tc.ctex"
-path.etc2="res://.godot/imported/mars.png-b9d8cf204c44f4f185fc69265aea112c.etc2.ctex"
+uid="uid://cdcw21b7wvad2"
+path.s3tc="res://.godot/imported/mercury.png-9ccf1c645ba1f1d2a8f13997348fb88c.s3tc.ctex"
+path.etc2="res://.godot/imported/mercury.png-9ccf1c645ba1f1d2a8f13997348fb88c.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/planets/mars.png"
-dest_files=["res://.godot/imported/mars.png-b9d8cf204c44f4f185fc69265aea112c.s3tc.ctex", "res://.godot/imported/mars.png-b9d8cf204c44f4f185fc69265aea112c.etc2.ctex"]
+source_file="res://assets/planets/mercury/mercury.png"
+dest_files=["res://.godot/imported/mercury.png-9ccf1c645ba1f1d2a8f13997348fb88c.s3tc.ctex", "res://.godot/imported/mercury.png-9ccf1c645ba1f1d2a8f13997348fb88c.etc2.ctex"]
 
 [params]
 
