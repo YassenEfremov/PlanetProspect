@@ -2,16 +2,18 @@
 
 # Planet Prospect
 
-Нашият проект представлява мобилна игра, в която можете да създадете собствена космическа колония, като междувременно научавате много за заобикалящата ни Вселена.
+Build machines, collect resourses and launch rockets to explore the Solar system! All of that and more from within your own smartphone!
+
+> **Warning**
+> The game is currently under heavy development, beware of broken features or bugs!
 
 
-# In-game screenshots
+## In-game screenshots
 
-![image](https://user-images.githubusercontent.com/48584741/231423363-283bc941-3fec-4398-b9c5-7b00e6c1a39f.png)
-
-![image](https://user-images.githubusercontent.com/48584741/231423491-8f937b62-e2ed-4bd9-a2d7-a77988f1672a.png)
-
-![image](https://user-images.githubusercontent.com/48584741/231423565-cb9ed267-55a8-496d-b415-ae5cafffb965.png)
-
-![image](https://user-images.githubusercontent.com/48584741/231423652-6c0ad2ec-0e94-4110-9308-b313122655bf.png)
-
+![Screenshot_20230718-132043_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/6ca11fce-fa79-488d-bf4a-8eb9a3c4b527)
+![Screenshot_20230718-132140_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/5980903f-faa5-450d-9c3e-ebcec01246e6)
+![Screenshot_20230718-132151_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/81da580b-d719-4745-ae0c-71ae726d65d5)
+![Screenshot_20230718-132230_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/003465c9-a127-4c48-8bec-7d0da25a3a68)
+![Screenshot_20230718-132247_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/e6d412a4-b8ce-4b32-9dc5-51ad8bf0fa5b)
+![Screenshot_20230718-132320_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/a07dcca9-02e3-48d9-9746-12baf9bdc2e9)
+![Screenshot_20230718-132352_PlanetProspect](https://github.com/YassenEfremov/PlanetProspect/assets/48584741/40e3f7af-8ec1-431e-aea0-53e1fd866218)
