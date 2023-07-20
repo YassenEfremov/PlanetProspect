@@ -5,7 +5,7 @@ signal max_resources_reached
 
 
 func _on_remove_building_button_pressed():
-	$"../../".selected_planet.remove_building()
+	$"../../".selected_planet.remove_selected_building()
 
 
 func _on_add_rocket_button_pressed():

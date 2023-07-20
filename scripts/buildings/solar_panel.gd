@@ -9,7 +9,11 @@ var energy_capacity: int = 20
 
 func _ready():
 	$GenerationTimer.wait_time = energy_generation_interval
-	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton")
+	if not permanent:
+		action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/RemoveBuildingButton")
+		$Construction.start()
+	else:
+		$Construction._on_build_timer_timeout()
 	$Resources/Value.text = str(generated_energy)
 
 

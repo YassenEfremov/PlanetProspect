@@ -18,12 +18,12 @@ func _unhandled_input(event):
 				Global.touches[event.index] = event
 			else:
 				Global.touches.erase(event.index)
-	#			await $"../SolarSystem/Earth".click_building()
+				Global.drags.erase(event.index)
 
 		if event is InputEventScreenDrag:
-			Global.touches[event.index] = event
-			if Global.touches.size() == 2:
-				camera_zoom(Global.touches[0], Global.touches[1])
+			Global.drags[event.index] = event
+			if Global.drags.size() == 2:
+				camera_zoom(Global.drags[0], Global.drags[1])
 
 
 func camera_zoom(drag1: InputEventScreenDrag, drag2: InputEventScreenDrag):

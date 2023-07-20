@@ -10,7 +10,6 @@ func _ready():
 	$BuildTimer.wait_time = build_time
 	$ProgressBar/SubViewportContainer/SubViewport/ProgressBar.max_value = build_time
 	$ProgressBar/SubViewportContainer/SubViewport/ProgressBar.value = $ProgressBar/SubViewportContainer/SubViewport/ProgressBar.max_value
-	$BuildTimer.start()
 
 
 func _process(delta):
@@ -31,6 +30,9 @@ func _process(delta):
 
 func _on_build_timer_timeout():
 	hide()
-	if $"/root/Main/SafeArea/UI".selected_planet.selected_building == get_parent():
+	if not get_parent().permanent and $"/root/Main/SafeArea/UI".selected_planet.selected_building == get_parent():
 		$"/root/Main/SafeArea/UI".selected_planet.deselect_building($"../")
 	finished.emit()
+
+func start():
+	$BuildTimer.start()

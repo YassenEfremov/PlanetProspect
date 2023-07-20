@@ -16,42 +16,46 @@ signal building_placed(building: Building)
 
 func _ready():
 	axis = Vector3(sin($Axis.rotation.x), cos($Axis.rotation.x), 0)
-#		await $UI/BuildingsLabel/Current.tree_entered
-#		await $UI/BuildingsLabel/Max.tree_entered
-	while not $UI/BuildingsLabel/Current or not $UI/BuildingsLabel/Max:
-		pass # Wait for child labels to load
+	
+	for tile in $RotatingStuff/Grid.get_children():
+		if tile.get_child_count() > 0:
+			var building: Building = tile.get_children()[0]
+			buildings[tile] = building
+			$UI/BuildingsLabel/Current.text = str(buildings.size())
+	
 	$UI/BuildingsLabel/Current.text = str(buildings.size())
 	$UI/BuildingsLabel/Max.text = str(max_buildings)
 
 
 func _process(delta):
-	$Area3D.rotate(axis, (1 / day_length) * delta)
+	$RotatingStuff.rotate(axis, (1 / day_length) * delta)
 
 
 func select_building(building: Building):
 	selected_building = building
 	building.get_node("%Outline").visible = true
+	for button in selected_building.action_buttons:
+		button.show()
 	
 	var tile = buildings.find_key(selected_building)
-	var selected_tile = ArrayMesh.new()
-	var selected_mat = StandardMaterial3D.new()
-	selected_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	selected_mat.albedo_color = Color(1.0, 1.0, 1.0, 0.5)
+	
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = tile.get_shape().get_faces()
-
-	selected_tile.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	selected_tile.surface_set_material(selected_tile.get_surface_count() - 1, selected_mat)
-	var m = MeshInstance3D.new()
-	m.mesh = selected_tile
-	m.name = "SelectedHighlight"
-	tile.add_child(m)
-	# The position of the selected building is basically the normal vector of the tile
-	m.position = selected_building.position.normalized() * 0.01
 	
-	for button in selected_building.action_buttons:
-		button.show()
+	var highlight_mat = StandardMaterial3D.new()
+	highlight_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	highlight_mat.albedo_color = Color(1.0, 1.0, 1.0, 0.5)
+
+	var highlight_mesh = ArrayMesh.new()
+	highlight_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	highlight_mesh.surface_set_material(highlight_mesh.get_surface_count() - 1, highlight_mat)
+	
+	var tile_highlight = MeshInstance3D.new()
+	tile_highlight.mesh = highlight_mesh
+	tile_highlight.name = "TileHighlight"
+	tile.add_child(tile_highlight)
+	tile_highlight.position += Vector3.UP * 0.01	# prevents texture flickering
 
 
 func deselect_building(building: Building):
@@ -59,7 +63,7 @@ func deselect_building(building: Building):
 		button.hide()
 	
 	var tile = buildings.find_key(selected_building)
-	tile.remove_child(tile.get_node("SelectedHighlight"))
+	tile.remove_child(tile.get_node("TileHighlight"))
 	
 	building.get_node("%Outline").visible = false
 	selected_building = null
@@ -87,21 +91,13 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 			last_press_pos = event.position
 			
 		if not event.pressed and building_to_place and event.position == last_press_pos:
-			var tile = $Area3D.shape_owner_get_owner($Area3D.shape_find_owner(shape_idx))
-			var tile_points = tile.get_shape().get_faces()
-#			if buildings[tile]:
-#				pass
+			var tile = $RotatingStuff/Grid.shape_owner_get_owner($RotatingStuff/Grid.shape_find_owner(shape_idx))
+			if buildings.has(tile):
+				return
 			
 			var building = building_to_place.instantiate()
 			tile.add_child(building) # This comes before setting the position and rotation!
 			building.scale = Vector3(0.5, 0.5, 0.5)
-			# This way of aligning with the normal works, no idea how, don't touch it for now
-			building.look_at_from_position(position, position - normal)
-			building.rotate_object_local(basis.x, PI/2)
-			# Each hexagon tile is made up of 4 triangles, the one we care about is the center one
-			# Vertecies 9, 10 and 11 are the center triangle's vertecies
-			# Therefore their average is the center of the tile
-			building.position = (tile_points[9] + tile_points[10] + tile_points[11]) / 3
 
 			buildings[tile] = building
 			building_placed.emit(building)
@@ -115,10 +111,13 @@ func _on_cancel_button_pressed():
 	building_to_place = null
 
 
-func remove_building():
-	buildings.find_key(selected_building).remove_child(selected_building)
-	buildings.erase(selected_building)
-	for button in selected_building.action_buttons:
+func remove_selected_building():
+	var building_copy = selected_building
+	deselect_building(selected_building)
+	
+	var tile = buildings.find_key(building_copy)
+	tile.remove_child(building_copy)
+	buildings.erase(tile)
+	for button in building_copy.action_buttons:
 		button.disabled = false
 	$UI/BuildingsLabel/Current.text = str(buildings.size())
-	click_building(selected_building)
