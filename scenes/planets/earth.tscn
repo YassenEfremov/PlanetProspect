@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://d0g2x5bwqslji"]
+[gd_scene load_steps=178 format=3 uid="uid://d0g2x5bwqslji"]
 
 [ext_resource type="Script" path="res://scripts/planet.gd" id="1_8l6jc"]
 [ext_resource type="Script" path="res://scripts/camera_main.gd" id="2_5dvrh"]
@@ -558,7 +558,18 @@ data = PackedVector3Array(1.1719, 0, 0.0337, -0.5155, 0, -1.0131, 0.6199, -0.001
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lbqog"]
 data = PackedVector3Array(-0.356, 0, -1.0693, -0.8132, 0, 0.857, -1.1369, -0.0016, -0.2417, -0.8132, 0, 0.857, 1.1481, 0, 0.2183, 0.3532, 0.0032, 1.108, 1.1481, 0, 0.2183, -0.356, 0, -1.0693, 0.7626, -0.0016, -0.8603, -0.8132, 0, 0.857, -0.356, 0, -1.0693, 1.1481, 0, 0.2183)
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="TorusMesh" id="TorusMesh_shwt0"]
+inner_radius = 384.4
+outer_radius = 385.0
+
+[sub_resource type="Curve3D" id="Curve3D_eyg2o"]
+_data = {
+"points": PackedVector3Array(-192, 0, 0, 192, 0, 0, 0, 0, -384, 1, 0, -192, -1, 0, 192, 385, 0, 0, 192, 0, 0, -192, 0, 0, 0, 0, 384, 0, 0, 192, 0, 0, -192, -384, 0, 0, -192, 0, 0, 192, 0, 0, 0, 0, -384),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Earth" type="Node3D"]
 script = ExtResource("1_8l6jc")
 radius = 6.371
 day_length = 24.0
@@ -577,23 +588,21 @@ visible = false
 mesh = SubResource("CylinderMesh_2kb3t")
 
 [node name="RotatingStuff" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RotatingStuff"]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_swo2y")
 skeleton = NodePath("")
 metadata/_edit_lock_ = true
 
 [node name="Outline" type="MeshInstance3D" parent="RotatingStuff"]
 unique_name_in_owner = true
-transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 visible = false
 mesh = SubResource("ArrayMesh_rwyfj")
 skeleton = NodePath("")
 
 [node name="Grid" type="Area3D" parent="RotatingStuff"]
-transform = Transform3D(-4.37114e-08, 0.397148, 0.917755, 0, 0.917755, -0.397148, -1, -1.73599e-08, -4.01163e-08, 0, 0, 0)
 
 [node name="Tile000" type="CollisionShape3D" parent="RotatingStuff/Grid"]
 transform = Transform3D(0.843913, -0.0741838, 0.531326, 0.0741838, -0.964742, -0.252525, 0.531326, 0.252525, -0.808655, -0.486113, -6.1334, 1.49967)
@@ -884,7 +893,6 @@ transform = Transform3D(0.999827, 0.0162064, -0.00916906, -0.0162064, 0.514911, 
 shape = SubResource("ConcavePolygonShape3D_h41cf")
 
 [node name="StaticBody3D" parent="RotatingStuff/Grid/Tile071" instance=ExtResource("4_k1s5o")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 permanent = true
 
 [node name="Tile072" type="CollisionShape3D" parent="RotatingStuff/Grid"]
@@ -1144,7 +1152,6 @@ transform = Transform3D(0.42263, 0.856236, 0.297058, -0.856236, 0.269794, 0.4405
 shape = SubResource("ConcavePolygonShape3D_tqetg")
 
 [node name="StaticBody3D" parent="RotatingStuff/Grid/Tile135" instance=ExtResource("4_tgv6q")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 permanent = true
 
 [node name="Tile136" type="CollisionShape3D" parent="RotatingStuff/Grid"]
@@ -1250,6 +1257,19 @@ shape = SubResource("ConcavePolygonShape3D_j5nfb")
 [node name="Tile161" type="CollisionShape3D" parent="RotatingStuff/Grid"]
 transform = Transform3D(0.902242, 0.309611, -0.300167, -0.309611, -0.0194249, -0.950665, -0.300167, 0.950665, 0.078333, 1.96894, -0.0367889, 6.05021)
 shape = SubResource("ConcavePolygonShape3D_lbqog")
+
+[node name="OrbitGuide" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.0888943, 0.996041, 0, 0.996041, -0.0888943, -1, -3.88569e-09, -4.35383e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("TorusMesh_shwt0")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.0888943, 0.996041, 0, 0.996041, -0.0888943, -1, -3.88569e-09, -4.35383e-08, 0, 0, 0)
+visible = false
+curve = SubResource("Curve3D_eyg2o")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-4.37107e-08, 0, -0.999985, 0, 1, 0, 0.999985, 0, -4.37107e-08, 0, 0, -384)
 
 [node name="UI" type="CanvasLayer" parent="."]
 

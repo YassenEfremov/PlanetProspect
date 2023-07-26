@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cekq41qgk3mkm"
-path="res://.godot/imported/solar_panel1.png-9330dfa2bf421612f62504bd64c336b9.ctex"
+uid="uid://ufo8a60hscdf"
+path="res://.godot/imported/steel_furnace_icon.png-31cee605ce29ba7ef70a88d65abe3bcc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildings/solar_panel/solar_panel1.png"
-dest_files=["res://.godot/imported/solar_panel1.png-9330dfa2bf421612f62504bd64c336b9.ctex"]
+source_file="res://assets/buildings/steel_furnace/steel_furnace_icon.png"
+dest_files=["res://.godot/imported/steel_furnace_icon.png-31cee605ce29ba7ef70a88d65abe3bcc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1qj44d4javg1"
-path="res://.godot/imported/steel_furnace.png-ba0f008e43af142aa11b5228bccd162a.ctex"
+uid="uid://cojbrmgxndjie"
+path="res://.godot/imported/tank_icon.png-b909ad9268b67bea69a93f6647425ce2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildings/steel_furnace/steel_furnace.png"
-dest_files=["res://.godot/imported/steel_furnace.png-ba0f008e43af142aa11b5228bccd162a.ctex"]
+source_file="res://assets/buildings/tank_icon.png"
+dest_files=["res://.godot/imported/tank_icon.png-b909ad9268b67bea69a93f6647425ce2.ctex"]
 
 [params]
 

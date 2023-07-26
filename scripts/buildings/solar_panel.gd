@@ -18,7 +18,6 @@ func _ready():
 
 
 func _on_construction_finished():
-	$MeshInstance3D.show()
 	$solar_panel.show()
 	$Resources.show()
 	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/CollectButton")

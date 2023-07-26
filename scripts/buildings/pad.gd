@@ -18,7 +18,7 @@ func launch_rocket():
 
 
 func _on_construction_finished():
-	$MeshInstance3D.show()
+	$pad.show()
 	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/AddRocketButton")
 	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/DestinationButton")
 	action_buttons.push_back($"/root/Main/SafeArea/UI/MainView/Actions/LaunchButton")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://byjl5qmowhowv"]
+[gd_scene load_steps=76 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
@@ -38,18 +38,18 @@
 [ext_resource type="Texture2D" uid="uid://be1i6pv2l4yph" path="res://assets/UI/bucket.png" id="34_cmybn"]
 [ext_resource type="Script" path="res://scripts/ui/build_view.gd" id="35_2jexq"]
 [ext_resource type="Texture2D" uid="uid://bg22tjvcawis1" path="res://assets/UI/action_button_disabled.png" id="35_i5u0t"]
-[ext_resource type="Texture2D" uid="uid://c1qj44d4javg1" path="res://assets/buildings/steel_furnace/steel_furnace.png" id="36_poevk"]
 [ext_resource type="Texture2D" uid="uid://d0aakepkqews0" path="res://assets/UI/steel.png" id="37_jd6vv"]
-[ext_resource type="Texture2D" uid="uid://depx47tk4i54k" path="res://assets/buildings/solar_panel/solar_panel2.png" id="38_niita"]
 [ext_resource type="Texture2D" uid="uid://d1btgtqk6lp51" path="res://assets/UI/action_button_normal.png" id="38_ram0f"]
-[ext_resource type="Texture2D" uid="uid://b0megwy0cvjx4" path="res://assets/buildings/storage.png" id="39_4cf2i"]
 [ext_resource type="Texture2D" uid="uid://cjokujbwodstt" path="res://assets/UI/action_button_pressed.png" id="39_hvnhx"]
-[ext_resource type="Texture2D" uid="uid://dui86ed5wh2bp" path="res://assets/buildings/pad/lauch_pad.png" id="40_wef8k"]
 [ext_resource type="Script" path="res://scripts/ui/star_map_view.gd" id="41_x74bm"]
+[ext_resource type="Texture2D" uid="uid://ufo8a60hscdf" path="res://assets/buildings/steel_furnace/steel_furnace_icon.png" id="42_gf5bc"]
 [ext_resource type="Texture2D" uid="uid://ybehxo6wm81y" path="res://assets/UI/planet.png" id="42_sc6qh"]
 [ext_resource type="Texture2D" uid="uid://b245qanhtnva8" path="res://assets/UI/moon_emoji.png" id="43_2rc3n"]
+[ext_resource type="Texture2D" uid="uid://0n2t16t0bgla" path="res://assets/buildings/solar_panel/solar_panel_icon2.png" id="44_3pwvb"]
 [ext_resource type="Texture2D" uid="uid://dql4l23uwr37" path="res://assets/UI/star.png" id="44_u60pq"]
+[ext_resource type="Texture2D" uid="uid://5wjsm7juwhxm" path="res://assets/buildings/storage/storage_icon.png" id="45_8mecd"]
 [ext_resource type="Texture2D" uid="uid://dph75fmaq6rxh" path="res://assets/UI/diameter_icon.png" id="45_bwhl4"]
+[ext_resource type="Texture2D" uid="uid://dirabqj4naj2k" path="res://assets/buildings/pad/pad_icon.png" id="46_0oewb"]
 [ext_resource type="Theme" uid="uid://bo0gq7hajv2ta" path="res://themes/stats_panel.tres" id="46_27uux"]
 [ext_resource type="Texture2D" uid="uid://br6hw8qy17o6j" path="res://assets/UI/axial_tilt_icon.png" id="46_rjcer"]
 [ext_resource type="Texture2D" uid="uid://cp42nj8ogl0wx" path="res://assets/UI/distance_icon.png" id="47_2l6ts"]
@@ -85,11 +85,28 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_8bvxb"]
 radius = 7.149
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_riy26"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6vtq"]
+shading_mode = 0
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_78gs5"]
-material = SubResource("StandardMaterial3D_riy26")
+[sub_resource type="CylinderMesh" id="CylinderMesh_dc5vw"]
+material = SubResource("StandardMaterial3D_g6vtq")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_juveh"]
+shading_mode = 0
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_q6dur"]
+material = SubResource("StandardMaterial3D_juveh")
+top_radius = 0.2
+bottom_radius = 0.0
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ltii"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_jlisa"]
 length = 0.001
@@ -361,11 +378,35 @@ transform = Transform3D(0.119144, -7.90545e-09, -0.275327, -0.275327, -1.20349e-
 visible = false
 
 [node name="North" type="Node3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap/North"]
-mesh = SubResource("BoxMesh_78gs5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_dc5vw")
 skeleton = NodePath("../..")
+
+[node name="Mag" type="Node3D" parent="StarMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, -2)
+visible = false
+
+[node name="X" type="MeshInstance3D" parent="StarMap/Mag"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_q6dur")
+skeleton = NodePath("../..")
+
+[node name="Y" type="MeshInstance3D" parent="StarMap/Mag"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_q6dur")
+skeleton = NodePath("../X")
+
+[node name="Z" type="MeshInstance3D" parent="StarMap/Mag"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_q6dur")
+skeleton = NodePath("../X")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap/Mag"]
+mesh = SubResource("BoxMesh_8ltii")
 
 [node name="SafeArea" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -1024,7 +1065,7 @@ offset_right = 84.0
 offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("36_poevk")
+icon = ExtResource("42_gf5bc")
 
 [node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel1"]
 layout_mode = 1
@@ -1076,7 +1117,7 @@ offset_right = 84.0
 offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("38_niita")
+icon = ExtResource("44_3pwvb")
 
 [node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel2"]
 layout_mode = 1
@@ -1128,7 +1169,7 @@ offset_right = 84.0
 offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("39_4cf2i")
+icon = ExtResource("45_8mecd")
 
 [node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel3"]
 layout_mode = 1
@@ -1180,7 +1221,7 @@ offset_right = 84.0
 offset_bottom = 71.0
 grow_horizontal = 2
 grow_vertical = 2
-icon = ExtResource("40_wef8k")
+icon = ExtResource("46_0oewb")
 
 [node name="Label" type="Label" parent="SafeArea/UI/BuildView/GridContainer/Panel4"]
 layout_mode = 1

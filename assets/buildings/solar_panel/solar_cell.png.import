@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dui86ed5wh2bp"
-path="res://.godot/imported/lauch_pad.png-42e45f1fca7c83302f867c575e204269.ctex"
+uid="uid://dmwm6bxka73a0"
+path="res://.godot/imported/solar_cell.png-69c45af863dadee664136b9ae5278dae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/buildings/pad/lauch_pad.png"
-dest_files=["res://.godot/imported/lauch_pad.png-42e45f1fca7c83302f867c575e204269.ctex"]
+source_file="res://assets/buildings/solar_panel/solar_cell.png"
+dest_files=["res://.godot/imported/solar_cell.png-69c45af863dadee664136b9ae5278dae.ctex"]
 
 [params]
 

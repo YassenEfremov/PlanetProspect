@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b6pw6bbnevln4"
-path="res://.godot/imported/construction.glb-a97f6b4f292e2d4341e66b0f4bc99afb.scn"
+uid="uid://bw36kh5klwpj"
+path="res://.godot/imported/pad.gltf-ee45db162cd64b9396c2de300be98f99.scn"
 
 [deps]
 
-source_file="res://assets/buildings/construction.glb"
-dest_files=["res://.godot/imported/construction.glb-a97f6b4f292e2d4341e66b0f4bc99afb.scn"]
+source_file="res://assets/buildings/pad/pad.gltf"
+dest_files=["res://.godot/imported/pad.gltf-ee45db162cd64b9396c2de300be98f99.scn"]
 
 [params]
 

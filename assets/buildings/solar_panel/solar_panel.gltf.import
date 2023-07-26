@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://jbn5ioutwb4c"
-path="res://.godot/imported/steel_furnace.glb-337889aa9e6e6df8a5212640204aa2a1.scn"
+uid="uid://dd6ummn2861o8"
+path="res://.godot/imported/solar_panel.gltf-6d4a2a8431cf94fbb9c1fc6e961732e4.scn"
 
 [deps]
 
-source_file="res://assets/buildings/steel_furnace/steel_furnace.glb"
-dest_files=["res://.godot/imported/steel_furnace.glb-337889aa9e6e6df8a5212640204aa2a1.scn"]
+source_file="res://assets/buildings/solar_panel/solar_panel.gltf"
+dest_files=["res://.godot/imported/solar_panel.gltf-6d4a2a8431cf94fbb9c1fc6e961732e4.scn"]
 
 [params]
 

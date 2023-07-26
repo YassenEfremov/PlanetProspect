@@ -10,4 +10,4 @@ func _ready():
 
 
 func _on_construction_finished():
-	$MeshInstance3D.show()
+	$storage.show()

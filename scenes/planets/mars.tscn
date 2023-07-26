@@ -196,7 +196,7 @@ data = PackedVector3Array(0.3284, 0, -1.0309, -0.8569, 0, 0.6373, -0.8569, 0, -0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fwicg"]
 data = PackedVector3Array(0.8336, 0, 0.6373, -0.3191, 0, -1.0309, 0.8336, 0, -0.6371, -0.3191, 0, -1.0309, -0.3191, 0, 1.0311, -1.0315, 0, 0.0001, -0.3191, 0, -1.0309, 0.8336, 0, 0.6373, -0.3191, 0, 1.0311)
 
-[node name="Node3D" type="Node3D"]
+[node name="Mars" type="Node3D"]
 script = ExtResource("1_8l6jc")
 radius = 3.396
 day_length = 25.0

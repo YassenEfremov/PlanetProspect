@@ -33,7 +33,7 @@ func _process(delta):
 
 func select_building(building: Building):
 	selected_building = building
-	building.get_node("%Outline").visible = true
+#	building.get_node("%Outline").visible = true
 	for button in selected_building.action_buttons:
 		button.show()
 	
@@ -65,7 +65,7 @@ func deselect_building(building: Building):
 	var tile = buildings.find_key(selected_building)
 	tile.remove_child(tile.get_node("TileHighlight"))
 	
-	building.get_node("%Outline").visible = false
+#	building.get_node("%Outline").visible = false
 	selected_building = null
 
 
@@ -97,7 +97,6 @@ func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
 			
 			var building = building_to_place.instantiate()
 			tile.add_child(building) # This comes before setting the position and rotation!
-			building.scale = Vector3(0.5, 0.5, 0.5)
 
 			buildings[tile] = building
 			building_placed.emit(building)

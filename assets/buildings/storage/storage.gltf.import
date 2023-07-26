@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bqwxb7ton22bu"
-path="res://.godot/imported/solar_panel.glb-e37db3cd35ef429f10feb8b753940488.scn"
+uid="uid://mhln8s3kbciy"
+path="res://.godot/imported/storage.gltf-ab4d231438730f401de49ee6528f55c6.scn"
 
 [deps]
 
-source_file="res://assets/buildings/solar_panel/solar_panel.glb"
-dest_files=["res://.godot/imported/solar_panel.glb-e37db3cd35ef429f10feb8b753940488.scn"]
+source_file="res://assets/buildings/storage/storage.gltf"
+dest_files=["res://.godot/imported/storage.gltf-ab4d231438730f401de49ee6528f55c6.scn"]
 
 [params]
 
