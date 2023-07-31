@@ -5,10 +5,9 @@ var MIN_ZOOM: float
 var MAX_ZOOM: float = 1000
 
 
-func _process(delta):
-	rotate(basis.x, Input.get_gyroscope().x / 60)
-	rotate(basis.y, Input.get_gyroscope().y / 60)
-	rotate(basis.z, Input.get_gyroscope().z / 60)
+func _physics_process(delta):
+	# Orienting the star map is easier than orienting the camera
+	pass
 
 
 func _unhandled_input(event):
@@ -23,7 +22,7 @@ func _unhandled_input(event):
 		if event is InputEventScreenDrag:
 			Global.drags[event.index] = event
 			if Global.drags.size() == 2:
-				camera_zoom(Global.drags[0], Global.drags[1])
+				camera_zoom(Global.drags[0], Global.drags[1])	# hmmmm... breaks sometimes
 
 
 func camera_zoom(drag1: InputEventScreenDrag, drag2: InputEventScreenDrag):

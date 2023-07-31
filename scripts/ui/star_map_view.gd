@@ -10,6 +10,11 @@ var selected_destination = null
 #var stars_shown = true
 
 
+func _process(delta):
+	var cam = $"/root/Main/StarMap/Camera3D"
+	$Sensors.text = "x: %f\ny: %f\nz: %f" % [rad_to_deg(cam.rotation.x), rad_to_deg(cam.rotation.y), rad_to_deg(cam.rotation.z)]
+
+
 func select_body(body):
 	if !selected_body:
 		# Newly selected body

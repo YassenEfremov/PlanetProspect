@@ -10,12 +10,6 @@ func _ready():
 	select_planet($"../../SolarSystem/Earth")
 
 
-func _process(delta):
-	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
-#	$StarMapView/Sensors.text = "camera: %s" % str($"../Camera3D".rotation_degrees)
-	pass
-
-
 func select_planet(planet):
 	if !selected_planet:
 		# Newly selected planet
@@ -58,12 +52,13 @@ func select_planet(planet):
 func _on_star_map_button_pressed():
 	current_view = $StarMapView
 	$"../../SolarSystem".hide()
-#	$"../OmniLight3D".hide()
+	$"../../OmniLight3D".hide()
 	$MainView.hide()
 	$Resources.hide()
 	selected_planet.get_node("UI/BuildingsLabel").hide()
 
 	$"../../StarMap/Camera3D".make_current()
+	$"../../StarMap".orient()
 	$"../../StarMap".show()
 	$StarMapView.show()
 	$BackButton.show()

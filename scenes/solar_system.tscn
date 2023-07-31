@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://byjl5qmowhowv"]
+[gd_scene load_steps=77 format=3 uid="uid://byjl5qmowhowv"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_f70wa"]
 [ext_resource type="PackedScene" uid="uid://dlhf8cacbhqjd" path="res://scenes/planets/mercury.tscn" id="3_ayca5"]
@@ -66,12 +66,10 @@ background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(0.313726, 0.313726, 0.313726, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1utp8"]
-shading_mode = 0
-albedo_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yck4"]
 albedo_texture = ExtResource("11_p0dlg")
 
-[sub_resource type="SphereMesh" id="SphereMesh_ccror"]
+[sub_resource type="SphereMesh" id="SphereMesh_nfpu4"]
 flip_faces = true
 radius = 100.0
 height = 200.0
@@ -85,28 +83,33 @@ radius = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_8bvxb"]
 radius = 7.149
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6vtq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tx8r"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8mttx"]
+material = SubResource("StandardMaterial3D_5tx8r")
+size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ytyp7"]
 shading_mode = 0
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_dc5vw"]
-material = SubResource("StandardMaterial3D_g6vtq")
-top_radius = 0.2
-bottom_radius = 0.2
-height = 4.0
+[sub_resource type="CylinderMesh" id="CylinderMesh_j85n0"]
+material = SubResource("StandardMaterial3D_ytyp7")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.5
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_juveh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rmfc8"]
 shading_mode = 0
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0, 0, 1, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_q6dur"]
-material = SubResource("StandardMaterial3D_juveh")
-top_radius = 0.2
-bottom_radius = 0.0
-height = 1.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_8ltii"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="CylinderMesh" id="CylinderMesh_t2anr"]
+material = SubResource("StandardMaterial3D_rmfc8")
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.5
 
 [sub_resource type="Animation" id="Animation_jlisa"]
 length = 0.001
@@ -202,211 +205,223 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 811.16
 visible = false
 script = null
 
-[node name="StarMap" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
+[node name="StarMap" type="Node3D" parent="."]
 visible = false
-material_override = SubResource("StandardMaterial3D_1utp8")
-mesh = SubResource("SphereMesh_ccror")
 script = ExtResource("12_owcun")
 
-[node name="Camera3D" type="Camera3D" parent="StarMap"]
-script = ExtResource("12_q6aps")
+[node name="RotatingStuff" type="Node3D" parent="StarMap"]
 
-[node name="Mercury" type="Area3D" parent="StarMap" groups=["planets"]]
+[node name="Sky" type="MeshInstance3D" parent="StarMap/RotatingStuff"]
+material_override = SubResource("StandardMaterial3D_4yck4")
+mesh = SubResource("SphereMesh_nfpu4")
+skeleton = NodePath("../..")
+
+[node name="Mercury" type="Area3D" parent="StarMap/RotatingStuff" groups=["planets"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91, 6.91388, -21)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Mercury"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Mercury"]
 shape = SubResource("SphereShape3D_cc51d")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Mercury"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Mercury"]
 billboard = 1
 texture = ExtResource("14_rjqj7")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Mercury"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Mercury"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="Venus" type="Area3D" parent="StarMap" groups=["planets"]]
+[node name="Venus" type="Area3D" parent="StarMap/RotatingStuff" groups=["planets"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.4086, -6, -70.627)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Venus"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Venus"]
 shape = SubResource("SphereShape3D_cc51d")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Venus"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Venus"]
 billboard = 1
 texture = ExtResource("14_nu4gj")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Venus"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Venus"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="Earth" type="Area3D" parent="StarMap" groups=["planets"]]
+[node name="Earth" type="Area3D" parent="StarMap/RotatingStuff" groups=["planets"]]
 visible = false
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Earth"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Earth"]
 shape = SubResource("SphereShape3D_uoth4")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Earth"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Earth"]
 billboard = 1
 texture = ExtResource("16_bbryf")
 
-[node name="Moon" type="Area3D" parent="StarMap" groups=["moons"]]
+[node name="Moon" type="Area3D" parent="StarMap/RotatingStuff" groups=["moons"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 71, -43)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Moon"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Moon"]
 shape = SubResource("SphereShape3D_uoth4")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Moon"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Moon"]
 billboard = 1
 texture = ExtResource("17_jed64")
 
-[node name="Mars" type="Area3D" parent="StarMap" groups=["planets"]]
+[node name="Mars" type="Area3D" parent="StarMap/RotatingStuff" groups=["planets"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 18.9596, -80)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Mars"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Mars"]
 shape = SubResource("SphereShape3D_uoth4")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Mars"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Mars"]
 billboard = 1
 texture = ExtResource("16_bbryf")
 
-[node name="Phobos" type="Area3D" parent="StarMap" groups=["moons"]]
+[node name="Phobos" type="Area3D" parent="StarMap/RotatingStuff" groups=["moons"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 12, -82)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Phobos"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Phobos"]
 shape = SubResource("SphereShape3D_uoth4")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Phobos"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Phobos"]
 billboard = 1
 texture = ExtResource("17_jed64")
 
-[node name="Deimos" type="Area3D" parent="StarMap" groups=["moons"]]
+[node name="Deimos" type="Area3D" parent="StarMap/RotatingStuff" groups=["moons"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 22, -85)
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Deimos"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Deimos"]
 shape = SubResource("SphereShape3D_uoth4")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Deimos"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Deimos"]
 billboard = 1
 texture = ExtResource("17_jed64")
 
-[node name="Jupiter" type="Area3D" parent="StarMap"]
+[node name="Jupiter" type="Area3D" parent="StarMap/RotatingStuff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
 visible = false
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Jupiter"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Jupiter"]
 shape = SubResource("SphereShape3D_8bvxb")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Jupiter"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Jupiter"]
 visible = false
 billboard = 1
 texture = ExtResource("18_5u8yt")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Jupiter"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Jupiter"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="Saturn" type="Area3D" parent="StarMap"]
+[node name="Saturn" type="Area3D" parent="StarMap/RotatingStuff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
 visible = false
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Saturn"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Saturn"]
 shape = SubResource("SphereShape3D_8bvxb")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Saturn"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Saturn"]
 visible = false
 billboard = 1
 texture = ExtResource("18_5u8yt")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Saturn"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Saturn"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="Uranus" type="Area3D" parent="StarMap"]
+[node name="Uranus" type="Area3D" parent="StarMap/RotatingStuff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
 visible = false
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Uranus"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Uranus"]
 shape = SubResource("SphereShape3D_8bvxb")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Uranus"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Uranus"]
 visible = false
 billboard = 1
 texture = ExtResource("18_5u8yt")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Uranus"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Uranus"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="Neptune" type="Area3D" parent="StarMap"]
+[node name="Neptune" type="Area3D" parent="StarMap/RotatingStuff"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -25, -52)
 visible = false
 script = ExtResource("13_52fsq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/Neptune"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarMap/RotatingStuff/Neptune"]
 shape = SubResource("SphereShape3D_8bvxb")
 
-[node name="Icon" type="Sprite3D" parent="StarMap/Neptune"]
+[node name="Icon" type="Sprite3D" parent="StarMap/RotatingStuff/Neptune"]
 visible = false
 billboard = 1
 texture = ExtResource("18_5u8yt")
 
-[node name="Locked" type="Sprite3D" parent="StarMap/Neptune"]
+[node name="Locked" type="Sprite3D" parent="StarMap/RotatingStuff/Neptune"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 billboard = 1
 texture = ExtResource("15_gpnof")
 
-[node name="ProximaCentauri" parent="StarMap" groups=["stars"] instance=ExtResource("19_p3ky3")]
+[node name="ProximaCentauri" parent="StarMap/RotatingStuff" groups=["stars"] instance=ExtResource("19_p3ky3")]
 transform = Transform3D(0.119144, -7.90545e-09, -0.275327, -0.275327, -1.20349e-08, -0.119144, -7.90545e-09, 0.3, -1.20349e-08, -2.2946, -4.21267, -8.64075)
 visible = false
 
-[node name="North" type="Node3D" parent="StarMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap/North"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_dc5vw")
+[node name="Ground" type="MeshInstance3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("PlaneMesh_8mttx")
 skeleton = NodePath("../..")
 
-[node name="Mag" type="Node3D" parent="StarMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, -2)
+[node name="NorthLabel" type="Label3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 10)
+modulate = Color(1, 0, 0, 1)
+text = "North"
+font_size = 96
+
+[node name="WestLabel" type="Label3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+modulate = Color(0.588235, 0.588235, 0.588235, 1)
+text = "West"
+font_size = 96
+
+[node name="SouthLabel" type="Label3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+modulate = Color(0, 0, 1, 1)
+text = "South"
+font_size = 96
+
+[node name="EastLabel" type="Label3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+modulate = Color(0.588235, 0.588235, 0.588235, 1)
+text = "East"
+font_size = 96
+
+[node name="NorthArrow" type="MeshInstance3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 0.25)
 visible = false
+mesh = SubResource("CylinderMesh_j85n0")
 
-[node name="X" type="MeshInstance3D" parent="StarMap/Mag"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_q6dur")
-skeleton = NodePath("../..")
+[node name="SouthArrow" type="MeshInstance3D" parent="StarMap/RotatingStuff"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1, -0.25)
+visible = false
+mesh = SubResource("CylinderMesh_t2anr")
 
-[node name="Y" type="MeshInstance3D" parent="StarMap/Mag"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_q6dur")
-skeleton = NodePath("../X")
-
-[node name="Z" type="MeshInstance3D" parent="StarMap/Mag"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_q6dur")
-skeleton = NodePath("../X")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StarMap/Mag"]
-mesh = SubResource("BoxMesh_8ltii")
+[node name="Camera3D" type="Camera3D" parent="StarMap"]
+script = ExtResource("12_q6aps")
 
 [node name="SafeArea" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -3680,11 +3695,8 @@ vertical_alignment = 1
 [connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel3/StorageButton" to="SafeArea/UI/BuildView" method="_on_storage_button_pressed"]
 [connection signal="pressed" from="SafeArea/UI/BuildView/GridContainer/Panel4/PadButton" to="SafeArea/UI/BuildView" method="_on_pad_button_pressed"]
 [connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/PlanetButton" to="StarMap" method="_on_planet_button_toggled"]
-[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/PlanetButton" to="SafeArea/UI/StarMapView" method="_on_planet_button_toggled"]
 [connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/MoonButton" to="StarMap" method="_on_moon_button_toggled"]
-[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/MoonButton" to="SafeArea/UI/StarMapView" method="_on_moon_button_toggled"]
 [connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/StarButton" to="StarMap" method="_on_star_button_toggled"]
-[connection signal="toggled" from="SafeArea/UI/StarMapView/Actions/StarButton" to="SafeArea/UI/StarMapView" method="_on_star_button_toggled"]
 [connection signal="pressed" from="SafeArea/UI/StarMapView/MercuryStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
 [connection signal="pressed" from="SafeArea/UI/StarMapView/VenusStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]
 [connection signal="pressed" from="SafeArea/UI/StarMapView/EarthStats/DestButton" to="SafeArea/UI/StarMapView" method="_on_dest_button_pressed"]

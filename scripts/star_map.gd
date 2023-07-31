@@ -1,25 +1,30 @@
-extends MeshInstance3D
+extends Node3D
 
 
 var selected_star: Area3D = null
-
-#var immediate_mesh
-
-
-#func _ready():
-#	immediate_mesh = ImmediateMesh.new()
-#	var material = ORMMaterial3D.new()
-#	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
-#	immediate_mesh.surface_add_vertex($"../Camera3D".position + Vector3.DOWN * 2)
-#	immediate_mesh.surface_add_vertex(Input.get_magnetometer())
-#	immediate_mesh.surface_end()
-#	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-#	material.albedo_color = Color.GREEN
+var drifted = false
 
 
-func _process(delta):
-#	$MainView/Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
-	$North.position = Input.get_magnetometer().normalized() * 3
+func _physics_process(delta):
+	if drifted and (abs(Input.get_gyroscope().x) < 1 or abs(Input.get_gyroscope().y) < 1 or abs(Input.get_gyroscope().z) < 1):
+		# wait to calm down and orient everything
+		await get_tree().create_timer(0.5).timeout
+		orient()
+		drifted = false
+	
+	if abs(Input.get_gyroscope().x) > 10 or abs(Input.get_gyroscope().y) > 10 or abs(Input.get_gyroscope().z) > 10:
+		# looking around too fast
+		drifted = true
+	
+	$RotatingStuff.rotate($Camera3D.basis.x.normalized(), -Input.get_gyroscope().x / 60)
+	$RotatingStuff.rotate($Camera3D.basis.y.normalized(), -Input.get_gyroscope().y / 60)
+	$RotatingStuff.rotate($Camera3D.basis.z.normalized(), -Input.get_gyroscope().z / 60)
+
+
+func orient():
+	var g = Input.get_accelerometer().normalized()
+	var N = Plane(g).project(Input.get_magnetometer()).normalized()
+	$RotatingStuff.look_at(N, -g)
 
 
 func select_star(star):

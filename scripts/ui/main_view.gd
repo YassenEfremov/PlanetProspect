@@ -1,6 +1,10 @@
 extends Control
 
 
+func _process(delta):
+	$Sensors.text = "gyro: %s\nmag: %s" % [str(Input.get_gyroscope().round()), str(Input.get_magnetometer().round())]
+#	$StarMapView/Sensors.text = "camera: %s" % str($"../Camera3D".rotation_degrees)
+
 #func _unhandled_input(event):
 #	if event is InputEventScreenTouch:
 #		if not event.pressed:
